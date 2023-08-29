@@ -1,0 +1,226 @@
+Id,Category,Title,Published,Abstract,URL
+2212.09410v1,cs.CL,Less is More: Parameter-Free Text Classification with Gzip,2022-12-19 12:40:18+00:00,"Deep neural networks (DNNs) are often used for text classification tasks as
+they usually achieve high levels of accuracy. However, DNNs can be
+computationally intensive with billions of parameters and large amounts of
+labeled data, which can make them expensive to use, to optimize and to transfer
+to out-of-distribution (OOD) cases in practice. In this paper, we propose a
+non-parametric alternative to DNNs that's easy, light-weight and universal in
+text classification: a combination of a simple compressor like gzip with a
+$k$-nearest-neighbor classifier. Without any training, pre-training or
+fine-tuning, our method achieves results that are competitive with
+non-pretrained deep learning methods on six in-distributed datasets. It even
+outperforms BERT on all five OOD datasets, including four low-resource
+languages. Our method also performs particularly well in few-shot settings
+where labeled data are too scarce for DNNs to achieve a satisfying accuracy.",http://arxiv.org/pdf/2212.09410v1
+1906.02506v2,stat.ML,Practical Deep Learning with Bayesian Principles,2019-06-06 10:22:45+00:00,"Bayesian methods promise to fix many shortcomings of deep learning, but they
+are impractical and rarely match the performance of standard methods, let alone
+improve them. In this paper, we demonstrate practical training of deep networks
+with natural-gradient variational inference. By applying techniques such as
+batch normalisation, data augmentation, and distributed training, we achieve
+similar performance in about the same number of epochs as the Adam optimiser,
+even on large datasets such as ImageNet. Importantly, the benefits of Bayesian
+principles are preserved: predictive probabilities are well-calibrated,
+uncertainties on out-of-distribution data are improved, and continual-learning
+performance is boosted. This work enables practical deep learning while
+preserving benefits of Bayesian principles. A PyTorch implementation is
+available as a plug-and-play optimiser.",http://arxiv.org/pdf/1906.02506v2
+1706.03762v7,cs.CL,Attention Is All You Need,2017-06-12 17:57:34+00:00,"The dominant sequence transduction models are based on complex recurrent or
+convolutional neural networks in an encoder-decoder configuration. The best
+performing models also connect the encoder and decoder through an attention
+mechanism. We propose a new simple network architecture, the Transformer, based
+solely on attention mechanisms, dispensing with recurrence and convolutions
+entirely. Experiments on two machine translation tasks show these models to be
+superior in quality while being more parallelizable and requiring significantly
+less time to train. Our model achieves 28.4 BLEU on the WMT 2014
+English-to-German translation task, improving over the existing best results,
+including ensembles by over 2 BLEU. On the WMT 2014 English-to-French
+translation task, our model establishes a new single-model state-of-the-art
+BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction
+of the training costs of the best models from the literature. We show that the
+Transformer generalizes well to other tasks by applying it successfully to
+English constituency parsing both with large and limited training data.",http://arxiv.org/pdf/1706.03762v7
+2307.10169v1,cs.CL,Challenges and Applications of Large Language Models,2023-07-19 17:55:13+00:00,"Large Language Models (LLMs) went from non-existent to ubiquitous in the
+machine learning discourse within a few years. Due to the fast pace of the
+field, it is difficult to identify the remaining challenges and already
+fruitful application areas. In this paper, we aim to establish a systematic set
+of open problems and application successes so that ML researchers can
+comprehend the field's current state more quickly and become productive.",http://arxiv.org/pdf/2307.10169v1
+2308.01320v1,cs.LG,"DeepSpeed-Chat: Easy, Fast and Affordable RLHF Training of ChatGPT-like Models at All Scales",2023-08-02 18:49:57+00:00,"ChatGPT-like models have revolutionized various applications in artificial
+intelligence, from summarization and coding to translation, matching or even
+surpassing human performance. However, the current landscape lacks an
+accessible, efficient, and cost-effective end-to-end RLHF (Reinforcement
+Learning with Human Feedback) training pipeline for these powerful models,
+particularly when training at the scale of billions of parameters. This paper
+introduces DeepSpeed-Chat, a novel system that democratizes RLHF training,
+making it accessible to the AI community. DeepSpeed-Chat offers three key
+capabilities: an easy-to-use training and inference experience for ChatGPT-like
+models, a DeepSpeed-RLHF pipeline that replicates the training pipeline from
+InstructGPT, and a robust DeepSpeed-RLHF system that combines various
+optimizations for training and inference in a unified way. The system delivers
+unparalleled efficiency and scalability, enabling training of models with
+hundreds of billions of parameters in record time and at a fraction of the
+cost. With this development, DeepSpeed-Chat paves the way for broader access to
+advanced RLHF training, even for data scientists with limited resources,
+thereby fostering innovation and further development in the field of AI.",http://arxiv.org/pdf/2308.01320v1
+2005.14165v4,cs.CL,Language Models are Few-Shot Learners,2020-05-28 17:29:03+00:00,"Recent work has demonstrated substantial gains on many NLP tasks and
+benchmarks by pre-training on a large corpus of text followed by fine-tuning on
+a specific task. While typically task-agnostic in architecture, this method
+still requires task-specific fine-tuning datasets of thousands or tens of
+thousands of examples. By contrast, humans can generally perform a new language
+task from only a few examples or from simple instructions - something which
+current NLP systems still largely struggle to do. Here we show that scaling up
+language models greatly improves task-agnostic, few-shot performance, sometimes
+even reaching competitiveness with prior state-of-the-art fine-tuning
+approaches. Specifically, we train GPT-3, an autoregressive language model with
+175 billion parameters, 10x more than any previous non-sparse language model,
+and test its performance in the few-shot setting. For all tasks, GPT-3 is
+applied without any gradient updates or fine-tuning, with tasks and few-shot
+demonstrations specified purely via text interaction with the model. GPT-3
+achieves strong performance on many NLP datasets, including translation,
+question-answering, and cloze tasks, as well as several tasks that require
+on-the-fly reasoning or domain adaptation, such as unscrambling words, using a
+novel word in a sentence, or performing 3-digit arithmetic. At the same time,
+we also identify some datasets where GPT-3's few-shot learning still struggles,
+as well as some datasets where GPT-3 faces methodological issues related to
+training on large web corpora. Finally, we find that GPT-3 can generate samples
+of news articles which human evaluators have difficulty distinguishing from
+articles written by humans. We discuss broader societal impacts of this finding
+and of GPT-3 in general.",http://arxiv.org/pdf/2005.14165v4
+2106.09685v2,cs.CL,LoRA: Low-Rank Adaptation of Large Language Models,2021-06-17 17:37:18+00:00,"An important paradigm of natural language processing consists of large-scale
+pre-training on general domain data and adaptation to particular tasks or
+domains. As we pre-train larger models, full fine-tuning, which retrains all
+model parameters, becomes less feasible. Using GPT-3 175B as an example --
+deploying independent instances of fine-tuned models, each with 175B
+parameters, is prohibitively expensive. We propose Low-Rank Adaptation, or
+LoRA, which freezes the pre-trained model weights and injects trainable rank
+decomposition matrices into each layer of the Transformer architecture, greatly
+reducing the number of trainable parameters for downstream tasks. Compared to
+GPT-3 175B fine-tuned with Adam, LoRA can reduce the number of trainable
+parameters by 10,000 times and the GPU memory requirement by 3 times. LoRA
+performs on-par or better than fine-tuning in model quality on RoBERTa,
+DeBERTa, GPT-2, and GPT-3, despite having fewer trainable parameters, a higher
+training throughput, and, unlike adapters, no additional inference latency. We
+also provide an empirical investigation into rank-deficiency in language model
+adaptation, which sheds light on the efficacy of LoRA. We release a package
+that facilitates the integration of LoRA with PyTorch models and provide our
+implementations and model checkpoints for RoBERTa, DeBERTa, and GPT-2 at
+https://github.com/microsoft/LoRA.",http://arxiv.org/pdf/2106.09685v2
+2307.06324v4,math.OC,Provably Faster Gradient Descent via Long Steps,2023-07-12 17:41:07+00:00,"This work establishes provably faster convergence rates for gradient descent
+in smooth convex optimization via a computer-assisted analysis technique. Our
+theory allows nonconstant stepsize policies with frequent long steps
+potentially violating descent by analyzing the overall effect of many
+iterations at once rather than the typical one-iteration inductions used in
+most first-order method analyses. We show that long steps, which may increase
+the objective value in the short term, lead to provably faster convergence in
+the long term. A conjecture towards proving a faster $O(1/T\log T)$ rate for
+gradient descent is also motivated along with simple numerical validation.",http://arxiv.org/pdf/2307.06324v4
+2308.00675v1,cs.CL,Tool Documentation Enables Zero-Shot Tool-Usage with Large Language Models,2023-08-01 17:21:38+00:00,"Today, large language models (LLMs) are taught to use new tools by providing
+a few demonstrations of the tool's usage. Unfortunately, demonstrations are
+hard to acquire, and can result in undesirable biased usage if the wrong
+demonstration is chosen. Even in the rare scenario that demonstrations are
+readily available, there is no principled selection protocol to determine how
+many and which ones to provide. As tasks grow more complex, the selection
+search grows combinatorially and invariably becomes intractable. Our work
+provides an alternative to demonstrations: tool documentation. We advocate the
+use of tool documentation, descriptions for the individual tool usage, over
+demonstrations. We substantiate our claim through three main empirical findings
+on 6 tasks across both vision and language modalities. First, on existing
+benchmarks, zero-shot prompts with only tool documentation are sufficient for
+eliciting proper tool usage, achieving performance on par with few-shot
+prompts. Second, on a newly collected realistic tool-use dataset with hundreds
+of available tool APIs, we show that tool documentation is significantly more
+valuable than demonstrations, with zero-shot documentation significantly
+outperforming few-shot without documentation. Third, we highlight the benefits
+of tool documentations by tackling image generation and video tracking using
+just-released unseen state-of-the-art models as tools. Finally, we highlight
+the possibility of using tool documentation to automatically enable new
+applications: by using nothing more than the documentation of GroundingDino,
+Stable Diffusion, XMem, and SAM, LLMs can re-invent the functionalities of the
+just-released Grounded-SAM and Track Anything models.",http://arxiv.org/pdf/2308.00675v1
+2308.12950v2,cs.CL,Code Llama: Open Foundation Models for Code,2023-08-24 17:39:13+00:00,"We release Code Llama, a family of large language models for code based on
+Llama 2 providing state-of-the-art performance among open models, infilling
+capabilities, support for large input contexts, and zero-shot instruction
+following ability for programming tasks. We provide multiple flavors to cover a
+wide range of applications: foundation models (Code Llama), Python
+specializations (Code Llama - Python), and instruction-following models (Code
+Llama - Instruct) with 7B, 13B and 34B parameters each. All models are trained
+on sequences of 16k tokens and show improvements on inputs with up to 100k
+tokens. 7B and 13B Code Llama and Code Llama - Instruct variants support
+infilling based on surrounding content. Code Llama reaches state-of-the-art
+performance among open models on several code benchmarks, with scores of up to
+53% and 55% on HumanEval and MBPP, respectively. Notably, Code Llama - Python
+7B outperforms Llama 2 70B on HumanEval and MBPP, and all our models outperform
+every other publicly available model on MultiPL-E. We release Code Llama under
+a permissive license that allows for both research and commercial use.",http://arxiv.org/pdf/2308.12950v2
+2305.14965v1,cs.CL,"Tricking LLMs into Disobedience: Understanding, Analyzing, and Preventing Jailbreaks",2023-05-24 09:57:37+00:00,"Recent explorations with commercial Large Language Models (LLMs) have shown
+that non-expert users can jailbreak LLMs by simply manipulating the prompts;
+resulting in degenerate output behavior, privacy and security breaches,
+offensive outputs, and violations of content regulator policies. Limited formal
+studies have been carried out to formalize and analyze these attacks and their
+mitigations. We bridge this gap by proposing a formalism and a taxonomy of
+known (and possible) jailbreaks. We perform a survey of existing jailbreak
+methods and their effectiveness on open-source and commercial LLMs (such as GPT
+3.5, OPT, BLOOM, and FLAN-T5-xxl). We further propose a limited set of prompt
+guards and discuss their effectiveness against known attack types.",http://arxiv.org/pdf/2305.14965v1
+2301.02737v2,cs.SI,Understanding the (In)Effectiveness of Content Moderation: A Case Study of Facebook in the Context of the U.S. Capitol Riot,2023-01-06 22:33:10+00:00,"Social media networks commonly employ content moderation as a tool to limit
+the spread of harmful content. However, the efficacy of this strategy in
+limiting the delivery of harmful content to users is not well understood. In
+this paper, we create a framework to quantify the efficacy of content
+moderation and use our metrics to analyze content removal on Facebook within
+the U.S. news ecosystem. In a data set of over 2M posts with 1.6B user
+engagements collected from 2,551 U.S. news sources before and during the
+Capitol Riot on January 6, 2021, we identify 10,811 removed posts. We find that
+the active engagement life cycle of Facebook posts is very short, with 90% of
+all engagement occurring within the first 30 hours after posting. Thus, even
+relatively quick intervention allowed significant accrual of engagement before
+removal, and prevented only 21% of the predicted engagement potential during a
+baseline period before the U.S. Capitol attack. Nearly a week after the attack,
+Facebook began removing older content, but these removals occurred so late in
+these posts' engagement life cycles that they disrupted less than 1% of
+predicted future engagement, highlighting the limited impact of this
+intervention. Content moderation likely has limits in its ability to prevent
+engagement, especially in a crisis, and we recommend that other approaches such
+as slowing down the rate of content diffusion be investigated.",http://arxiv.org/pdf/2301.02737v2
+2003.01207v1,cs.AI,BARD: A structured technique for group elicitation of Bayesian networks to support analytic reasoning,2020-03-02 21:55:35+00:00,"In many complex, real-world situations, problem solving and decision making
+require effective reasoning about causation and uncertainty. However, human
+reasoning in these cases is prone to confusion and error. Bayesian networks
+(BNs) are an artificial intelligence technology that models uncertain
+situations, supporting probabilistic and causal reasoning and decision making.
+However, to date, BN methodologies and software require significant upfront
+training, do not provide much guidance on the model building process, and do
+not support collaboratively building BNs. BARD (Bayesian ARgumentation via
+Delphi) is both a methodology and an expert system that utilises (1) BNs as the
+underlying structured representations for better argument analysis, (2) a
+multi-user web-based software platform and Delphi-style social processes to
+assist with collaboration, and (3) short, high-quality e-courses on demand, a
+highly structured process to guide BN construction, and a variety of helpful
+tools to assist in building and reasoning with BNs, including an automated
+explanation tool to assist effective report writing. The result is an
+end-to-end online platform, with associated online training, for groups without
+prior BN expertise to understand and analyse a problem, build a model of its
+underlying probabilistic causal structure, validate and reason with the causal
+model, and use it to produce a written analytic report. Initial experimental
+results demonstrate that BARD aids in problem solving, reasoning and
+collaboration.",http://arxiv.org/pdf/2003.01207v1
+2204.02311v5,cs.CL,PaLM: Scaling Language Modeling with Pathways,2022-04-05 16:11:45+00:00,"Large language models have been shown to achieve remarkable performance
+across a variety of natural language tasks using few-shot learning, which
+drastically reduces the number of task-specific training examples needed to
+adapt the model to a particular application. To further our understanding of
+the impact of scale on few-shot learning, we trained a 540-billion parameter,
+densely activated, Transformer language model, which we call Pathways Language
+Model PaLM. We trained PaLM on 6144 TPU v4 chips using Pathways, a new ML
+system which enables highly efficient training across multiple TPU Pods. We
+demonstrate continued benefits of scaling by achieving state-of-the-art
+few-shot learning results on hundreds of language understanding and generation
+benchmarks. On a number of these tasks, PaLM 540B achieves breakthrough
+performance, outperforming the finetuned state-of-the-art on a suite of
+multi-step reasoning tasks, and outperforming average human performance on the
+recently released BIG-bench benchmark. A significant number of BIG-bench tasks
+showed discontinuous improvements from model scale, meaning that performance
+steeply increased as we scaled to our largest model. PaLM also has strong
+capabilities in multilingual tasks and source code generation, which we
+demonstrate on a wide array of benchmarks. We additionally provide a
+comprehensive analysis on bias and toxicity, and study the extent of training
+data memorization with respect to model scale. Finally, we discuss the ethical
+considerations related to large language models and discuss potential
+mitigation strategies.",http://arxiv.org/pdf/2204.02311v5
