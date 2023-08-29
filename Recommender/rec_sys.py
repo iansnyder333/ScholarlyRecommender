@@ -66,12 +66,14 @@ def fetch(ids: list):
         repository["Abstract"].append(result.summary.strip("\n"))
         repository["URL"].append(result.pdf_url)
 
-    return pd.DataFrame(repository)
+    return pd.DataFrame(repository).set_index("Id")
 
 
-def run():
+def run(path: str = "Repository/Feed.csv"):
     reccommended = rank()
     feed = fetch(reccommended)
+    feed.to_csv(path)
+    print(f"Feed saved to {path} \n")
     # TO DO filter and format feed, store feed
     # improve source_candidates, and rank
     # improve reusability of code and modularity
