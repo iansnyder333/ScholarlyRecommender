@@ -1,18 +1,8 @@
 import pandas as pd
 import arxiv
-from Scraper.queries import queries
+from ScholarlyRecommender.Scraper.queries import queries
+from ScholarlyRecommender.const import BASE_REPO
 from copy import deepcopy
-
-BASE_REPO = lambda: deepcopy(
-    {
-        "Id": [],
-        "Category": [],
-        "Title": [],
-        "Published": [],
-        "Abstract": [],
-        "URL": [],
-    }
-)
 
 
 def search(
@@ -52,4 +42,4 @@ def source_candidates(queries: list = queries, max_results: int = 100):
     df["Published"] = pd.to_datetime(df["Published"])
     df = df[df["Published"] > (pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=8))]
     print(f"Number of papers extracted : {df.shape[0]}")
-    df.to_csv("Repository/Candidates.csv")
+    # df.to_csv("ScholarlyRecommender/Repository/Candidates.csv")
