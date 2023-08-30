@@ -14,7 +14,9 @@ def clean_feed(path: str = "ScholarlyRecommender/Repository/Feed.csv"):
 # df = clean_feed()
 
 
-def build_html_feed(df: pd.DataFrame):
+def build_html_feed(
+    df: pd.DataFrame, to_path: str = "ScholarlyRecommender/Newsletter/html/Feed.html"
+):
     # df = pd.read_csv("Repository/CleanFeed.csv")
 
     # Initialize an empty string to store the HTML content
@@ -55,11 +57,11 @@ def build_html_feed(df: pd.DataFrame):
     html_content += """ </body>
     </html>"""
     # Save the generated HTML to a file for demonstration
-    html_file_path = "ScholarlyRecommender/Newsletter/html/Example_Feed.html"
+    html_file_path = to_path
     with open(html_file_path, "w") as f:
         f.write(html_content)
 
     html_file_path
 
 
-build_html_feed(clean_feed())
+# build_html_feed(clean_feed())
