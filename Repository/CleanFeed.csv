@@ -1,0 +1,13 @@
+Id,Category,Title,Published,Abstract,URL
+2308.14608v1,cs.LG,AI in the Gray: Exploring Moderation Policies in Dialogic Large Language Models vs. Human Answers in Controversial Topics,2023-08-28,"The introduction of ChatGPT and the subsequent improvement of Large Language
+Models (LLMs) have prompted more and more individuals to turn to the use ...",http://arxiv.org/pdf/2308.14608v1
+2308.14921v1,cs.CL,Gender bias and stereotypes in Large Language Models,2023-08-28,"Large Language Models (LLMs) have made substantial progress in the past
+several months, shattering state-of-the-art benchmarks in many domains. This
+p...",http://arxiv.org/pdf/2308.14921v1
+2308.14752v1,cs.CY,"AI Deception: A Survey of Examples, Risks, and Potential Solutions",2023-08-28,"This paper argues that a range of current AI systems have learned how to
+deceive humans. We define deception as the systematic inducement of false
+bel...",http://arxiv.org/pdf/2308.14752v1
+2308.14359v1,cs.AI,Effect of Attention and Self-Supervised Speech Embeddings on Non-Semantic Speech Tasks,2023-08-28,"Human emotion understanding is pivotal in making conversational technology
+mainstream. We view speech emotion understanding as a perception task which...",http://arxiv.org/pdf/2308.14359v1
+2308.14149v1,cs.CL,"Examining User-Friendly and Open-Sourced Large GPT Models: A Survey on Language, Multimodal, and Scientific GPT Models",2023-08-27,"Generative pre-trained transformer (GPT) models have revolutionized the field
+of natural language processing (NLP) with remarkable performance in vari...",http://arxiv.org/pdf/2308.14149v1
