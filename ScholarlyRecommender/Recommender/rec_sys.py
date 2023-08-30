@@ -3,13 +3,12 @@ import numpy as np
 from tqdm import tqdm
 import pandas as pd
 import arxiv
-from copy import deepcopy
 from ScholarlyRecommender.const import BASE_REPO
 
 
 def rankV2(n: int = 5, k: int = 5, on: str = "Abstract"):
     likes = pd.read_csv("ScholarlyRecommender/Repository/Candidates_Labeled.csv")
-    candidates = pd.read_csv("ScholarlyRecommender/Repository/Candidates.csv")
+    candidates = pd.read_csv("ScholarlyRecommender/Repository/TestCandidates.csv")
 
     train = np.array([(row[on], row["label"]) for _, row in likes.iterrows()])
     test = np.array([(row[on], row["Id"]) for _, row in candidates.iterrows()])
@@ -118,10 +117,6 @@ def run(path: str = "ScholarlyRecommender/Repository/Feed.csv"):
 
     feed.to_csv(path)
     print(f"Feed saved to {path} \n")
-    # TO DO filter and format feed, store feed
-    # improve source_candidates, and rank
-    # improve reusability of code and modularity
-    # build user interface for front end and backend api
 
 
 if __name__ == "__main__":

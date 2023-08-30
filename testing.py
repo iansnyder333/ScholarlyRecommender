@@ -6,10 +6,15 @@ import pandas as pd
 
 def Pipeline():
     # Scrape
-    scrape.source_candidates()
+    scrape.source_candidates(
+        to_path="ScholarlyRecommender/Repository/TestCandidates.csv"
+    )
     # RecSys
-    rec_sys.evaluate()
-    feed.build_html_feed(feed.clean_feed("ScholarlyRecommender/Repository/Feed.csv"))
+    rec_sys.run(path="ScholarlyRecommender/Repository/TestFeed.csv")
+    feed.build_html_feed(
+        feed.clean_feed("ScholarlyRecommender/Repository/TestFeed.csv"),
+        to_path="ScholarlyRecommender/Newsletter/html/TestFeed.html",
+    )
     # feed = pd.read_csv("Repository/Feed.csv", index_col="Id")
     # print(feed.head())
 
