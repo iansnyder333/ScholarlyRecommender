@@ -1,6 +1,6 @@
 import pandas as pd
 import arxiv
-from queries import queries
+from Scraper.queries import queries
 from copy import deepcopy
 
 BASE_REPO = lambda: deepcopy(
@@ -32,13 +32,16 @@ def search(
 
 def source_candidates(queries: list = queries, max_results: int = 100):
     # Source
-    repo = BASE_REPO()
-    df = pd.DataFrame(repo).set_index("Id")
+
+    df = None
     for query in queries:
         print(f"Searching for {query}")
-        df2 = search(query, max_results=max_results)
-        print(f"Number of papers extracted : {df2.shape[0]}")
-        df = pd.concat([df, df2])
+        if df is None:
+            df = search(query, max_results=max_results)
+        else:
+            df2 = search(query, max_results=max_results)
+            print(f"Number of papers extracted : {df2.shape[0]}")
+            df = pd.concat([df, df2])
 
     # Filter
     print(f"Number of papers extracted : {df.shape[0]}")
