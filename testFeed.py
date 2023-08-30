@@ -6,9 +6,7 @@ import pandas as pd
 
 @st.cache_data
 def load_feed():
-    return pd.read_csv(
-        "/Users/iansnyder/Desktop/Projects/LLM/Repository/Feed.csv", index_col="Id"
-    )
+    return pd.read_csv("Repository/Feed.csv", index_col="Id")
 
 
 data_df = load_feed()

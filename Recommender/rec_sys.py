@@ -17,44 +17,6 @@ BASE_REPO = lambda: deepcopy(
 )
 
 
-def rank(n: int = 5, k: int = 5, on: str = "Abstract"):
-    likes = pd.read_csv("Repository/Goodpapers.csv")
-    candidates = pd.read_csv("Repository/Candidates.csv")
-
-    train = np.array([(row[on], row["Id"]) for _, row in likes.iterrows()])
-    test = np.array([(row[on], row["Id"]) for _, row in candidates.iterrows()])
-
-    results = []
-    print(f"Starting to rank {len(test)} candidates...\n")
-    for x1, id in tqdm(test):
-        # calculate the compressed length of the utf-8 encoded text
-        Cx1 = len(gzip.compress(x1.encode()))
-        # create a distance array
-        similarity_to_x1 = []
-        for x2, _ in train:
-            # calculate the compressed length of the utf-8 encoded text
-            Cx2 = len(gzip.compress(x2.encode()))
-            # concatenate the two texts
-            x1x2 = " ".join([x1, x2])
-            # calculate the compressed length of the utf-8 encoded concatenated text
-            Cx1x2 = len(gzip.compress(x1x2.encode()))
-            # calculate the normalized compression distance: a normalized version of information distance
-            ncd = (Cx1x2 - min(Cx1, Cx2)) / max(Cx1, Cx2)
-
-            similarity_to_x1.append(ncd)
-        sorted_idx = np.sort(np.array(similarity_to_x1))
-        mean = np.mean(sorted_idx[0:5])
-        results.append((mean, id))
-
-    df = pd.DataFrame(results, columns=["Similarity", "Id"])
-    df["rank"] = df["Similarity"].rank(ascending=True)
-    df = df.sort_values(by=["rank"])
-    df["Id"] = df["Id"].apply(lambda x: str(x))
-    reccommended = df["Id"].tolist()[0:n]
-    print(f"Finished Ranking.\n")
-    return reccommended
-
-
 def rankV2(n: int = 5, k: int = 5, on: str = "Abstract"):
     likes = pd.read_csv("Repository/Candidates_Labeled.csv")
     candidates = pd.read_csv("Repository/Candidates.csv")
@@ -97,6 +59,51 @@ def rankV2(n: int = 5, k: int = 5, on: str = "Abstract"):
     return reccommended
 
 
+def evaluate(n: int = 5, k: int = 5, on: str = "Abstract"):
+    likes = pd.read_csv("Repository/Candidates_Labeled.csv")
+    # Set train and test equal to 90% and 10% of the data respectively
+    train_data = likes.sample(frac=0.9, random_state=1)
+    test_data = likes.drop(train_data.index)
+
+    train = np.array([(row[on], row["label"]) for _, row in train_data.iterrows()])
+    test = np.array([(row[on], row["label"]) for _, row in test_data.iterrows()])
+
+    results = []
+    print(f"Starting to rank {len(test)} candidates...\n")
+    for x1, label in tqdm(test):
+        # calculate the compressed length of the utf-8 encoded text
+        Cx1 = len(gzip.compress(x1.encode()))
+        # create a distance array
+        similarity_to_x1 = []
+        for x2, _ in train:
+            # calculate the compressed length of the utf-8 encoded text
+            Cx2 = len(gzip.compress(x2.encode()))
+            # concatenate the two texts
+            x1x2 = " ".join([x1, x2])
+            # calculate the compressed length of the utf-8 encoded concatenated text
+            Cx1x2 = len(gzip.compress(x1x2.encode()))
+            # calculate the normalized compression distance: a normalized version of information distance
+            ncd = (Cx1x2 - min(Cx1, Cx2)) / max(Cx1, Cx2)
+
+            similarity_to_x1.append(ncd)
+        sorted_idx = np.argsort(np.array(similarity_to_x1))
+        top_k_ratings = train[sorted_idx[:k], 1]
+        topk = top_k_ratings.astype(int)
+        mean = np.mean(topk)
+
+        results.append((mean, label))
+
+    df = pd.DataFrame(results, columns=["predicted", "actual"])
+
+    df["actual"] = df["actual"].astype(int)
+    # calculate the mean squared error
+    df["squared_error"] = (df["predicted"] - df["actual"]) ** 2
+    # loss function
+    loss = np.sqrt(df["squared_error"].sum() / df.shape[0])
+    print(df)
+    print(loss)
+
+
 def fetch(ids: list):
     print(f"Fetching {len(ids)} papers from arxiv... \n")
     repository = BASE_REPO()
@@ -128,4 +135,5 @@ def run(path: str = "Repository/Feed.csv"):
 
 
 if __name__ == "__main__":
+    # evaluate()
     run()
