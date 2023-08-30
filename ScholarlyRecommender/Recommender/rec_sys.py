@@ -4,22 +4,12 @@ from tqdm import tqdm
 import pandas as pd
 import arxiv
 from copy import deepcopy
-
-BASE_REPO = lambda: deepcopy(
-    {
-        "Id": [],
-        "Category": [],
-        "Title": [],
-        "Published": [],
-        "Abstract": [],
-        "URL": [],
-    }
-)
+from ScholarlyRecommender.const import BASE_REPO
 
 
 def rankV2(n: int = 5, k: int = 5, on: str = "Abstract"):
-    likes = pd.read_csv("Repository/Candidates_Labeled.csv")
-    candidates = pd.read_csv("Repository/Candidates.csv")
+    likes = pd.read_csv("ScholarlyRecommender/Repository/Candidates_Labeled.csv")
+    candidates = pd.read_csv("ScholarlyRecommender/Repository/Candidates.csv")
 
     train = np.array([(row[on], row["label"]) for _, row in likes.iterrows()])
     test = np.array([(row[on], row["Id"]) for _, row in candidates.iterrows()])
@@ -60,7 +50,7 @@ def rankV2(n: int = 5, k: int = 5, on: str = "Abstract"):
 
 
 def evaluate(n: int = 5, k: int = 5, on: str = "Abstract"):
-    likes = pd.read_csv("Repository/Candidates_Labeled.csv")
+    likes = pd.read_csv("ScholarlyRecommender/Repository/Candidates_Labeled.csv")
     # Set train and test equal to 90% and 10% of the data respectively
     train_data = likes.sample(frac=0.9, random_state=1)
     test_data = likes.drop(train_data.index)
@@ -122,7 +112,7 @@ def fetch(ids: list):
     return pd.DataFrame(repository).set_index("Id")
 
 
-def run(path: str = "Repository/Feed.csv"):
+def run(path: str = "ScholarlyRecommender/Repository/Feed.csv"):
     reccommended = rankV2(n=5, on="Abstract")
     feed = fetch(reccommended)
 
@@ -135,5 +125,5 @@ def run(path: str = "Repository/Feed.csv"):
 
 
 if __name__ == "__main__":
-    # evaluate()
-    run()
+    evaluate()
+    # run()
