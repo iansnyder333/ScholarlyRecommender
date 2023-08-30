@@ -1,19 +1,22 @@
 # Create and manage the database for the recommender system
 import pandas as pd
 import arxiv
+from copy import deepcopy
 
-BASE_REPO = {
-    "Id": [],
-    "Category": [],
-    "Title": [],
-    "Published": [],
-    "Abstract": [],
-    "URL": [],
-}
+BASE_REPO = lambda: deepcopy(
+    {
+        "Id": [],
+        "Category": [],
+        "Title": [],
+        "Published": [],
+        "Abstract": [],
+        "URL": [],
+    }
+)
 
 
 def get_papers(ids: list, query: str = ""):
-    repository = BASE_REPO
+    repository = BASE_REPO()
     search = arxiv.Search(
         query=query,
         id_list=ids,
@@ -50,4 +53,4 @@ def remove_paper(ids: list, from_repo: str):
     df.to_csv(from_repo)
 
 
-# add_paper(["2003.01207", "2204.02311"], "Repository/Goodpapers.csv")
+# add_paper(["2307.12008"], "Repository/Goodpapers.csv")
