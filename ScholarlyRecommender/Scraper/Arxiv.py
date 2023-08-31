@@ -6,7 +6,10 @@ from ScholarlyRecommender.const import BASE_REPO
 
 def search(
     query: str, max_results: int = 100, sort_by=arxiv.SortCriterion.SubmittedDate
-):
+) -> pd.DataFrame:
+    """
+    Scrape arxiv.org for papers matching the query and return a dataframe matching the BASE_REPO format.
+    """
     repository = BASE_REPO()
     search = arxiv.Search(query=query, max_results=max_results, sort_by=sort_by)
     for result in search.results():
@@ -25,7 +28,9 @@ def source_candidates(
     to_path: str = None,
     as_df: bool = False,
 ):
-    # Source
+    """
+    Scrape arxiv.org for papers matching the queries, filter them and return a dataframe or save it to a csv file.
+    """
 
     df = None
     for query in queries:

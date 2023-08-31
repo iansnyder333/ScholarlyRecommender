@@ -6,7 +6,16 @@ import arxiv
 from ScholarlyRecommender.const import BASE_REPO
 
 
-def rankV2(context: pd.DataFrame, n: int = 5, k: int = 5, on: str = "Abstract"):
+def rankerV3(
+    context: pd.DataFrame, n: int = 5, k: int = 5, on: str = "Abstract"
+) -> pd.DataFrame:
+    """
+    Rank the papers in the context using the normalized compression distance combined with a weighted top-k mean rating.
+    Return a list of the top n ranked papers.
+    This is a modified version of the algorithm described in the paper "“Low-Resource” Text Classification- A Parameter-Free Classification Method with Compressors."
+    The algorithim gets the top k most similar papers to each paper in the context that the user rated and calculates the mean rating of those papers as its prediction.
+
+    """
     likes = pd.read_csv(
         "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv"
     )
@@ -16,7 +25,7 @@ def rankV2(context: pd.DataFrame, n: int = 5, k: int = 5, on: str = "Abstract"):
     test = np.array([(row[on], row["Id"]) for _, row in candidates.iterrows()])
 
     results = []
-    print(f"Starting to rank {len(test)} candidates...\n")
+    print(f"Starting to rank {len(test)} candidates on {on}\n")
     for x1, id in tqdm(test):
         # calculate the compressed length of the utf-8 encoded text
         Cx1 = len(gzip.compress(x1.encode()))
@@ -33,32 +42,58 @@ def rankV2(context: pd.DataFrame, n: int = 5, k: int = 5, on: str = "Abstract"):
             ncd = (Cx1x2 - min(Cx1, Cx2)) / max(Cx1, Cx2)
 
             similarity_to_x1.append(ncd)
-        sorted_idx = np.argsort(np.array(similarity_to_x1))
+        # calculate the similarity weights for the top k most similar papers
+        similarity_to_x1 = np.array(similarity_to_x1)
+        sorted_idx = np.argsort(similarity_to_x1)
+        values = similarity_to_x1[sorted_idx[:k]]
+        weights = values / np.sum(values)
+        inverse_weights = 1 / weights
+        weights_norm = inverse_weights / np.sum(inverse_weights)
         top_k_ratings = train[sorted_idx[:k], 1]
         topk = top_k_ratings.astype(int)
-        mean = np.mean(topk)
+        # calculate the weighted mean rating
+        prediction = np.sum(weights_norm * topk)
+        # mean = np.dot(weights, topk)
+        # mean = np.mean(topk)
 
-        results.append((mean, id))
+        results.append((prediction, id))
 
-    df = pd.DataFrame(results, columns=["Similarity", "Id"])
-    df["rank"] = df["Similarity"].rank(ascending=False)
+    df = pd.DataFrame(results, columns=["predicted", "Id"])
+    return df
+
+
+def rank(context) -> list:
+    """
+    Run the rankerV3 algorithm on the context and return a list of the top 5 ranked papers.
+    """
+    df1 = rankerV3(context, on="Abstract")
+    df2 = rankerV3(context, on="Title")
+    df = df1.copy()
+    df["predicted"] = (df1["predicted"] + df2["predicted"]) / 2
+    df["rank"] = df["predicted"].rank(ascending=False)
     df = df.sort_values(by=["rank"])
     df["Id"] = df["Id"].apply(lambda x: str(x))
-    reccommended = df["Id"].tolist()[0:n]
+    reccommended = df["Id"].tolist()[0:5]
     print(f"Finished Ranking.\n")
 
     return reccommended
 
 
-def evaluate(n: int = 5, k: int = 5, on: str = "Abstract"):
-    likes = pd.read_csv("ScholarlyRecommender/Repository/Candidates_Labeled.csv")
+def evaluate(n: int = 5, k: int = 6, on: str = "Abstract") -> float:
+    """
+    Evaluate the recommender system using the normalized compression distance.
+    Calculate the mean squared error between the predicted and actual ratings.
+    Return the loss.
+    """
+    likes = pd.read_csv(
+        "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv"
+    )
     # Set train and test equal to 90% and 10% of the data respectively
-    train_data = likes.sample(frac=0.9, random_state=1)
+    train_data = likes.sample(frac=0.9, random_state=0)
     test_data = likes.drop(train_data.index)
 
     train = np.array([(row[on], row["label"]) for _, row in train_data.iterrows()])
     test = np.array([(row[on], row["label"]) for _, row in test_data.iterrows()])
-
     results = []
     print(f"Starting to rank {len(test)} candidates...\n")
     for x1, label in tqdm(test):
@@ -77,12 +112,18 @@ def evaluate(n: int = 5, k: int = 5, on: str = "Abstract"):
             ncd = (Cx1x2 - min(Cx1, Cx2)) / max(Cx1, Cx2)
 
             similarity_to_x1.append(ncd)
-        sorted_idx = np.argsort(np.array(similarity_to_x1))
+        similarity_to_x1 = np.array(similarity_to_x1)
+        sorted_idx = np.argsort(similarity_to_x1)
+        values = similarity_to_x1[sorted_idx[:k]]
+        weights = values / np.sum(values)
+        inverse_weights = 1 / weights
+        weights_norm = inverse_weights / np.sum(inverse_weights)
         top_k_ratings = train[sorted_idx[:k], 1]
         topk = top_k_ratings.astype(int)
-        mean = np.mean(topk)
+        # calculate the weighted mean rating
+        prediction = np.sum(weights_norm * topk)
 
-        results.append((mean, label))
+        results.append((prediction, label))
 
     df = pd.DataFrame(results, columns=["predicted", "actual"])
 
@@ -91,11 +132,14 @@ def evaluate(n: int = 5, k: int = 5, on: str = "Abstract"):
     df["squared_error"] = (df["predicted"] - df["actual"]) ** 2
     # loss function
     loss = np.sqrt(df["squared_error"].sum() / df.shape[0])
-    print(df)
-    print(loss)
+    # print(df.head())
+    return loss
 
 
-def fetch(ids: list):
+def fetch(ids: list) -> pd.DataFrame:
+    """
+    Fetch papers from arxiv.org matching the ids and return a dataframe matching the BASE_REPO including the authors.
+    """
     print(f"Fetching {len(ids)} papers from arxiv... \n")
     repository = BASE_REPO()
     repository["Author"] = []
@@ -115,26 +159,22 @@ def fetch(ids: list):
     return pd.DataFrame(repository)
 
 
-def run(df, size, to_path, as_df):
-    reccommended = rankV2(context=df, n=size, on="Abstract")
-    feed = fetch(reccommended)
-    if to_path is not None:
-        feed.set_index("Id").to_csv(to_path)
-        print(f"Feed saved to {to_path} \n")
-        # feed.to_csv(to_path)
-    if as_df:
-        return feed
-
-
 def get_recommendations(data, size: int = 5, to_path: str = None, as_df: bool = False):
+    """
+    Rank the papers in the data and return a dataframe or save it to a csv file.
+    Data can be a pandas DataFrame or a path to a csv file.
+    """
     if isinstance(data, pd.DataFrame):
         df = data
         df.reset_index(inplace=True)
     elif isinstance(data, str):
+        assert data.endswith(".csv"), "data must be a csv file"
         df = pd.read_csv(data)
     else:
         raise TypeError("data must be a pandas DataFrame or a path to a csv file")
-    reccommended = rankV2(context=df, n=size, on="Abstract")
+
+    # reccommended = rankV2(context=df, n=size, on="Abstract")
+    reccommended = rank(context=df)
     feed = fetch(reccommended)
     if to_path is not None:
         feed.set_index("Id").to_csv(to_path)
@@ -142,8 +182,3 @@ def get_recommendations(data, size: int = 5, to_path: str = None, as_df: bool = 
         # feed.to_csv(to_path)
     if as_df:
         return feed
-
-
-if __name__ == "__main__":
-    evaluate()
-    # run()

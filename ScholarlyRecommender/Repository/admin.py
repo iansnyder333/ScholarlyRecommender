@@ -4,8 +4,15 @@ import arxiv
 
 from ScholarlyRecommender.const import BASE_REPO
 
+"""
+This module contains functions to create and manage the database for the recommender system.
+"""
 
-def get_papers(ids: list, query: str = ""):
+
+def get_papers(ids: list, query: str = "") -> pd.DataFrame:
+    """
+    Scrape arxiv.org for papers matching the query and return a dataframe matching the BASE_REPO format.
+    """
     repository = BASE_REPO()
     search = arxiv.Search(
         query=query,
@@ -21,12 +28,19 @@ def get_papers(ids: list, query: str = ""):
     return pd.DataFrame(repository).set_index("Id")
 
 
-def build_arxiv_repo(ids: list, path: str):
+def build_arxiv_repo(ids: list, path: str) -> None:
+    """
+    Build a csv file containing the papers matching the ids.
+    """
+    assert path.endswith(".csv"), "Path must be a csv file"
     df = get_papers(ids)
     df.to_csv(path)
 
 
-def add_paper(ids: list, to_repo: str):
+def add_paper(ids: list, to_repo: str) -> None:
+    """
+    Add papers matching the ids to the repository. Duplicates are removed.
+    """
     assert to_repo.endswith(".csv"), "Repository must be a csv file"
     df1 = pd.read_csv(to_repo, index_col="Id")
     df2 = get_papers(ids)
@@ -35,12 +49,12 @@ def add_paper(ids: list, to_repo: str):
     df.to_csv(to_repo)
 
 
-def remove_paper(ids: list, from_repo: str):
+def remove_paper(ids: list, from_repo: str) -> None:
+    """
+    Remove papers matching the ids from the repository.
+    """
     assert from_repo.endswith(".csv"), "Repository must be a csv file"
     df1 = pd.read_csv(from_repo, index_col="Id")
     df2 = get_papers(ids)
     df = df1.drop(df2.index)
     df.to_csv(from_repo)
-
-
-# add_paper(["2307.12008"], "ScholarlyRecommender/Repository/Goodpapers.csv")

@@ -1,4 +1,6 @@
 import ScholarlyRecommender as sr
+import pandas as pd
+import numpy as np
 
 
 def Pipeline():
@@ -12,5 +14,8 @@ def Pipeline():
 
     sr.get_feed(
         data=r,
-        to_path="ScholarlyRecommender/Newsletter/html/4TestUserFeed.html",
+        to_path="ScholarlyRecommender/Newsletter/html/5TestUserFeed.html",
     )
+
+
+Pipeline()
