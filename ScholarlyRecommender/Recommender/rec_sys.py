@@ -6,9 +6,11 @@ import arxiv
 from ScholarlyRecommender.const import BASE_REPO
 
 
-def rankV2(n: int = 5, k: int = 5, on: str = "Abstract"):
-    likes = pd.read_csv("ScholarlyRecommender/Repository/Candidates_Labeled.csv")
-    candidates = pd.read_csv("ScholarlyRecommender/Repository/TestCandidates.csv")
+def rankV2(context: pd.DataFrame, n: int = 5, k: int = 5, on: str = "Abstract"):
+    likes = pd.read_csv(
+        "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv"
+    )
+    candidates = context
 
     train = np.array([(row[on], row["label"]) for _, row in likes.iterrows()])
     test = np.array([(row[on], row["Id"]) for _, row in candidates.iterrows()])
@@ -96,6 +98,7 @@ def evaluate(n: int = 5, k: int = 5, on: str = "Abstract"):
 def fetch(ids: list):
     print(f"Fetching {len(ids)} papers from arxiv... \n")
     repository = BASE_REPO()
+    repository["Author"] = []
     search = arxiv.Search(
         query="",
         id_list=ids,
@@ -107,16 +110,38 @@ def fetch(ids: list):
         repository["Published"].append(result.published)
         repository["Abstract"].append(result.summary.strip("\n"))
         repository["URL"].append(result.pdf_url)
+        repository["Author"].append(result.authors)
 
-    return pd.DataFrame(repository).set_index("Id")
+    return pd.DataFrame(repository)
 
 
-def run(path: str = "ScholarlyRecommender/Repository/Feed.csv"):
-    reccommended = rankV2(n=5, on="Abstract")
+def run(df, size, to_path, as_df):
+    reccommended = rankV2(context=df, n=size, on="Abstract")
     feed = fetch(reccommended)
+    if to_path is not None:
+        feed.set_index("Id").to_csv(to_path)
+        print(f"Feed saved to {to_path} \n")
+        # feed.to_csv(to_path)
+    if as_df:
+        return feed
 
-    feed.to_csv(path)
-    print(f"Feed saved to {path} \n")
+
+def get_recommendations(data, size: int = 5, to_path: str = None, as_df: bool = False):
+    if isinstance(data, pd.DataFrame):
+        df = data
+        df.reset_index(inplace=True)
+    elif isinstance(data, str):
+        df = pd.read_csv(data)
+    else:
+        raise TypeError("data must be a pandas DataFrame or a path to a csv file")
+    reccommended = rankV2(context=df, n=size, on="Abstract")
+    feed = fetch(reccommended)
+    if to_path is not None:
+        feed.set_index("Id").to_csv(to_path)
+        print(f"Feed saved to {to_path} \n")
+        # feed.to_csv(to_path)
+    if as_df:
+        return feed
 
 
 if __name__ == "__main__":
