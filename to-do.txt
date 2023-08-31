@@ -1,5 +1,4 @@
-- Implement transformer recommender and evaluate it 
-- Implement newsletter form that can send emails or automate most aspects
-- Allow feedback/labeling from newsletter which is added to training data 
-- Allow signups for newsletter 
-- Use transformers for summary in the abstract and writing newsletter headers. 
+- improve feed html quality 
+- add feedback feature 
+- store emails more efficiently 
+- implement transformer model for the headline 
