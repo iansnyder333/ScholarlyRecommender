@@ -39,9 +39,71 @@ def build_html_feed(
     html_content = """<!DOCTYPE html>
     <html>
     <head>
-        <link rel="stylesheet" href="style.css">
+    <style>
+    .title-main{
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.05em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    color: #2C3E50;
+    margin-bottom: 10px;
+}
+p {
+    font-family: "Georgia", serif;
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+    color: #333;
+    margin-bottom: 20px;
+}
+/* General styles for each feed item */
+.feed-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 8px;
+}
+
+/* Style for the title */
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.author {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+/* Style for the metadata section */
+.metadata {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Style for the abstract */
+.abstract {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Style for the read more link */
+a {
+    display: inline-block;
+    background-color: #007BFF;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+    </style>
+        
     </head>
-    <body>"""
+    <body>
+    <h1 class="title-main">Decoding the Future of AI: Ethical Dilemmas, Embedding Logic, and Emotion Analytics in Conversational Tech—A Curated Selection of Cutting-Edge Research</h1>
+    <p>Dear Reader,
+    This edition aims to immerse you in the nuanced fabric of Large Language Models, spanning topics from ethical concerns in moderation and gender biases to highly technical advancements like embedding logic programming into Python's deep-learning ecosystem. Expect in-depth analyses and pioneering solutions that push the boundaries of conventional wisdom, handpicked to empower your specialized interest in these paradigms.</p>"""
 
     # HTML template for each feed item
     html_template = """
