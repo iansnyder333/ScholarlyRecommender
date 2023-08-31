@@ -3,7 +3,7 @@ from email.message import EmailMessage
 
 EMAIL_ADDRESS = "scholarlyrecommender@gmail.com"
 
-EMAIL_PASSWORD = None
+EMAIL_PASSWORD = input("*")
 
 SUBSCRIBERS = [
     "scholarlyrecommender@gmail.com",
