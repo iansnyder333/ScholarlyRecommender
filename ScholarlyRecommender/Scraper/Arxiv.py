@@ -22,7 +22,8 @@ def search(
 def source_candidates(
     queries: list = queries,
     max_results: int = 100,
-    to_path: str = "ScholarlyRecommender/Repository/Candidates.csv",
+    to_path: str = None,
+    as_df: bool = False,
 ):
     # Source
 
@@ -45,4 +46,7 @@ def source_candidates(
     df["Published"] = pd.to_datetime(df["Published"])
     df = df[df["Published"] > (pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=8))]
     print(f"Number of papers extracted : {df.shape[0]}")
-    df.to_csv(to_path)
+    if to_path is not None:
+        df.to_csv(to_path)
+    if as_df:
+        return df

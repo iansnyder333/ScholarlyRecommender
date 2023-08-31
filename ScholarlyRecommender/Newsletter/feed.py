@@ -1,14 +1,30 @@
 import pandas as pd
 import numpy as np
 from datetime import datetime
+import re
 
 
-def clean_feed(path: str = "ScholarlyRecommender/Repository/Feed.csv"):
+def clean_feed(path: str):
     df = pd.read_csv(path)
-    df["Published"] = pd.to_datetime(df["Published"]).dt.strftime("%Y-%m-%d")
-    df["Abstract"] = df["Abstract"].str[:150] + "..."
-    # df.to_csv("Repository/CleanFeed.csv", index=False)
+    df["Id"] = df["Id"].apply(lambda x: "Entry Id: " + str(x))
+    df["Published"] = pd.to_datetime(df["Published"]).dt.strftime("%m-%d-%Y")
+    df["Published"] = df["Published"].apply(lambda x: "Published on " + str(x))
+    df["Author"] = df["Author"].apply(extract_author_names)
+    df["Abstract"] = df["Abstract"].str[:500] + "..."
     return df
+
+
+def extract_author_names(author_string):
+    # The regular expression to match any characters enclosed within single quotes
+    pattern = r"\'(.*?)\'"
+
+    # Find all matches of the pattern
+    matches = re.findall(pattern, author_string)
+
+    return ", ".join(matches)
+
+
+# Pipeline()
 
 
 # df = clean_feed()
@@ -31,6 +47,7 @@ def build_html_feed(
     html_template = """
     <div class="feed-item">
     <h2 class="title">{title}</h2>
+    <h4 class="author">{author}</h4>
     <div class="metadata">
         <span class="id">{id}</span> | 
         <span class="category">{category}</span> | 
@@ -47,6 +64,7 @@ def build_html_feed(
     for index, row in df.iterrows():
         item_html = html_template.format(
             title=row["Title"],
+            author=row["Author"],
             id=row["Id"],
             category=row["Category"],
             published=row["Published"],
@@ -65,3 +83,13 @@ def build_html_feed(
 
 
 # build_html_feed(clean_feed())
+def get_feed(data, to_path: str = "ScholarlyRecommender/Newsletter/html/Feed.html"):
+    if isinstance(data, pd.DataFrame):
+        data.to_csv("ScholarlyRecommender/Repository/TempFeed.csv", index=False)
+        df = clean_feed("ScholarlyRecommender/Repository/TempFeed.csv")
+        build_html_feed(df, to_path)
+    elif isinstance(data, str):
+        df = clean_feed(data)
+        build_html_feed(df, to_path)
+    else:
+        raise TypeError("data must be a pandas DataFrame or a path to a csv file")

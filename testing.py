@@ -1,22 +1,16 @@
-from ScholarlyRecommender.Recommender import rec_sys
-import ScholarlyRecommender.Scraper.Arxiv as scrape
-import ScholarlyRecommender.Newsletter.feed as feed
-import pandas as pd
+import ScholarlyRecommender as sr
 
 
 def Pipeline():
     # Scrape
-    scrape.source_candidates(
-        to_path="ScholarlyRecommender/Repository/TestCandidates.csv"
-    )
-    # RecSys
-    rec_sys.run(path="ScholarlyRecommender/Repository/TestFeed.csv")
-    feed.build_html_feed(
-        feed.clean_feed("ScholarlyRecommender/Repository/TestFeed.csv"),
-        to_path="ScholarlyRecommender/Newsletter/html/TestFeed.html",
-    )
-    # feed = pd.read_csv("Repository/Feed.csv", index_col="Id")
-    # print(feed.head())
 
+    c = sr.source_candidates(as_df=True)
+    r = sr.get_recommendations(
+        data=c,
+        as_df=True,
+    )
 
-Pipeline()
+    sr.get_feed(
+        data=r,
+        to_path="ScholarlyRecommender/Newsletter/html/4TestUserFeed.html",
+    )

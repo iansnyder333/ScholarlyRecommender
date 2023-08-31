@@ -10,9 +10,13 @@
 .title {
     font-size: 24px;
     font-weight: bold;
+    margin-bottom: 5px;
+}
+.author {
+    font-size: 14px;
+    font-weight: bold;
     margin-bottom: 10px;
 }
-
 /* Style for the metadata section */
 .metadata {
     font-size: 14px;
