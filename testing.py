@@ -1,7 +1,6 @@
 import ScholarlyRecommender as sr
 import pandas as pd
 import numpy as np
-import test_mail as tm
 
 
 def Pipeline():
@@ -17,4 +16,9 @@ def Pipeline():
         data=r,
         to_path="ScholarlyRecommender/Newsletter/html/TestUserFeed.html",
     )
-    tm.send_email("ScholarlyRecommender/Newsletter/html/TestUserFeed.html")
+
+
+sr.get_feed(
+    data="ScholarlyRecommender/Repository/Recommendations.csv",
+    to_path="ScholarlyRecommender/Newsletter/html/NewTestFeed.html",
+)
