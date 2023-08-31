@@ -62,7 +62,7 @@ def rankerV3(
     return df
 
 
-def rank(context) -> list:
+def rank(context, n: int = 5) -> list:
     """
     Run the rankerV3 algorithm on the context and return a list of the top 5 ranked papers.
     """
@@ -73,7 +73,7 @@ def rank(context) -> list:
     df["rank"] = df["predicted"].rank(ascending=False)
     df = df.sort_values(by=["rank"])
     df["Id"] = df["Id"].apply(lambda x: str(x))
-    reccommended = df["Id"].tolist()[0:5]
+    reccommended = df["Id"].tolist()[0:n]
     print(f"Finished Ranking.\n")
 
     return reccommended
@@ -174,7 +174,7 @@ def get_recommendations(data, size: int = 5, to_path: str = None, as_df: bool = 
         raise TypeError("data must be a pandas DataFrame or a path to a csv file")
 
     # reccommended = rankV2(context=df, n=size, on="Abstract")
-    reccommended = rank(context=df)
+    reccommended = rank(context=df, n=size)
     feed = fetch(reccommended)
     if to_path is not None:
         feed.set_index("Id").to_csv(to_path)

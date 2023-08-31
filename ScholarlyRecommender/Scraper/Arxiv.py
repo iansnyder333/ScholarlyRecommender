@@ -27,6 +27,7 @@ def source_candidates(
     max_results: int = 100,
     to_path: str = None,
     as_df: bool = False,
+    prev_days: int = 7,
 ):
     """
     Scrape arxiv.org for papers matching the queries, filter them and return a dataframe or save it to a csv file.
@@ -49,7 +50,9 @@ def source_candidates(
     print(f"Number of papers extracted : {df.shape[0]}")
     # Only keep papers from the last week
     df["Published"] = pd.to_datetime(df["Published"])
-    df = df[df["Published"] > (pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=8))]
+    df = df[
+        df["Published"] > (pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=prev_days))
+    ]
     print(f"Number of papers extracted : {df.shape[0]}")
     if to_path is not None:
         df.to_csv(to_path)

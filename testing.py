@@ -28,4 +28,19 @@ def short_Pipeline():
     )
 
 
-short_Pipeline()
+def main_Pipeline(q: list = None, n: int = 5, days: int = 7):
+    # Scrape
+
+    c = sr.source_candidates(queries=q, as_df=True, prev_days=days)
+    r = sr.get_recommendations(
+        data=c,
+        size=n,
+        as_df=True,
+    )
+
+    sr.get_feed(
+        data=r,
+        to_path="ScholarlyRecommender/Newsletter/html/WebTestFeed.html",
+    )
+    return "ScholarlyRecommender/Newsletter/html/WebTestFeed.html"
+    # send_email(path="ScholarlyRecommender/Newsletter/html/TestFeed.html")

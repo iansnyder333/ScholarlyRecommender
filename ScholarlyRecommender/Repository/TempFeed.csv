@@ -1,63 +1,4 @@
 Id,Category,Title,Published,Abstract,URL,Author
-2308.14337v1,cs.AI,Cognitive Effects in Large Language Models,2023-08-28 06:30:33+00:00,"Large Language Models (LLMs) such as ChatGPT have received enormous attention
-over the past year and are now used by hundreds of millions of people every
-day. The rapid adoption of this technology naturally raises questions about the
-possible biases such models might exhibit. In this work, we tested one of these
-models (GPT-3) on a range of cognitive effects, which are systematic patterns
-that are usually found in human cognitive tasks. We found that LLMs are indeed
-prone to several human cognitive effects. Specifically, we show that the
-priming, distance, SNARC, and size congruity effects were presented with GPT-3,
-while the anchoring effect is absent. We describe our methodology, and
-specifically the way we converted real-world experiments to text-based
-experiments. Finally, we speculate on the possible reasons why GPT-3 exhibits
-these effects and discuss whether they are imitated or reinvented.",http://arxiv.org/pdf/2308.14337v1,"[arxiv.Result.Author('Jonathan Shaki'), arxiv.Result.Author('Sarit Kraus'), arxiv.Result.Author('Michael Wooldridge')]"
-2308.14921v1,cs.CL,Gender bias and stereotypes in Large Language Models,2023-08-28 22:32:05+00:00,"Large Language Models (LLMs) have made substantial progress in the past
-several months, shattering state-of-the-art benchmarks in many domains. This
-paper investigates LLMs' behavior with respect to gender stereotypes, a known
-issue for prior models. We use a simple paradigm to test the presence of gender
-bias, building on but differing from WinoBias, a commonly used gender bias
-dataset, which is likely to be included in the training data of current LLMs.
-We test four recently published LLMs and demonstrate that they express biased
-assumptions about men and women's occupations. Our contributions in this paper
-are as follows: (a) LLMs are 3-6 times more likely to choose an occupation that
-stereotypically aligns with a person's gender; (b) these choices align with
-people's perceptions better than with the ground truth as reflected in official
-job statistics; (c) LLMs in fact amplify the bias beyond what is reflected in
-perceptions or the ground truth; (d) LLMs ignore crucial ambiguities in
-sentence structure 95% of the time in our study items, but when explicitly
-prompted, they recognize the ambiguity; (e) LLMs provide explanations for their
-choices that are factually inaccurate and likely obscure the true reason behind
-their predictions. That is, they provide rationalizations of their biased
-behavior. This highlights a key property of these models: LLMs are trained on
-imbalanced datasets; as such, even with the recent successes of reinforcement
-learning with human feedback, they tend to reflect those imbalances back at us.
-As with other types of societal biases, we suggest that LLMs must be carefully
-tested to ensure that they treat minoritized individuals and communities
-equitably.",http://arxiv.org/pdf/2308.14921v1,"[arxiv.Result.Author('Hadas Kotek'), arxiv.Result.Author('Rikker Dockum'), arxiv.Result.Author('David Q. Sun')]"
-2308.15126v1,cs.LG,Evaluation and Analysis of Hallucination in Large Vision-Language Models,2023-08-29 08:51:24+00:00,"Large Vision-Language Models (LVLMs) have recently achieved remarkable
-success. However, LVLMs are still plagued by the hallucination problem, which
-limits the practicality in many scenarios. Hallucination refers to the
-information of LVLMs' responses that does not exist in the visual input, which
-poses potential risks of substantial consequences. There has been limited work
-studying hallucination evaluation in LVLMs. In this paper, we propose
-Hallucination Evaluation based on Large Language Models (HaELM), an LLM-based
-hallucination evaluation framework. HaELM achieves an approximate 95%
-performance comparable to ChatGPT and has additional advantages including low
-cost, reproducibility, privacy preservation and local deployment. Leveraging
-the HaELM, we evaluate the hallucination in current LVLMs. Furthermore, we
-analyze the factors contributing to hallucination in LVLMs and offer helpful
-suggestions to mitigate the hallucination problem. Our training data and human
-annotation hallucination data will be made public soon.",http://arxiv.org/pdf/2308.15126v1,"[arxiv.Result.Author('Junyang Wang'), arxiv.Result.Author('Yiyang Zhou'), arxiv.Result.Author('Guohai Xu'), arxiv.Result.Author('Pengcheng Shi'), arxiv.Result.Author('Chenlin Zhao'), arxiv.Result.Author('Haiyang Xu'), arxiv.Result.Author('Qinghao Ye'), arxiv.Result.Author('Ming Yan'), arxiv.Result.Author('Ji Zhang'), arxiv.Result.Author('Jihua Zhu'), arxiv.Result.Author('Jitao Sang'), arxiv.Result.Author('Haoyu Tang')]"
-2308.14182v1,cs.CL,Generative AI for Business Strategy: Using Foundation Models to Create Business Strategy Tools,2023-08-27 19:03:12+00:00,"Generative models (foundation models) such as LLMs (large language models)
-are having a large impact on multiple fields. In this work, we propose the use
-of such models for business decision making. In particular, we combine
-unstructured textual data sources (e.g., news data) with multiple foundation
-models (namely, GPT4, transformer-based Named Entity Recognition (NER) models
-and Entailment-based Zero-shot Classifiers (ZSC)) to derive IT (information
-technology) artifacts in the form of a (sequence of) signed business networks.
-We posit that such artifacts can inform business stakeholders about the state
-of the market and their own positioning as well as provide quantitative
-insights into improving their future outlook.",http://arxiv.org/pdf/2308.14182v1,"[arxiv.Result.Author('Son The Nguyen'), arxiv.Result.Author('Theja Tulabandhula')]"
 2308.15930v1,cs.CL,LLaSM: Large Language and Speech Model,2023-08-30 10:12:39+00:00,"Multi-modal large language models have garnered significant interest
 recently. Though, most of the works focus on vision-language multi-modal models
 providing strong capabilities in following vision-and-language instructions.
@@ -75,3 +16,84 @@ https://github.com/LinkSoul-AI/LLaSM and
 https://huggingface.co/spaces/LinkSoul/LLaSM. The LLaSM-Audio-Instructions
 dataset is available at
 https://huggingface.co/datasets/LinkSoul/LLaSM-Audio-Instructions.",http://arxiv.org/pdf/2308.15930v1,"[arxiv.Result.Author('Yu Shu'), arxiv.Result.Author('Siwei Dong'), arxiv.Result.Author('Guangyao Chen'), arxiv.Result.Author('Wenhao Huang'), arxiv.Result.Author('Ruihua Zhang'), arxiv.Result.Author('Daochen Shi'), arxiv.Result.Author('Qiqi Xiang'), arxiv.Result.Author('Yemin Shi')]"
+2308.15962v1,cs.RO,WALL-E: Embodied Robotic WAiter Load Lifting with Large Language Model,2023-08-30 11:35:21+00:00,"Enabling robots to understand language instructions and react accordingly to
+visual perception has been a long-standing goal in the robotics research
+community. Achieving this goal requires cutting-edge advances in natural
+language processing, computer vision, and robotics engineering. Thus, this
+paper mainly investigates the potential of integrating the most recent Large
+Language Models (LLMs) and existing visual grounding and robotic grasping
+system to enhance the effectiveness of the human-robot interaction. We
+introduce the WALL-E (Embodied Robotic WAiter load lifting with Large Language
+model) as an example of this integration. The system utilizes the LLM of
+ChatGPT to summarize the preference object of the users as a target instruction
+via the multi-round interactive dialogue. The target instruction is then
+forwarded to a visual grounding system for object pose and size estimation,
+following which the robot grasps the object accordingly. We deploy this
+LLM-empowered system on the physical robot to provide a more user-friendly
+interface for the instruction-guided grasping task. The further experimental
+results on various real-world scenarios demonstrated the feasibility and
+efficacy of our proposed framework.",http://arxiv.org/pdf/2308.15962v1,"[arxiv.Result.Author('Tianyu Wang'), arxiv.Result.Author('Yifan Li'), arxiv.Result.Author('Haitao Lin'), arxiv.Result.Author('Xiangyang Xue'), arxiv.Result.Author('Yanwei Fu')]"
+2308.15812v1,cs.LG,Peering Through Preferences: Unraveling Feedback Acquisition for Aligning Large Language Models,2023-08-30 07:35:32+00:00,"Aligning large language models (LLMs) with human values and intents
+critically involves the use of human or AI feedback. While dense feedback
+annotations are expensive to acquire and integrate, sparse feedback presents a
+structural design choice between ratings (e.g., score Response A on a scale of
+1-7) and rankings (e.g., is Response A better than Response B?). In this work,
+we analyze the effect of this design choice for the alignment and evaluation of
+LLMs. We uncover an inconsistency problem wherein the preferences inferred from
+ratings and rankings significantly disagree 60% for both human and AI
+annotators. Our subsequent analysis identifies various facets of annotator
+biases that explain this phenomena, such as human annotators would rate denser
+responses higher while preferring accuracy during pairwise judgments. To our
+surprise, we also observe that the choice of feedback protocol also has a
+significant effect on the evaluation of aligned LLMs. In particular, we find
+that LLMs that leverage rankings data for alignment (say model X) are preferred
+over those that leverage ratings data (say model Y), with a rank-based
+evaluation protocol (is X/Y's response better than reference response?) but not
+with a rating-based evaluation protocol (score Rank X/Y's response on a scale
+of 1-7). Our findings thus shed light on critical gaps in methods for
+evaluating the real-world utility of language models and their strong
+dependence on the feedback protocol used for alignment. Our code and data are
+available at https://github.com/Hritikbansal/sparse_feedback.",http://arxiv.org/pdf/2308.15812v1,"[arxiv.Result.Author('Hritik Bansal'), arxiv.Result.Author('John Dang'), arxiv.Result.Author('Aditya Grover')]"
+2308.15944v1,cs.SE,WUDI: A Human Involved Self-Adaptive Framework to Prevent Childhood Obesity in Internet of Things Environment,2023-08-30 10:52:00+00:00,"The Internet of Things (IoT) connects people, devices, and information
+resources, in various domains to improve efficiency. The healthcare domain has
+been transformed by the integration of the IoT, leading to the development of
+digital healthcare solutions such as health monitoring, emergency detection,
+and remote operation. This integration has led to an increase in the health
+data collected from a variety of IoT sources. Consequently, advanced
+technologies are required to analyze health data, and artificial intelligence
+has been employed to extract meaningful insights from the data. Childhood
+overweight and obesity have emerged as some of the most serious global public
+health challenges, as they can lead to a variety of health-related problems and
+the early development of chronic diseases. To address this, a self-adaptive
+framework is proposed to prevent childhood obesity by using lifelog data from
+IoT environments, with human involvement being an important consideration in
+the framework. The framework uses an ensemble-based learning model to predict
+obesity using the lifelog data. Empirical experiments using lifelog data from
+smartphone applications were conducted to validate the effectiveness of human
+involvement and obesity prediction. The results demonstrated the efficiency of
+the proposed framework with human involvement in obesity prediction. The
+proposed framework can be applied in real-world healthcare services for
+childhood obesity.",http://arxiv.org/pdf/2308.15944v1,"[arxiv.Result.Author('Euijong Lee'), arxiv.Result.Author('Jaemin Jung'), arxiv.Result.Author('Gee-Myung Moon'), arxiv.Result.Author('Seong-Whan Lee'), arxiv.Result.Author('Ji-Hoon Jeong')]"
+2308.16137v1,cs.CL,LM-Infinite: Simple On-the-Fly Length Generalization for Large Language Models,2023-08-30 16:47:51+00:00,"In recent years, there have been remarkable advancements in the performance
+of Transformer-based Large Language Models (LLMs) across various domains. As
+these LLMs are deployed for increasingly complex tasks, they often face the
+needs to conduct longer reasoning processes or understanding larger contexts.
+In these situations, the length generalization failure of LLMs on long
+sequences become more prominent. Most pre-training schemes truncate training
+sequences to a fixed length (such as 2048 for LLaMa). LLMs often struggle to
+generate fluent texts, let alone carry out downstream tasks, after longer
+contexts, even with relative positional encoding which is designed to cope with
+this problem. Common solutions such as finetuning on longer corpora often
+involves daunting hardware and time costs and requires careful training process
+design. To more efficiently leverage the generation capacity of existing LLMs,
+we theoretically and empirically investigate the main out-of-distribution (OOD)
+factors contributing to this problem. Inspired by this diagnosis, we propose a
+simple yet effective solution for on-the-fly length generalization,
+LM-Infinite, which involves only a $\Lambda$-shaped attention mask and a
+distance limit while requiring no parameter updates or learning. We find it
+applicable to a variety of LLMs using relative-position encoding methods.
+LM-Infinite is computational efficient with $O(n)$ time and space, and
+demonstrates consistent fluency and generation quality to as long as 32k tokens
+on ArXiv and OpenWebText2 datasets, with 2.72x decoding speedup. On downstream
+task such as passkey retrieval, it continues to work on inputs much longer than
+training lengths where vanilla models fail immediately.",http://arxiv.org/pdf/2308.16137v1,"[arxiv.Result.Author('Chi Han'), arxiv.Result.Author('Qifan Wang'), arxiv.Result.Author('Wenhan Xiong'), arxiv.Result.Author('Yu Chen'), arxiv.Result.Author('Heng Ji'), arxiv.Result.Author('Sinong Wang')]"
