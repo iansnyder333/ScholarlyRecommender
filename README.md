@@ -8,7 +8,7 @@
 <h3 align="center">Scholarly Recommender</h3>
 
   <p align="center">
-    End-to-end product that sources recent academic publications and prepares a feed of recommended readings delivered right to your email.
+    End-to-end product that sources recent academic publications and prepares a feed of recommended readings in seconds. 
     <br />
     <a href="https://github.com/iansnyder333/ScholarlyRecommender"><strong>Explore the docs »</strong></a>
     <br />
