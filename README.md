@@ -58,8 +58,9 @@
 
 ### Built With
 
-* [![Pandas][Pandas.org]][Pandas-url]
-
+* [![Python][Python.com]][Python-url]
+* [![Streamlit][Streamlit.com]][Python-url]
+* [![Pandas][Pandas.com]][Pandas-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -71,26 +72,25 @@ To try ScholarlyRecommender, you can use the streamlit web application found HER
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+In order to install this app locally you need to have git along with a suitable Python version. This app was developed using Python 3.11 and has not been tested on any earlier versions.
+
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+MacOS
+1. Clone the repo
    ```sh
    git clone https://github.com/iansnyder333/ScholarlyRecommender.git
    ```
-3. Install NPM packages
+2. cd into the repo and setup a enviroment
    ```sh
-   npm install
+   cd ScholarlyRecommender
+   python3.11 -m venv env
+   source env/bin/activate
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+3. install dependencies 
+   ```sh
+   pip3.11 install -r requirements.txt
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -100,9 +100,8 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Webapp, email, parameters, labeling etc
 
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -167,9 +166,15 @@ Linkedin: [www.linkedin.com/in/ian-snyder-aa1600182/](https://www.linkedin.com/i
 * []()
 * []()
 
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[Pandas.org](https://img.shields.io/badge/Pandas
+[Python.com]:https://img.shields.io/badge/Python-blue
+[Python-url]:https://www.python.org/
+[Streamlit.com]:https://img.shields.io/badge/Streamlit-red
+[Streamlit-url]:https://streamlit.io/
+[Pandas.com]:https://img.shields.io/badge/pandas-purple
 [Pandas-url]:https://pandas.pydata.org/
+
