@@ -135,10 +135,9 @@ if navigation == "Get Recommendations":
             sr.get_feed(
                 data=r,
                 email=False,
-                to_path="ScholarlyRecommender/Newsletter/html/WebTestFeed.html",
+                to_path="ScholarlyRecommender/Newsletter/html/WebFeed.html",
             )
-            result = "ScholarlyRecommender/Newsletter/html/WebTestFeed.html"
-            # result = main_Pipeline(q=query, n=n, days=days)
+            result = "ScholarlyRecommender/Newsletter/html/WebFeed.html"
 
             HtmlFile = open(
                 result,

@@ -32,6 +32,7 @@ def source_candidates(
     to_path: str = None,
     as_df: bool = False,
     prev_days: int = 7,
+    sort_by=arxiv.SortCriterion.SubmittedDate,
 ):
     """
     Scrape arxiv.org for papers matching the queries, filter them and return a dataframe or save it to a csv file.
@@ -44,17 +45,18 @@ def source_candidates(
     assert len(queries) < 100, "Too many queries, please reduce the number of queries "
 
     prev_days = min(prev_days, 30)
-    max_results = max(((100 * prev_days) // len(queries)), 100)
+    if sort_by == arxiv.SortCriterion.SubmittedDate:
+        max_results = max(((100 * prev_days) // len(queries)), 100)
 
     print(f"Searching for {max_results} papers for each query")
     df = None
     for query in queries:
         print(f"Searching for {query}")
         if df is None:
-            df = search(query, max_results=max_results)
+            df = search(query, max_results=max_results, sort_by=sort_by)
             print(f"Number of papers extracted : {len(df.index)}")
         else:
-            df2 = search(query, max_results=max_results)
+            df2 = search(query, max_results=max_results, sort_by=sort_by)
             print(f"Number of papers extracted : {len(df2.index)}")
             df = pd.concat([df, df2])
 
@@ -65,9 +67,11 @@ def source_candidates(
     print(f"Number of papers extracted : {len(df.index)}")
     # Only keep papers from the last week
     df["Published"] = pd.to_datetime(df["Published"])
-    df = df[
-        df["Published"] >= (pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=prev_days))
-    ]
+    if sort_by == arxiv.SortCriterion.SubmittedDate:
+        df = df[
+            df["Published"]
+            >= (pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=prev_days))
+        ]
     print(f"Number of papers extracted : {len(df.index)}")
     if to_path is not None:
         df.to_csv(to_path)

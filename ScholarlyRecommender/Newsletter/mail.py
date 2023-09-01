@@ -1,19 +1,17 @@
 import smtplib
 from email.message import EmailMessage
 
-EMAIL_ADDRESS = "scholarlyrecommender@gmail.com"
-
-EMAIL_PASSWORD = input("*")
-
-SUBSCRIBERS = [
-    "scholarlyrecommender@gmail.com",
-]
-
 
 def send_email(
     path: str = "ScholarlyRecommender/Newsletter/html/NewTestFeed.html",
 ):
-    global EMAIL_ADDRESS, EMAIL_PASSWORD, SUBSCRIBERS
+    EMAIL_ADDRESS = "scholarlyrecommender@gmail.com"
+
+    EMAIL_PASSWORD = input("*")
+
+    SUBSCRIBERS = [
+        "scholarlyrecommender@gmail.com",
+    ]
 
     msg = EmailMessage()
     msg["Subject"] = "Your Scholarly Recommender Weekly Newsletter"
