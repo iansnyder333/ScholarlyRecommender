@@ -8,5 +8,6 @@ queries = [
     "physics.data-an",
     "q-bio.QM",
     "stat.CO",
-    "stat.ML" "stat.TH",
+    "stat.ML",
+    "stat.TH",
 ]

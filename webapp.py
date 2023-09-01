@@ -3,6 +3,8 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from testing import main_Pipeline
+import ScholarlyRecommender as sr
+import pandas as pd
 
 # Theme Configuration
 st.set_page_config(
@@ -11,7 +13,48 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
-
+search_categories = {
+    "Computer Science": [
+        "Artificial Intelligence",
+        "Computer Vision and Pattern Recognition",
+        "Computation and Language",
+        "Databases",
+        "Distributed, Parallel, and Cluster Computing",
+        "Data Structures and Algorithms",
+        "Computer Science and Game Theory",
+        "Machine Learning",
+        "Robotics",
+        "Software Engineering",
+    ],
+    "Mathmatics": [
+        "Combinatorics",
+        "Dynamical Systems",
+        "Numerical Analysis",
+        "Number Theory",
+        "Probability",
+        "Quantum Algebra",
+        "Logic",
+    ],
+    "Biology": [
+        "Biomolecules",
+        "Genomics",
+        "Neurons and Cognition",
+        "Subcellular Processes",
+        "Quantitative Methods",
+    ],
+    "Physics": [
+        "Astrophysics",
+        "Condensed matter",
+        "General relativity and quantum cosmology",
+        "High energy physics",
+        "Mathematical physics",
+        "Nonlinear sciences",
+        "Nuclear experiment",
+        "Nuclear theory",
+        "Quantum physics",
+    ],
+    "Statistics": ["Applications", "Computation", "Methodology", "Statistics Theory"],
+}
 # Custom CSS for better UI
 st.markdown(
     """
@@ -35,10 +78,16 @@ if navigation == "Get Recommendations":
 
     # Collecting user details
 
-    query = st.multiselect(
+    categories = st.multiselect(
         "What Interests You? (select at least one)",
-        ["Computer Science", "Machine Learning", "Mathmatics", "Physics", "Statistics"],
+        search_categories.keys(),
     )
+    selected_sub_categories = {}
+    for selected in categories:
+        selected_sub_categories[selected] = st.multiselect(
+            f"Select sub-categories under {selected} (Optional)",
+            search_categories[selected],
+        )
 
     # Advanced filters
     with st.expander("Advanced Filters"):
@@ -55,14 +104,41 @@ if navigation == "Get Recommendations":
             max_value=30,
             value=7,
         )
-
     # Call to Action
     if st.button("Generate Recommendations"):
-        # Call your backend function here to generate recommendations
-        assert len(query) > 0, "Please select at least one interest."
-        with st.status("Working..", expanded=True) as status:
-            result = main_Pipeline(q=query, n=n, days=days)
-            st.write("Almost Done...")
+        with st.status("Building Query...", expanded=True) as status:
+            # st.write("Building Query...")
+            query = []
+            for key, value in selected_sub_categories.items():
+                if len(value) > 0:
+                    query.extend(value)
+                else:
+                    query.append(key)
+            # Call your backend function here to generate recommendations
+            assert len(query) > 0, "Please select at least one interest."
+            # st.write("Searching for papers...")
+            status.update(
+                label="Searching for papers...", state="running", expanded=True
+            )
+            c = sr.source_candidates(queries=query, as_df=True, prev_days=days)
+            # st.write("Generating recommendations...")
+            status.update(
+                label="Generating recommendations...", state="running", expanded=True
+            )
+            r = sr.get_recommendations(
+                data=c,
+                size=n,
+                as_df=True,
+            )
+            # st.write("Generating feed...")
+            status.update(label="Generating feed...", state="running", expanded=True)
+            sr.get_feed(
+                data=r,
+                to_path="ScholarlyRecommender/Newsletter/html/WebTestFeed.html",
+            )
+            result = "ScholarlyRecommender/Newsletter/html/WebTestFeed.html"
+            # result = main_Pipeline(q=query, n=n, days=days)
+
             HtmlFile = open(
                 result,
                 "r",
