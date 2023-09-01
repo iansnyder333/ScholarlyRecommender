@@ -8,7 +8,7 @@ import numpy as np
 def Pipeline():
     # Scrape
 
-    c = sr.source_candidates(as_df=True)
+    c = sr.source_candidates(max_results=500, as_df=True)
     r = sr.get_recommendations(
         data=c,
         as_df=True,
@@ -16,7 +16,7 @@ def Pipeline():
 
     sr.get_feed(
         data=r,
-        to_path="ScholarlyRecommender/Newsletter/html/NewTestFeed.html",
+        to_path="ScholarlyRecommender/Newsletter/html/LargeTestFeed.html",
     )
     # send_email(path="ScholarlyRecommender/Newsletter/html/TestFeed.html")
 

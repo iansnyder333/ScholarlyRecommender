@@ -42,19 +42,22 @@ def rankerV3(
             ncd = (Cx1x2 - min(Cx1, Cx2)) / max(Cx1, Cx2)
 
             similarity_to_x1.append(ncd)
+
         # calculate the similarity weights for the top k most similar papers
+        # Converting the list to a numpy array for vectorized operations
         similarity_to_x1 = np.array(similarity_to_x1)
+        # sort the array and get the top k most similar papers
         sorted_idx = np.argsort(similarity_to_x1)
         values = similarity_to_x1[sorted_idx[:k]]
+        # calculate the similarity weights for the top k most similar papers
         weights = values / np.sum(values)
+        # Weights need to be inverted so that the most similar papers (lowest distance) have the highest weights
         inverse_weights = 1 / weights
-        weights_norm = inverse_weights / np.sum(inverse_weights)
-        top_k_ratings = train[sorted_idx[:k], 1]
-        topk = top_k_ratings.astype(int)
-        # calculate the weighted mean rating
-        prediction = np.sum(weights_norm * topk)
-        # mean = np.dot(weights, topk)
-        # mean = np.mean(topk)
+        inverse_weights_norm = (inverse_weights) / np.sum(inverse_weights)
+        # get the top k ratings
+        top_k_ratings = train[sorted_idx[:k], 1].astype(int)
+        # calculate the prediction as the inverse weighted mean of the top k ratings
+        prediction = np.sum(np.dot(inverse_weights_norm, top_k_ratings))
 
         results.append((prediction, id))
 
@@ -112,16 +115,20 @@ def evaluate(n: int = 5, k: int = 6, on: str = "Abstract") -> float:
             ncd = (Cx1x2 - min(Cx1, Cx2)) / max(Cx1, Cx2)
 
             similarity_to_x1.append(ncd)
+        # Converting the list to a numpy array for vectorized operations
         similarity_to_x1 = np.array(similarity_to_x1)
+        # sort the array and get the top k most similar papers
         sorted_idx = np.argsort(similarity_to_x1)
         values = similarity_to_x1[sorted_idx[:k]]
+        # calculate the similarity weights for the top k most similar papers
         weights = values / np.sum(values)
+        # Weights need to be inverted so that the most similar papers (lowest distance) have the highest weights
         inverse_weights = 1 / weights
-        weights_norm = inverse_weights / np.sum(inverse_weights)
-        top_k_ratings = train[sorted_idx[:k], 1]
-        topk = top_k_ratings.astype(int)
-        # calculate the weighted mean rating
-        prediction = np.sum(weights_norm * topk)
+        inverse_weights_norm = (inverse_weights) / np.sum(inverse_weights)
+        # get the top k ratings
+        top_k_ratings = train[sorted_idx[:k], 1].astype(int)
+        # calculate the prediction as the inverse weighted mean of the top k ratings
+        prediction = np.sum(np.dot(inverse_weights_norm, top_k_ratings))
 
         results.append((prediction, label))
 
@@ -172,8 +179,9 @@ def get_recommendations(data, size: int = 5, to_path: str = None, as_df: bool = 
         df = pd.read_csv(data)
     else:
         raise TypeError("data must be a pandas DataFrame or a path to a csv file")
+    assert size > 0, "size must be greater than 0"
+    assert size < len(df.index), "size must be less than the length of the data"
 
-    # reccommended = rankV2(context=df, n=size, on="Abstract")
     reccommended = rank(context=df, n=size)
     feed = fetch(reccommended)
     if to_path is not None:
