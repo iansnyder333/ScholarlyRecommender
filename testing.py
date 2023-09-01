@@ -16,6 +16,7 @@ def Pipeline():
 
     sr.get_feed(
         data=r,
+        email=True,
         to_path="ScholarlyRecommender/Newsletter/html/LargeTestFeed.html",
     )
     # send_email(path="ScholarlyRecommender/Newsletter/html/TestFeed.html")

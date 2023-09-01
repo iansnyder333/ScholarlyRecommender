@@ -2,7 +2,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-from testing import main_Pipeline
+
 import ScholarlyRecommender as sr
 import pandas as pd
 
@@ -134,6 +134,7 @@ if navigation == "Get Recommendations":
             status.update(label="Generating feed...", state="running", expanded=True)
             sr.get_feed(
                 data=r,
+                email=False,
                 to_path="ScholarlyRecommender/Newsletter/html/WebTestFeed.html",
             )
             result = "ScholarlyRecommender/Newsletter/html/WebTestFeed.html"

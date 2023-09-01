@@ -7,7 +7,7 @@ from ScholarlyRecommender.const import BASE_REPO
 
 
 def rankerV3(
-    context: pd.DataFrame, n: int = 5, k: int = 5, on: str = "Abstract"
+    context: pd.DataFrame, labels: str, n: int = 5, k: int = 5, on: str = "Abstract"
 ) -> pd.DataFrame:
     """
     Rank the papers in the context using the normalized compression distance combined with a weighted top-k mean rating.
@@ -16,9 +16,7 @@ def rankerV3(
     The algorithim gets the top k most similar papers to each paper in the context that the user rated and calculates the mean rating of those papers as its prediction.
 
     """
-    likes = pd.read_csv(
-        "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv"
-    )
+    likes = pd.read_csv(labels)
     candidates = context
 
     train = np.array([(row[on], row["label"]) for _, row in likes.iterrows()])
@@ -65,12 +63,15 @@ def rankerV3(
     return df
 
 
-def rank(context, n: int = 5) -> list:
+def rank(context, labels: str = None, n: int = 5) -> list:
     """
     Run the rankerV3 algorithm on the context and return a list of the top 5 ranked papers.
     """
-    df1 = rankerV3(context, on="Abstract")
-    df2 = rankerV3(context, on="Title")
+    if labels is None:
+        labels = "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv"
+
+    df1 = rankerV3(context, labels, on="Abstract")
+    df2 = rankerV3(context, labels, on="Title")
     df = df1.copy()
     df["predicted"] = (df1["predicted"] + df2["predicted"]) / 2
     df["rank"] = df["predicted"].rank(ascending=False)
