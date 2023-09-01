@@ -167,7 +167,9 @@ def fetch(ids: list) -> pd.DataFrame:
     return pd.DataFrame(repository)
 
 
-def get_recommendations(data, size: int = 5, to_path: str = None, as_df: bool = False):
+def get_recommendations(
+    data, labels=None, size: int = 5, to_path: str = None, as_df: bool = False
+):
     """
     Rank the papers in the data and return a dataframe or save it to a csv file.
     Data can be a pandas DataFrame or a path to a csv file.
@@ -183,7 +185,11 @@ def get_recommendations(data, size: int = 5, to_path: str = None, as_df: bool = 
     assert size > 0, "size must be greater than 0"
     assert size < len(df.index), "size must be less than the length of the data"
 
-    reccommended = rank(context=df, n=size)
+    reccommended = rank(
+        context=df,
+        labels=labels,
+        n=size,
+    )
     feed = fetch(reccommended)
     if to_path is not None:
         feed.set_index("Id").to_csv(to_path)

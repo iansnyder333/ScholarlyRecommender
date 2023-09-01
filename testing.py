@@ -2,46 +2,25 @@ import ScholarlyRecommender as sr
 import pandas as pd
 import numpy as np
 
-# from test_mail import send_email
 
-
+# Example of how to use the recommender system in a pipeline
+# This is useful for testing and debugging, along with quick execution if you don't want to use the webapp.
+# If you run Pipeline(), it will generate a feed of 5 papers based on whatever calibration is currently in the repository.
+# You also must modify the queries.py file to include the categories you want to search for. or manually enter them in the function call.
 def Pipeline():
-    # Scrape
-
-    c = sr.source_candidates(max_results=500, as_df=True)
-    r = sr.get_recommendations(
-        data=c,
+    candidates = sr.source_candidates(queries=None, as_df=True, prev_days=7)
+    recommendations = sr.get_recommendations(
+        data=candidates,
+        labels=None,
+        size=5,
+        to_path=None,
         as_df=True,
     )
-
     sr.get_feed(
-        data=r,
-        email=True,
-        to_path="ScholarlyRecommender/Newsletter/html/LargeTestFeed.html",
+        data=recommendations,
+        email=False,
+        to_path="ScholarlyRecommender/Newsletter/html/Feed.html",
     )
-    # send_email(path="ScholarlyRecommender/Newsletter/html/TestFeed.html")
-
-
-def short_Pipeline():
-    sr.get_feed(
-        data="ScholarlyRecommender/Repository/Recommendations.csv",
-        to_path="ScholarlyRecommender/Newsletter/html/NewTestFeed.html",
+    print(
+        "Feed Generated, it is saved to ScholarlyRecommender/Newsletter/html/Feed.html"
     )
-
-
-def main_Pipeline(q: list = None, n: int = 5, days: int = 7):
-    # Scrape
-
-    c = sr.source_candidates(queries=q, as_df=True, prev_days=days)
-    r = sr.get_recommendations(
-        data=c,
-        size=n,
-        as_df=True,
-    )
-
-    sr.get_feed(
-        data=r,
-        to_path="ScholarlyRecommender/Newsletter/html/WebTestFeed.html",
-    )
-    return "ScholarlyRecommender/Newsletter/html/WebTestFeed.html"
-    # send_email(path="ScholarlyRecommender/Newsletter/html/TestFeed.html")
