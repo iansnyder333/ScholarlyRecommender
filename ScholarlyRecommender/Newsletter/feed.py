@@ -28,7 +28,9 @@ def extract_author_names(author_string):
 
 
 def build_email(
-    df: pd.DataFrame, to_path: str = "ScholarlyRecommender/Newsletter/html/Feed.html"
+    df: pd.DataFrame,
+    email: bool = False,
+    to_path: str = "ScholarlyRecommender/Newsletter/html/Feed.html",
 ):
     flanT5_out = {
         "headline": "Decoding the Future of AI: Ethical Dilemmas, Embedding Logic, and Emotion Analytics in Conversational Tech—A Curated Selection of Cutting-Edge Research",
@@ -39,25 +41,26 @@ def build_email(
     <html>
     <body>
     """
-    body_template = """
-<h2 class="title-main" style='font-family: "Open Sans", sans-serif; color: #34495e;font-family: Arial, sans-serif;
-    font-size: 28px;
-    letter-spacing: 0.05em;
-    
-    color: #2C3E50;
-    margin-bottom: 10px;'>{headline}</h2>
-<p style='font-family: "Open Sans", sans-serif; color: #2c3e50; font-size: 18px;  margin-bottom: 20px; line-height: 1.6;'>
-    Dear Reader,
+    if email:
+        body_template = """
+    <h2 class="title-main" style='font-family: "Open Sans", sans-serif; color: #34495e;font-family: Arial, sans-serif;
+        font-size: 28px;
+        letter-spacing: 0.05em;
+        
+        color: #2C3E50;
+        margin-bottom: 10px;'>{headline}</h2>
+    <p style='font-family: "Open Sans", sans-serif; color: #2c3e50; font-size: 18px;  margin-bottom: 20px; line-height: 1.6;'>
+        Dear Reader,
+        </p>
+    <p style='font-family: "Open Sans", sans-serif; color: #2c3e50; font-size: 18px;  margin-bottom: 20px; line-height: 1.6;'>
+            {intro}
     </p>
-<p style='font-family: "Open Sans", sans-serif; color: #2c3e50; font-size: 18px;  margin-bottom: 20px; line-height: 1.6;'>
-        {intro}
-</p>
-    """
-    body_html = body_template.format(
-        headline=flanT5_out["headline"],
-        intro=flanT5_out["intro"],
-    )
-    html_content += body_html
+        """
+        body_html = body_template.format(
+            headline=flanT5_out["headline"],
+            intro=flanT5_out["intro"],
+        )
+        html_content += body_html
     # HTML template for each feed item
     html_template = """
     <div class="feed-item" style="border: 1px solid #ccc;
@@ -113,15 +116,19 @@ def build_email(
 
 
 # build_html_feed(clean_feed())
-def get_feed(data, to_path: str = "ScholarlyRecommender/Newsletter/html/Feed.html"):
+def get_feed(
+    data,
+    email: bool = False,
+    to_path: str = "ScholarlyRecommender/Newsletter/html/Feed.html",
+):
     if isinstance(data, pd.DataFrame):
         data.to_csv("ScholarlyRecommender/Repository/TempFeed.csv", index=False)
         df = clean_feed("ScholarlyRecommender/Repository/TempFeed.csv")
         # build_html_feed(df, to_path)
-        build_email(df, to_path)
+        build_email(df, email=email, to_path=to_path)
     elif isinstance(data, str):
         df = clean_feed(data)
-        build_email(df, to_path)
+        build_email(df, email=email, to_path=to_path)
         # build_html_feed(df, to_path)
     else:
         raise TypeError("data must be a pandas DataFrame or a path to a csv file")

@@ -1,4 +1,41 @@
 Id,Category,Title,Published,Abstract,URL,Author
+2308.14921v1,cs.CL,Gender bias and stereotypes in Large Language Models,2023-08-28 22:32:05+00:00,"Large Language Models (LLMs) have made substantial progress in the past
+several months, shattering state-of-the-art benchmarks in many domains. This
+paper investigates LLMs' behavior with respect to gender stereotypes, a known
+issue for prior models. We use a simple paradigm to test the presence of gender
+bias, building on but differing from WinoBias, a commonly used gender bias
+dataset, which is likely to be included in the training data of current LLMs.
+We test four recently published LLMs and demonstrate that they express biased
+assumptions about men and women's occupations. Our contributions in this paper
+are as follows: (a) LLMs are 3-6 times more likely to choose an occupation that
+stereotypically aligns with a person's gender; (b) these choices align with
+people's perceptions better than with the ground truth as reflected in official
+job statistics; (c) LLMs in fact amplify the bias beyond what is reflected in
+perceptions or the ground truth; (d) LLMs ignore crucial ambiguities in
+sentence structure 95% of the time in our study items, but when explicitly
+prompted, they recognize the ambiguity; (e) LLMs provide explanations for their
+choices that are factually inaccurate and likely obscure the true reason behind
+their predictions. That is, they provide rationalizations of their biased
+behavior. This highlights a key property of these models: LLMs are trained on
+imbalanced datasets; as such, even with the recent successes of reinforcement
+learning with human feedback, they tend to reflect those imbalances back at us.
+As with other types of societal biases, we suggest that LLMs must be carefully
+tested to ensure that they treat minoritized individuals and communities
+equitably.",http://arxiv.org/pdf/2308.14921v1,"[arxiv.Result.Author('Hadas Kotek'), arxiv.Result.Author('Rikker Dockum'), arxiv.Result.Author('David Q. Sun')]"
+2308.15126v1,cs.LG,Evaluation and Analysis of Hallucination in Large Vision-Language Models,2023-08-29 08:51:24+00:00,"Large Vision-Language Models (LVLMs) have recently achieved remarkable
+success. However, LVLMs are still plagued by the hallucination problem, which
+limits the practicality in many scenarios. Hallucination refers to the
+information of LVLMs' responses that does not exist in the visual input, which
+poses potential risks of substantial consequences. There has been limited work
+studying hallucination evaluation in LVLMs. In this paper, we propose
+Hallucination Evaluation based on Large Language Models (HaELM), an LLM-based
+hallucination evaluation framework. HaELM achieves an approximate 95%
+performance comparable to ChatGPT and has additional advantages including low
+cost, reproducibility, privacy preservation and local deployment. Leveraging
+the HaELM, we evaluate the hallucination in current LVLMs. Furthermore, we
+analyze the factors contributing to hallucination in LVLMs and offer helpful
+suggestions to mitigate the hallucination problem. Our training data and human
+annotation hallucination data will be made public soon.",http://arxiv.org/pdf/2308.15126v1,"[arxiv.Result.Author('Junyang Wang'), arxiv.Result.Author('Yiyang Zhou'), arxiv.Result.Author('Guohai Xu'), arxiv.Result.Author('Pengcheng Shi'), arxiv.Result.Author('Chenlin Zhao'), arxiv.Result.Author('Haiyang Xu'), arxiv.Result.Author('Qinghao Ye'), arxiv.Result.Author('Ming Yan'), arxiv.Result.Author('Ji Zhang'), arxiv.Result.Author('Jihua Zhu'), arxiv.Result.Author('Jitao Sang'), arxiv.Result.Author('Haoyu Tang')]"
 2308.16361v1,cs.AI,Large Language Models as Data Preprocessors,2023-08-30 23:28:43+00:00,"Large Language Models (LLMs), typified by OpenAI's GPT series and Meta's
 LLaMA variants, have marked a significant advancement in artificial
 intelligence. Trained on vast amounts of text data, LLMs are capable of
@@ -35,67 +72,18 @@ https://github.com/LinkSoul-AI/LLaSM and
 https://huggingface.co/spaces/LinkSoul/LLaSM. The LLaSM-Audio-Instructions
 dataset is available at
 https://huggingface.co/datasets/LinkSoul/LLaSM-Audio-Instructions.",http://arxiv.org/pdf/2308.15930v1,"[arxiv.Result.Author('Yu Shu'), arxiv.Result.Author('Siwei Dong'), arxiv.Result.Author('Guangyao Chen'), arxiv.Result.Author('Wenhao Huang'), arxiv.Result.Author('Ruihua Zhang'), arxiv.Result.Author('Daochen Shi'), arxiv.Result.Author('Qiqi Xiang'), arxiv.Result.Author('Yemin Shi')]"
-2308.16557v1,cs.SE,Effective Test Generation Using Pre-trained Large Language Models and Mutation Testing,2023-08-31 08:48:31+00:00,"One of the critical phases in software development is software testing.
-Testing helps with identifying potential bugs and reducing maintenance costs.
-The goal of automated test generation tools is to ease the development of tests
-by suggesting efficient bug-revealing tests. Recently, researchers have
-leveraged Large Language Models (LLMs) of code to generate unit tests. While
-the code coverage of generated tests was usually assessed, the literature has
-acknowledged that the coverage is weakly correlated with the efficiency of
-tests in bug detection. To improve over this limitation, in this paper, we
-introduce MuTAP for improving the effectiveness of test cases generated by LLMs
-in terms of revealing bugs by leveraging mutation testing. Our goal is achieved
-by augmenting prompts with surviving mutants, as those mutants highlight the
-limitations of test cases in detecting bugs. MuTAP is capable of generating
-effective test cases in the absence of natural language descriptions of the
-Program Under Test (PUTs). We employ different LLMs within MuTAP and evaluate
-their performance on different benchmarks. Our results show that our proposed
-method is able to detect up to 28% more faulty human-written code snippets.
-Among these, 17% remained undetected by both the current state-of-the-art fully
-automated test generation tool (i.e., Pynguin) and zero-shot/few-shot learning
-approaches on LLMs. Furthermore, MuTAP achieves a Mutation Score (MS) of 93.57%
-on synthetic buggy code, outperforming all other approaches in our evaluation.
-Our findings suggest that although LLMs can serve as a useful tool to generate
-test cases, they require specific post-processing steps to enhance the
-effectiveness of the generated test cases which may suffer from syntactic or
-functional errors and may be ineffective in detecting certain types of bugs and
-testing corner cases PUTs.",http://arxiv.org/pdf/2308.16557v1,"[arxiv.Result.Author('Arghavan Moradi Dakhel'), arxiv.Result.Author('Amin Nikanjam'), arxiv.Result.Author('Vahid Majdinasab'), arxiv.Result.Author('Foutse Khomh'), arxiv.Result.Author('Michel C. Desmarais')]"
-2308.15962v2,cs.RO,WALL-E: Embodied Robotic WAiter Load Lifting with Large Language Model,2023-08-30 11:35:21+00:00,"Enabling robots to understand language instructions and react accordingly to
-visual perception has been a long-standing goal in the robotics research
-community. Achieving this goal requires cutting-edge advances in natural
-language processing, computer vision, and robotics engineering. Thus, this
-paper mainly investigates the potential of integrating the most recent Large
-Language Models (LLMs) and existing visual grounding and robotic grasping
-system to enhance the effectiveness of the human-robot interaction. We
-introduce the WALL-E (Embodied Robotic WAiter load lifting with Large Language
-model) as an example of this integration. The system utilizes the LLM of
-ChatGPT to summarize the preference object of the users as a target instruction
-via the multi-round interactive dialogue. The target instruction is then
-forwarded to a visual grounding system for object pose and size estimation,
-following which the robot grasps the object accordingly. We deploy this
-LLM-empowered system on the physical robot to provide a more user-friendly
-interface for the instruction-guided grasping task. The further experimental
-results on various real-world scenarios demonstrated the feasibility and
-efficacy of our proposed framework. See the project website at:
-https://star-uu-wang.github.io/WALL-E/",http://arxiv.org/pdf/2308.15962v2,"[arxiv.Result.Author('Tianyu Wang'), arxiv.Result.Author('Yifan Li'), arxiv.Result.Author('Haitao Lin'), arxiv.Result.Author('Xiangyang Xue'), arxiv.Result.Author('Yanwei Fu')]"
-2308.15812v1,cs.LG,Peering Through Preferences: Unraveling Feedback Acquisition for Aligning Large Language Models,2023-08-30 07:35:32+00:00,"Aligning large language models (LLMs) with human values and intents
-critically involves the use of human or AI feedback. While dense feedback
-annotations are expensive to acquire and integrate, sparse feedback presents a
-structural design choice between ratings (e.g., score Response A on a scale of
-1-7) and rankings (e.g., is Response A better than Response B?). In this work,
-we analyze the effect of this design choice for the alignment and evaluation of
-LLMs. We uncover an inconsistency problem wherein the preferences inferred from
-ratings and rankings significantly disagree 60% for both human and AI
-annotators. Our subsequent analysis identifies various facets of annotator
-biases that explain this phenomena, such as human annotators would rate denser
-responses higher while preferring accuracy during pairwise judgments. To our
-surprise, we also observe that the choice of feedback protocol also has a
-significant effect on the evaluation of aligned LLMs. In particular, we find
-that LLMs that leverage rankings data for alignment (say model X) are preferred
-over those that leverage ratings data (say model Y), with a rank-based
-evaluation protocol (is X/Y's response better than reference response?) but not
-with a rating-based evaluation protocol (score Rank X/Y's response on a scale
-of 1-7). Our findings thus shed light on critical gaps in methods for
-evaluating the real-world utility of language models and their strong
-dependence on the feedback protocol used for alignment. Our code and data are
-available at https://github.com/Hritikbansal/sparse_feedback.",http://arxiv.org/pdf/2308.15812v1,"[arxiv.Result.Author('Hritik Bansal'), arxiv.Result.Author('John Dang'), arxiv.Result.Author('Aditya Grover')]"
+2308.15022v1,cs.CL,Recursively Summarizing Enables Long-Term Dialogue Memory in Large Language Models,2023-08-29 04:59:53+00:00,"Most open-domain dialogue systems suffer from forgetting important
+information, especially in a long-term conversation. Existing works usually
+train the specific retriever or summarizer to obtain key information from the
+past, which is time-consuming and highly depends on the quality of labeled
+data. To alleviate this problem, we propose to recursively generate summaries/
+memory using large language models (LLMs) to enhance long-term memory ability.
+Specifically, our method first stimulates LLMs to memorize small dialogue
+contexts and then recursively produce new memory using previous memory and
+following contexts. Finally, the LLM can easily generate a highly consistent
+response with the help of the latest memory. We evaluate our method using
+ChatGPT and text-davinci-003, and the experiments on the widely-used public
+dataset show that our method can generate more consistent responses in a
+long-context conversation. Notably, our method is a potential solution to
+enable the LLM to model the extremely long context. Code and scripts will be
+released later.",http://arxiv.org/pdf/2308.15022v1,"[arxiv.Result.Author('Qingyue Wang'), arxiv.Result.Author('Liang Ding'), arxiv.Result.Author('Yanan Cao'), arxiv.Result.Author('Zhiliang Tian'), arxiv.Result.Author('Shi Wang'), arxiv.Result.Author('Dacheng Tao'), arxiv.Result.Author('Li Guo')]"
