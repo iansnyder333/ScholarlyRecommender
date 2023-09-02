@@ -124,6 +124,8 @@ elif navigation == "Configure":
         if "current_index" not in st.session_state:
             st.session_state.current_index = 0
         if "papers_df" not in st.session_state:
+            import arxiv
+
             # Source papers only once and store in session state
             c = sr.source_candidates(
                 max_results=100,
