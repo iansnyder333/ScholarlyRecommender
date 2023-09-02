@@ -107,21 +107,19 @@ MacOS
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Once installed, you want to calibrate the system to your own interests. The easiest way to do this is using the webcalibrate.py file. Alternativley, you can use calibrate.py, which runs in the terminal.
+Once installed, you want to calibrate the system to your own interests. The easiest way to do this is using the webapp.py file. Alternativley, you can use calibrate.py, which runs in the terminal.
 
 Make sure you are cd into the parent folder of the cloned repo.
 
 Run this in your terminal as follows:
 ```sh
-streamlit run webcalibrate.py
-```
-
-After you have completed this, you can start generating papers using the main app, webapp.py.
-
-Run this in your terminal as follows:
-```sh
 streamlit run webapp.py
 ```
+
+Navigate to the configure tab and complete the steps. You can now navigate back to the get recommendations tab and generate results!
+The web app offers full functionality and serves as an api to the system, while using the webapp, updates made to the configuration will be applied and refreshed in a continuous manner. 
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
