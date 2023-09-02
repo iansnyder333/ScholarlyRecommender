@@ -4,10 +4,11 @@ from tqdm import tqdm
 import pandas as pd
 import arxiv
 from ScholarlyRecommender.const import BASE_REPO
+from ScholarlyRecommender.config import config
 
 
 def rankerV3(
-    context: pd.DataFrame, labels: str, n: int = 5, k: int = 5, on: str = "Abstract"
+    context: pd.DataFrame, labels: str, k: int = 6, on: str = "Abstract"
 ) -> pd.DataFrame:
     """
     Rank the papers in the context using the normalized compression distance combined with a weighted top-k mean rating.
@@ -68,7 +69,7 @@ def rank(context, labels: str = None, n: int = 5) -> list:
     Run the rankerV3 algorithm on the context and return a list of the top 5 ranked papers.
     """
     if labels is None:
-        labels = "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv"
+        labels = config["labels"]
 
     df1 = rankerV3(context, labels, on="Abstract")
     df2 = rankerV3(context, labels, on="Title")
@@ -89,9 +90,7 @@ def evaluate(n: int = 5, k: int = 6, on: str = "Abstract") -> float:
     Calculate the mean squared error between the predicted and actual ratings.
     Return the loss.
     """
-    likes = pd.read_csv(
-        "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv"
-    )
+    likes = pd.read_csv(config["labels"])
     # Set train and test equal to 90% and 10% of the data respectively
     train_data = likes.sample(frac=0.9, random_state=0)
     test_data = likes.drop(train_data.index)
@@ -168,7 +167,11 @@ def fetch(ids: list) -> pd.DataFrame:
 
 
 def get_recommendations(
-    data, labels=None, size: int = 5, to_path: str = None, as_df: bool = False
+    data,
+    labels=None,
+    size: int = config["feed_length"],
+    to_path: str = None,
+    as_df: bool = False,
 ):
     """
     Rank the papers in the data and return a dataframe or save it to a csv file.

@@ -6,8 +6,11 @@ import ScholarlyRecommender as sr
 import pandas as pd
 import arxiv
 
+to_path = "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv"
+old_config = sr.get_config()
 
-def run_cal(query=list):
+
+def calibrate_rec_sys(query: list, num_papers: int = 10, to_path: str = to_path):
     # get sample of papers to label
     c = sr.source_candidates(
         queries=query,
@@ -20,7 +23,7 @@ def run_cal(query=list):
     df = sam[["Title", "Abstract"]].copy()
     df["Abstract"] = df["Abstract"].str[:500] + "..."
 
-    df = df.head(10)
+    df = df.head(num_papers)
     labels = []
     for _, row in df.iterrows():
         print(f"{row['Title']} \n")
@@ -29,7 +32,10 @@ def run_cal(query=list):
         labels.append(int(input("enter a number: ")))
         print("\n \n")
     df["label"] = labels
-    df.to_csv("ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv")
+    df.to_csv(to_path)
+    old_config["labels"] = to_path
+    sr.update_config(old_config)
+    return True
 
 
 def main():
@@ -59,9 +65,11 @@ def main():
     categories = list(map(search_categories.get, categories))
     print(f"Thank you for your input. You selected {categories} \n")
     print(
-        "Now we will ask you to rate a few papers to help us get to know you better. This will take a few minutes. \n"
+        "Now we will ask you to rate a few papers to help us get to know you better. This will take a few minutes."
     )
-    res = input("If you want to skip this step, enter 'skip': \n")
+    res = input(
+        "Press enter if you want to proceed, If you want to skip this step, enter 'skip': \n"
+    )
     if res == "skip":
         print("You have chosen to skip this step. \n")
         print(
@@ -69,12 +77,20 @@ def main():
         )
         return
     print("Please rate the following papers on a scale of 1 to 10 \n")
-    run_cal(categories)
-    print(
-        "Thank you for your input. Your results have been saved to 'ScholarlyRecommender/Repository/labeled/Test_Labeled.csv'. \n"
-    )
-    print("The recommender system will now be calibrated to your interests \n")
-    return
+    state = calibrate_rec_sys(categories)
+    if state:
+        print(
+            f"Thank you for your input. Your results have been saved to config.json . \n"
+        )
+        print("The recommender system will now be calibrated to your interests \n")
+        print(
+            "This process is automatic, please do not change any files or default arguments! \n"
+        )
+
+        return
+    else:
+        print("Something went wrong. Please try again. \n")
+        return
 
 
 if __name__ == "__main__":

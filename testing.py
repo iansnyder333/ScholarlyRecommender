@@ -8,18 +8,15 @@ import numpy as np
 # If you run Pipeline(), it will generate a feed of 5 papers based on whatever calibration is currently in the repository.
 # You also must modify the queries.py file to include the categories you want to search for. or manually enter them in the function call.
 def Pipeline():
-    candidates = sr.source_candidates(queries=None, as_df=True, prev_days=7)
+    candidates = sr.source_candidates(as_df=True, prev_days=7)
     recommendations = sr.get_recommendations(
         data=candidates,
-        labels=None,
-        size=5,
         to_path=None,
         as_df=True,
     )
     sr.get_feed(
         data=recommendations,
         email=False,
-        to_path="ScholarlyRecommender/Newsletter/html/Feed.html",
     )
     print(
         "Feed Generated, it is saved to ScholarlyRecommender/Newsletter/html/Feed.html"
