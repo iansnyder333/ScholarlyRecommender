@@ -1,8 +1,9 @@
 {
     "queries": [
         "Artificial Intelligence",
-        "Computer Vision and Pattern Recognition",
-        "Computation and Language"
+        "Computation and Language",
+        "Machine Learning",
+        "Computer Vision and Pattern Recognition"
     ],
     "labels": "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv",
     "feed_length": 5,
