@@ -75,7 +75,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To try ScholarlyRecommender, you can use the streamlit web application found HERE SOON. This will allow you to use the system in its entirety without needing to install anything, however your recommendations will not be personalized and will use the default labeled dataset which is based on my own interests. In order to tailor the application to give relevant recommendations tailored to you, you must install the app and make some modifications detailed below.
+To try ScholarlyRecommender, you can use the streamlit web application found  [Here](https://iansnyder333-scholarlyrecommender-webapp-tflhbc.streamlit.app/). This will allow you to use the system in its entirety without needing to install anything. If you want to modify the system internally or add functionality, you can follow the directions below to install it locally. 
 
 ### Prerequisites
 
