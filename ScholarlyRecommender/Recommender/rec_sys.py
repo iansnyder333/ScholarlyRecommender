@@ -4,7 +4,9 @@ from tqdm import tqdm
 import pandas as pd
 import arxiv
 from ScholarlyRecommender.const import BASE_REPO
-from ScholarlyRecommender.config import config
+from ScholarlyRecommender.config import get_config
+
+config = get_config()
 
 
 def rankerV3(
@@ -168,7 +170,7 @@ def fetch(ids: list) -> pd.DataFrame:
 
 def get_recommendations(
     data,
-    labels=None,
+    labels=config["labels"],
     size: int = config["feed_length"],
     to_path: str = None,
     as_df: bool = False,

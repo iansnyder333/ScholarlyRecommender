@@ -24,6 +24,7 @@ def calibrate_rec_sys(query: list, num_papers: int = 10, to_path: str = to_path)
     df["Abstract"] = df["Abstract"].str[:500] + "..."
 
     df = df.head(num_papers)
+
     labels = []
     for _, row in df.iterrows():
         print(f"{row['Title']} \n")

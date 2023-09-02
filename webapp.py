@@ -6,6 +6,7 @@ import streamlit.components.v1 as components
 import ScholarlyRecommender as sr
 import pandas as pd
 
+
 # Theme Configuration
 st.set_page_config(
     page_title="Scholarly Recommender",
@@ -79,7 +80,7 @@ if navigation == "Get Recommendations":
     # Collecting user details
 
     categories = st.multiselect(
-        "What Interests You? (select at least one)",
+        "What Interests You? (leave blank for default configuration)",
         search_categories.keys(),
     )
     selected_sub_categories = {}
@@ -88,8 +89,6 @@ if navigation == "Get Recommendations":
             f"Select sub-categories under {selected} (Optional)",
             search_categories[selected],
         )
-
-    # Advanced filters
     with st.expander("Advanced Filters"):
         keyword = st.text_input("Keyword")
         n = st.slider(
@@ -115,12 +114,15 @@ if navigation == "Get Recommendations":
                 else:
                     query.append(key)
             # Call your backend function here to generate recommendations
-            assert len(query) > 0, "Please select at least one interest."
+            if len(query) == 0:
+                query = sr.get_config()["queries"]
+
             # st.write("Searching for papers...")
             status.update(
                 label="Searching for papers...", state="running", expanded=True
             )
             c = sr.source_candidates(queries=query, as_df=True, prev_days=days)
+            # c = sr.source_candidates(queries=query, as_df=True, prev_days=days)
             # st.write("Generating recommendations...")
             status.update(
                 label="Generating recommendations...", state="running", expanded=True
@@ -148,15 +150,16 @@ if navigation == "Get Recommendations":
             status.update(label="Feed Generated", state="complete", expanded=False)
         components.html(source_code, height=1000, scrolling=True)
 
+
 # About Page
 elif navigation == "About":
     st.title("About")
-    st.write("Detailed information about this application.")
+    st.write("Detailed information about this application. Will be updated later.")
 
 # Contact Page
 elif navigation == "Contact":
     st.title("Contact")
-    st.write("Contact details here.")
+    st.write("Ways to contact the developer. Will be updated later.")
 
 # Footer
 st.markdown(
