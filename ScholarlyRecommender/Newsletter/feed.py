@@ -2,7 +2,9 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import re
-from ScholarlyRecommender.config import config
+from ScholarlyRecommender.config import get_config
+
+config = get_config()
 
 
 def clean_feed(path: str):

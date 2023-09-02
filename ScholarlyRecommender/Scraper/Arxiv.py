@@ -1,7 +1,9 @@
 import pandas as pd
 import arxiv
 from ScholarlyRecommender.const import BASE_REPO
-from ScholarlyRecommender.config import config
+from ScholarlyRecommender.config import get_config
+
+config = get_config()
 
 
 def search(
@@ -71,6 +73,10 @@ def source_candidates(
         df = df[
             df["Published"]
             >= (pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=prev_days))
+        ]
+    else:
+        df = df[
+            df["Published"] >= (pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=1095))
         ]
     print(f"Number of papers extracted : {len(df.index)}")
     if to_path is not None:
