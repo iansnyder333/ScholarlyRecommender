@@ -2,49 +2,13 @@ import ScholarlyRecommender as sr
 import pandas as pd
 import arxiv
 import streamlit as st
+from Utils.webutils import search_categories
 
-search_categories = {
-    "Computer Science": [
-        "Artificial Intelligence",
-        "Computer Vision and Pattern Recognition",
-        "Computation and Language",
-        "Databases",
-        "Distributed, Parallel, and Cluster Computing",
-        "Data Structures and Algorithms",
-        "Computer Science and Game Theory",
-        "Machine Learning",
-        "Robotics",
-        "Software Engineering",
-    ],
-    "Mathmatics": [
-        "Combinatorics",
-        "Dynamical Systems",
-        "Numerical Analysis",
-        "Number Theory",
-        "Probability",
-        "Quantum Algebra",
-        "Logic",
-    ],
-    "Biology": [
-        "Biomolecules",
-        "Genomics",
-        "Neurons and Cognition",
-        "Subcellular Processes",
-        "Quantitative Methods",
-    ],
-    "Physics": [
-        "Astrophysics",
-        "Condensed matter",
-        "General relativity and quantum cosmology",
-        "High energy physics",
-        "Mathematical physics",
-        "Nonlinear sciences",
-        "Nuclear experiment",
-        "Nuclear theory",
-        "Quantum physics",
-    ],
-    "Statistics": ["Applications", "Computation", "Methodology", "Statistics Theory"],
-}
+st.set_page_config(
+    page_title="SR Configuration",
+    page_icon="images/logo.png",
+    layout="wide",
+)
 
 
 def calibrate_rec_sys(num_papers: int = 10, to_path: str = "path_to_save.csv"):

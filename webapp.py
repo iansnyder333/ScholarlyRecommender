@@ -5,7 +5,7 @@ import streamlit.components.v1 as components
 
 import ScholarlyRecommender as sr
 import pandas as pd
-
+from Utils.webutils import search_categories
 
 # Theme Configuration
 st.set_page_config(
@@ -14,48 +14,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
-search_categories = {
-    "Computer Science": [
-        "Artificial Intelligence",
-        "Computer Vision and Pattern Recognition",
-        "Computation and Language",
-        "Databases",
-        "Distributed, Parallel, and Cluster Computing",
-        "Data Structures and Algorithms",
-        "Computer Science and Game Theory",
-        "Machine Learning",
-        "Robotics",
-        "Software Engineering",
-    ],
-    "Mathmatics": [
-        "Combinatorics",
-        "Dynamical Systems",
-        "Numerical Analysis",
-        "Number Theory",
-        "Probability",
-        "Quantum Algebra",
-        "Logic",
-    ],
-    "Biology": [
-        "Biomolecules",
-        "Genomics",
-        "Neurons and Cognition",
-        "Subcellular Processes",
-        "Quantitative Methods",
-    ],
-    "Physics": [
-        "Astrophysics",
-        "Condensed matter",
-        "General relativity and quantum cosmology",
-        "High energy physics",
-        "Mathematical physics",
-        "Nonlinear sciences",
-        "Nuclear experiment",
-        "Nuclear theory",
-        "Quantum physics",
-    ],
-    "Statistics": ["Applications", "Computation", "Methodology", "Statistics Theory"],
-}
+
 # Custom CSS for better UI
 st.markdown(
     """
@@ -67,7 +26,7 @@ st.markdown(
 )
 
 # Sidebar with logo and navigation
-st.sidebar.image("images/logo.png", width=200)
+st.sidebar.image("images/logo.png", use_column_width=True)
 st.sidebar.title("Navigation")
 navigation = st.sidebar.radio("Go to", ["Get Recommendations", "About", "Contact"])
 
@@ -75,7 +34,7 @@ navigation = st.sidebar.radio("Go to", ["Get Recommendations", "About", "Contact
 if navigation == "Get Recommendations":
     st.title("Scholarly Recommender")
     # User input section
-    st.subheader("User Inputs")
+    st.subheader("Customize your recommendations")
 
     # Collecting user details
 
@@ -90,7 +49,6 @@ if navigation == "Get Recommendations":
             search_categories[selected],
         )
     with st.expander("Advanced Filters"):
-        keyword = st.text_input("Keyword")
         n = st.slider(
             "How many recommendations would you like?",
             min_value=1,
@@ -103,6 +61,11 @@ if navigation == "Get Recommendations":
             max_value=30,
             value=7,
         )
+        to_email = st.checkbox("Email Recommendations?")
+        if to_email:
+            st.write(
+                "This feature is currently in development, please check back later."
+            )
     # Call to Action
     if st.button("Generate Recommendations"):
         with st.status("Building Query...", expanded=True) as status:
@@ -113,7 +76,7 @@ if navigation == "Get Recommendations":
                     query.extend(value)
                 else:
                     query.append(key)
-            # Call your backend function here to generate recommendations
+
             if len(query) == 0:
                 query = sr.get_config()["queries"]
 

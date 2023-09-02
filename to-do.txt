@@ -1,4 +1,0 @@
-- improve feed html quality 
-- add feedback feature 
-- store emails more efficiently 
-- implement transformer model for the headline 
