@@ -1,35 +1,4 @@
 Id,Category,Title,Published,Abstract,URL,Author
-2308.15126v1,cs.LG,Evaluation and Analysis of Hallucination in Large Vision-Language Models,2023-08-29 08:51:24+00:00,"Large Vision-Language Models (LVLMs) have recently achieved remarkable
-success. However, LVLMs are still plagued by the hallucination problem, which
-limits the practicality in many scenarios. Hallucination refers to the
-information of LVLMs' responses that does not exist in the visual input, which
-poses potential risks of substantial consequences. There has been limited work
-studying hallucination evaluation in LVLMs. In this paper, we propose
-Hallucination Evaluation based on Large Language Models (HaELM), an LLM-based
-hallucination evaluation framework. HaELM achieves an approximate 95%
-performance comparable to ChatGPT and has additional advantages including low
-cost, reproducibility, privacy preservation and local deployment. Leveraging
-the HaELM, we evaluate the hallucination in current LVLMs. Furthermore, we
-analyze the factors contributing to hallucination in LVLMs and offer helpful
-suggestions to mitigate the hallucination problem. Our training data and human
-annotation hallucination data will be made public soon.",http://arxiv.org/pdf/2308.15126v1,"[arxiv.Result.Author('Junyang Wang'), arxiv.Result.Author('Yiyang Zhou'), arxiv.Result.Author('Guohai Xu'), arxiv.Result.Author('Pengcheng Shi'), arxiv.Result.Author('Chenlin Zhao'), arxiv.Result.Author('Haiyang Xu'), arxiv.Result.Author('Qinghao Ye'), arxiv.Result.Author('Ming Yan'), arxiv.Result.Author('Ji Zhang'), arxiv.Result.Author('Jihua Zhu'), arxiv.Result.Author('Jitao Sang'), arxiv.Result.Author('Haoyu Tang')]"
-2308.16692v1,cs.CL,SpeechTokenizer: Unified Speech Tokenizer for Speech Large Language Models,2023-08-31 12:53:09+00:00,"Current speech large language models build upon discrete speech
-representations, which can be categorized into semantic tokens and acoustic
-tokens. However, existing speech tokens are not specifically designed for
-speech language modeling. To assess the suitability of speech tokens for
-building speech language models, we established the first benchmark,
-SLMTokBench. Our results indicate that neither semantic nor acoustic tokens are
-ideal for this purpose. Therefore, we propose SpeechTokenizer, a unified speech
-tokenizer for speech large language models. SpeechTokenizer adopts the
-Encoder-Decoder architecture with residual vector quantization (RVQ). Unifying
-semantic and acoustic tokens, SpeechTokenizer disentangles different aspects of
-speech information hierarchically across different RVQ layers. Furthermore, We
-construct a Unified Speech Language Model (USLM) leveraging SpeechTokenizer.
-Experiments show that SpeechTokenizer performs comparably to EnCodec in speech
-reconstruction and demonstrates strong performance on the SLMTokBench
-benchmark. Also, USLM outperforms VALL-E in zero-shot Text-to-Speech tasks.
-Code and models are available at
-https://github.com/ZhangXInFD/SpeechTokenizer/.",http://arxiv.org/pdf/2308.16692v1,"[arxiv.Result.Author('Xin Zhang'), arxiv.Result.Author('Dong Zhang'), arxiv.Result.Author('Shimin Li'), arxiv.Result.Author('Yaqian Zhou'), arxiv.Result.Author('Xipeng Qiu')]"
 2308.15930v1,cs.CL,LLaSM: Large Language and Speech Model,2023-08-30 10:12:39+00:00,"Multi-modal large language models have garnered significant interest
 recently. Though, most of the works focus on vision-language multi-modal models
 providing strong capabilities in following vision-and-language instructions.
@@ -66,18 +35,68 @@ LLMs in data preprocessing is evaluated through an experimental study spanning
 on 4 datasets, suggesting LLMs' immense potential in these tasks. Despite
 certain limitations, our study underscores the promise of LLMs in this domain
 and anticipates future developments to overcome current hurdles.",http://arxiv.org/pdf/2308.16361v1,"[arxiv.Result.Author('Haochen Zhang'), arxiv.Result.Author('Yuyang Dong'), arxiv.Result.Author('Chuan Xiao'), arxiv.Result.Author('Masafumi Oyamada')]"
-2308.15022v1,cs.CL,Recursively Summarizing Enables Long-Term Dialogue Memory in Large Language Models,2023-08-29 04:59:53+00:00,"Most open-domain dialogue systems suffer from forgetting important
-information, especially in a long-term conversation. Existing works usually
-train the specific retriever or summarizer to obtain key information from the
-past, which is time-consuming and highly depends on the quality of labeled
-data. To alleviate this problem, we propose to recursively generate summaries/
-memory using large language models (LLMs) to enhance long-term memory ability.
-Specifically, our method first stimulates LLMs to memorize small dialogue
-contexts and then recursively produce new memory using previous memory and
-following contexts. Finally, the LLM can easily generate a highly consistent
-response with the help of the latest memory. We evaluate our method using
-ChatGPT and text-davinci-003, and the experiments on the widely-used public
-dataset show that our method can generate more consistent responses in a
-long-context conversation. Notably, our method is a potential solution to
-enable the LLM to model the extremely long context. Code and scripts will be
-released later.",http://arxiv.org/pdf/2308.15022v1,"[arxiv.Result.Author('Qingyue Wang'), arxiv.Result.Author('Liang Ding'), arxiv.Result.Author('Yanan Cao'), arxiv.Result.Author('Zhiliang Tian'), arxiv.Result.Author('Shi Wang'), arxiv.Result.Author('Dacheng Tao'), arxiv.Result.Author('Li Guo')]"
+2308.15812v1,cs.LG,Peering Through Preferences: Unraveling Feedback Acquisition for Aligning Large Language Models,2023-08-30 07:35:32+00:00,"Aligning large language models (LLMs) with human values and intents
+critically involves the use of human or AI feedback. While dense feedback
+annotations are expensive to acquire and integrate, sparse feedback presents a
+structural design choice between ratings (e.g., score Response A on a scale of
+1-7) and rankings (e.g., is Response A better than Response B?). In this work,
+we analyze the effect of this design choice for the alignment and evaluation of
+LLMs. We uncover an inconsistency problem wherein the preferences inferred from
+ratings and rankings significantly disagree 60% for both human and AI
+annotators. Our subsequent analysis identifies various facets of annotator
+biases that explain this phenomena, such as human annotators would rate denser
+responses higher while preferring accuracy during pairwise judgments. To our
+surprise, we also observe that the choice of feedback protocol also has a
+significant effect on the evaluation of aligned LLMs. In particular, we find
+that LLMs that leverage rankings data for alignment (say model X) are preferred
+over those that leverage ratings data (say model Y), with a rank-based
+evaluation protocol (is X/Y's response better than reference response?) but not
+with a rating-based evaluation protocol (score Rank X/Y's response on a scale
+of 1-7). Our findings thus shed light on critical gaps in methods for
+evaluating the real-world utility of language models and their strong
+dependence on the feedback protocol used for alignment. Our code and data are
+available at https://github.com/Hritikbansal/sparse_feedback.",http://arxiv.org/pdf/2308.15812v1,"[arxiv.Result.Author('Hritik Bansal'), arxiv.Result.Author('John Dang'), arxiv.Result.Author('Aditya Grover')]"
+2308.16137v1,cs.CL,LM-Infinite: Simple On-the-Fly Length Generalization for Large Language Models,2023-08-30 16:47:51+00:00,"In recent years, there have been remarkable advancements in the performance
+of Transformer-based Large Language Models (LLMs) across various domains. As
+these LLMs are deployed for increasingly complex tasks, they often face the
+needs to conduct longer reasoning processes or understanding larger contexts.
+In these situations, the length generalization failure of LLMs on long
+sequences become more prominent. Most pre-training schemes truncate training
+sequences to a fixed length (such as 2048 for LLaMa). LLMs often struggle to
+generate fluent texts, let alone carry out downstream tasks, after longer
+contexts, even with relative positional encoding which is designed to cope with
+this problem. Common solutions such as finetuning on longer corpora often
+involves daunting hardware and time costs and requires careful training process
+design. To more efficiently leverage the generation capacity of existing LLMs,
+we theoretically and empirically investigate the main out-of-distribution (OOD)
+factors contributing to this problem. Inspired by this diagnosis, we propose a
+simple yet effective solution for on-the-fly length generalization,
+LM-Infinite, which involves only a $\Lambda$-shaped attention mask and a
+distance limit while requiring no parameter updates or learning. We find it
+applicable to a variety of LLMs using relative-position encoding methods.
+LM-Infinite is computational efficient with $O(n)$ time and space, and
+demonstrates consistent fluency and generation quality to as long as 32k tokens
+on ArXiv and OpenWebText2 datasets, with 2.72x decoding speedup. On downstream
+task such as passkey retrieval, it continues to work on inputs much longer than
+training lengths where vanilla models fail immediately.",http://arxiv.org/pdf/2308.16137v1,"[arxiv.Result.Author('Chi Han'), arxiv.Result.Author('Qifan Wang'), arxiv.Result.Author('Wenhan Xiong'), arxiv.Result.Author('Yu Chen'), arxiv.Result.Author('Heng Ji'), arxiv.Result.Author('Sinong Wang')]"
+2308.16890v1,cs.CV,TouchStone: Evaluating Vision-Language Models by Language Models,2023-08-31 17:52:04+00:00,"Large vision-language models (LVLMs) have recently witnessed rapid
+advancements, exhibiting a remarkable capacity for perceiving, understanding,
+and processing visual information by connecting visual receptor with large
+language models (LLMs). However, current assessments mainly focus on
+recognizing and reasoning abilities, lacking direct evaluation of
+conversational skills and neglecting visual storytelling abilities. In this
+paper, we propose an evaluation method that uses strong LLMs as judges to
+comprehensively evaluate the various abilities of LVLMs. Firstly, we construct
+a comprehensive visual dialogue dataset TouchStone, consisting of open-world
+images and questions, covering five major categories of abilities and 27
+subtasks. This dataset not only covers fundamental recognition and
+comprehension but also extends to literary creation. Secondly, by integrating
+detailed image annotations we effectively transform the multimodal input
+content into a form understandable by LLMs. This enables us to employ advanced
+LLMs for directly evaluating the quality of the multimodal dialogue without
+requiring human intervention. Through validation, we demonstrate that powerful
+LVLMs, such as GPT-4, can effectively score dialogue quality by leveraging
+their textual capabilities alone, aligning with human preferences. We hope our
+work can serve as a touchstone for LVLMs' evaluation and pave the way for
+building stronger LVLMs. The evaluation code is available at
+https://github.com/OFA-Sys/TouchStone.",http://arxiv.org/pdf/2308.16890v1,"[arxiv.Result.Author('Shuai Bai'), arxiv.Result.Author('Shusheng Yang'), arxiv.Result.Author('Jinze Bai'), arxiv.Result.Author('Peng Wang'), arxiv.Result.Author('Xingxuan Zhang'), arxiv.Result.Author('Junyang Lin'), arxiv.Result.Author('Xinggang Wang'), arxiv.Result.Author('Chang Zhou'), arxiv.Result.Author('Jingren Zhou')]"
