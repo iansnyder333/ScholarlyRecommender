@@ -45,6 +45,7 @@
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#methods">Methods</a></li>
   </ol>
 </details>
 
@@ -99,13 +100,17 @@ MacOS
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Once installed, you want to calibrate the system to your own interests. The easiest way to do this is using the webcalibrate.py file. 
+Once installed, you want to calibrate the system to your own interests. The easiest way to do this is using the webcalibrate.py file. Alternativley, you can use calibrate.py, which runs in the terminal.
+
 Make sure you are cd into the parent folder of the cloned repo.
+
 Run this in your terminal as follows:
 ```sh
 streamlit run webcalibrate.py
 ```
-After you have completed this, you can start generating papers using the main app, webapp.py
+
+After you have completed this, you can start generating papers using the main app, webapp.py.
+
 Run this in your terminal as follows:
 ```sh
 streamlit run webapp.py
@@ -145,7 +150,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Not Distributed under the MIT License. Don't See `LICENSE.txt` for more information.
+Not Distributed under the MIT License. Don't See `LICENSE.txt` for more information. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -164,7 +169,14 @@ Linkedin: [www.linkedin.com/in/ian-snyder-aa1600182/](https://www.linkedin.com/i
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- METHODS -->
+## Methods 
 
+Once candidates are sourced in the context of the configuration, they are ranked. The ranking process involves using the normalized compression distance combined with an inverse weighted top-k mean rating from the candidates to the labeled papers. This is a modified version of the algorithm described in the paper "“Low-Resource” Text Classification- A Parameter-Free Classification Method with Compressors." The algorithm gets the top k most similar papers to each paper in the context that the user rated and calculates a weighted mean rating of those papers as its prediction. The results are then sorted by the papers with the highest predicting rating and are returned in accordance with the desired amount.
+
+This is by no means the best approach to source relevant content, but is a fairly accurate and lightweight one that can run on limited hardware. 
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
