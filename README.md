@@ -45,7 +45,6 @@
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -68,7 +67,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To try ScholarlyRecommender, you can use the streamlit web application found HERE. This will allow you to use the system in its entirety without needing to install anything, however your recommendations will not be personalized and will use the default labeled dataset which is based on my own interests. In order to tailor the application to give relevant recommendations tailored to you, you must install the app and make some modifications detailed below.
+To try ScholarlyRecommender, you can use the streamlit web application found HERE SOON. This will allow you to use the system in its entirety without needing to install anything, however your recommendations will not be personalized and will use the default labeled dataset which is based on my own interests. In order to tailor the application to give relevant recommendations tailored to you, you must install the app and make some modifications detailed below.
 
 ### Prerequisites
 
@@ -100,18 +99,26 @@ MacOS
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Webapp, email, parameters, labeling etc
-
-
+Once installed, you want to calibrate the system to your own interests. The easiest way to do this is using the webcalibrate.py file. 
+Make sure you are cd into the parent folder of the cloned repo.
+Run this in your terminal as follows:
+```sh
+streamlit run webcalibrate.py
+```
+After you have completed this, you can start generating papers using the main app, webapp.py
+Run this in your terminal as follows:
+```sh
+streamlit run webapp.py
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] Adding email support on the web app
+- [ ] Making it easier to give feedback to suggested papers to improve the system
+- [ ] Many visual and user experience improvements
+
 
 See the [open issues](https://github.com/iansnyder333/ScholarlyRecommender/issues) for a full list of proposed features (and known issues).
 
@@ -159,15 +166,8 @@ Linkedin: [www.linkedin.com/in/ian-snyder-aa1600182/](https://www.linkedin.com/i
 
 
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
