@@ -65,10 +65,12 @@
 
 ### Built With
 
-* [![Python][Python.com]][Python-url]
-* [![Streamlit][Streamlit.com]][Python-url]
-* [![Pandas][Pandas.com]][Pandas-url]
-
+[![Python][Python.com]][Python-url]
+[![Streamlit][Streamlit.com]][Python-url]
+[![Pandas][Pandas.com]][Pandas-url]
+[![NumPy][Numpy.com]][Numpy-url]
+[![Arxiv.arxiv][Arxiv.arxiv.com]][Arxiv.arxiv-url]
+  
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -179,7 +181,7 @@ Linkedin: [www.linkedin.com/in/ian-snyder-aa1600182/](https://www.linkedin.com/i
 
 Once candidates are sourced in the context of the configuration, they are ranked. The ranking process involves using the normalized compression distance combined with an inverse weighted top-k mean rating from the candidates to the labeled papers. This is a modified version of the algorithm described in the paper "“Low-Resource” Text Classification- A Parameter-Free Classification Method with Compressors." The algorithm gets the top k most similar papers to each paper in the context that the user rated and calculates a weighted mean rating of those papers as its prediction. The results are then sorted by the papers with the highest predicting rating and are returned in accordance with the desired amount.
 
-This is by no means the best approach to source relevant content, but is a fairly accurate and lightweight one that can run on limited hardware. 
+This is by no means the best approach to source relevant content, but is a fairly accurate and lightweight one that can run on limited hardware with very little "training" data. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -194,4 +196,8 @@ This is by no means the best approach to source relevant content, but is a fairl
 [Streamlit-url]:https://streamlit.io/
 [Pandas.com]:https://img.shields.io/badge/pandas-purple
 [Pandas-url]:https://pandas.pydata.org/
+[Numpy.com]:https://img.shields.io/badge/NumPy-%23ADD8E6
+[Numpy-url]:https://numpy.org/
+[Arxiv.arxiv.com]:https://img.shields.io/badge/Arxiv-%23FF0000
+[Arxiv.arxiv-url]:http://lukasschwab.me/arxiv.py/index.html
 
