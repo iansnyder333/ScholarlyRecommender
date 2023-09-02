@@ -12,7 +12,7 @@
   <p align="center">
     End-to-end product that sources recent academic publications and prepares a feed of recommended readings in seconds. 
     <br />
-    <a href="https://github.com/iansnyder333/ScholarlyRecommender"><strong>Explore the docs »</strong></a>
+    <a href="https://iansnyder333-scholarlyrecommender-webapp-tflhbc.streamlit.app/"><strong>Try it now »</strong></a>
     <br />
     <br />
     <a href="https://github.com/iansnyder333/ScholarlyRecommender">View Demo</a>
