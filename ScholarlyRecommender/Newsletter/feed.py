@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import re
+from ScholarlyRecommender.config import config
 
 
 def clean_feed(path: str):
@@ -119,7 +120,7 @@ def build_email(
 def get_feed(
     data,
     email: bool = False,
-    to_path: str = "ScholarlyRecommender/Newsletter/html/Feed.html",
+    to_path: str = config["feed_path"],
 ):
     if isinstance(data, pd.DataFrame):
         data.to_csv("ScholarlyRecommender/Repository/TempFeed.csv", index=False)

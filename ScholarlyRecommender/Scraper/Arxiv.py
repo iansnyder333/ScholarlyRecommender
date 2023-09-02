@@ -1,7 +1,7 @@
 import pandas as pd
 import arxiv
-from ScholarlyRecommender.Scraper.queries import queries
 from ScholarlyRecommender.const import BASE_REPO
+from ScholarlyRecommender.config import config
 
 
 def search(
@@ -27,7 +27,7 @@ def search(
 
 
 def source_candidates(
-    queries: list = queries,
+    queries: list = config["queries"],
     max_results: int = 100,
     to_path: str = None,
     as_df: bool = False,
