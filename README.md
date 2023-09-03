@@ -12,7 +12,7 @@
   <p align="center">
     End-to-end product that sources recent academic publications and prepares a feed of recommended readings in seconds. 
     <br />
-    <a href="https://iansnyder333-scholarlyrecommender-webapp-tflhbc.streamlit.app/"><strong>Try it now »</strong></a>
+    <a href="https://scholarlyrecommender.streamlit.app/"><strong>Try it now »</strong></a>
     <br />
     <br />
     <a href="https://github.com/iansnyder333/ScholarlyRecommender">View Demo</a>
@@ -77,7 +77,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To try ScholarlyRecommender, you can use the streamlit web application found  [Here](https://iansnyder333-scholarlyrecommender-webapp-tflhbc.streamlit.app/). This will allow you to use the system in its entirety without needing to install anything. If you want to modify the system internally or add functionality, you can follow the directions below to install it locally. 
+To try ScholarlyRecommender, you can use the streamlit web application found  [Here](https://scholarlyrecommender.streamlit.app/). This will allow you to use the system in its entirety without needing to install anything. If you want to modify the system internally or add functionality, you can follow the directions below to install it locally. 
 
 ### Prerequisites
 
