@@ -127,9 +127,11 @@ The web app offers full functionality and serves as an api to the system, while 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Adding email support on the web app
+- [ ] Adding email support on the web app, currently in testing.
 - [ ] Making it easier to give feedback to suggested papers to improve the system
-- [ ] Many visual and user experience improvements
+- [ ] Improving the overall labeling experience, specifically the pooling process and labeling setup to be more integrated.
+- [ ] Improve modularity in the webapp and try to improve caching for faster performance. 
+- [ ] Many visual and user experience improvements, a complete overhaul of the UX is likely.
 
 
 See the [open issues](https://github.com/iansnyder333/ScholarlyRecommender/issues) for a full list of proposed features (and known issues).
