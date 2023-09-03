@@ -38,5 +38,10 @@ search_categories = {
         "Nuclear theory",
         "Quantum physics",
     ],
-    "Statistics": ["Applications", "Computation", "Methodology", "Statistics Theory"],
+    "Statistics": [
+        "Statistics Applications",
+        "Computational Statistics",
+        "Statistics Methodology",
+        "Statistics Theory",
+    ],
 }

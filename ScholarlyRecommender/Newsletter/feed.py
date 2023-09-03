@@ -47,20 +47,20 @@ def build_email(
 
     html_content = """<!DOCTYPE html>
     <html>
-    <body>
+    <body style="background-color: #FFFFFF; color: #A2A2F5">
     """
     if email:
         body_template = """
-    <h2 class="title-main" style='font-family: "Open Sans", sans-serif; color: #34495e;font-family: Arial, sans-serif;
+    <h2 class="title-main" style='font-family: "Open Sans", sans-serif; color: #262730;font-family: Arial, sans-serif;
         font-size: 28px;
         letter-spacing: 0.05em;
         
         color: #2C3E50;
         margin-bottom: 10px;'>{headline}</h2>
-    <p style='font-family: "Open Sans", sans-serif; color: #2c3e50; font-size: 18px;  margin-bottom: 20px; line-height: 1.6;'>
+    <p style='font-family: "Open Sans", sans-serif; color: #262730; font-size: 18px;  margin-bottom: 20px; line-height: 1.6;'>
         Dear Reader,
         </p>
-    <p style='font-family: "Open Sans", sans-serif; color: #2c3e50; font-size: 18px;  margin-bottom: 20px; line-height: 1.6;'>
+    <p style='font-family: "Open Sans", sans-serif; color: #262730; font-size: 18px;  margin-bottom: 20px; line-height: 1.6;'>
             {intro}
     </p>
         """
@@ -77,19 +77,19 @@ def build_email(
     border-radius: 8px;">
     <h2 class="title" style=" font-size: 24px;
     font-weight: bold;
-    margin-bottom: 5px; color: #000000;">{title}</h2>
+    margin-bottom: 5px; color: #262730;">{title}</h2>
     <h4 class="author" style="font-size: 14px;
     font-weight: bold;
-    margin-bottom: 10px; color:#000000;">{author}</h4>
+    margin-bottom: 10px; color:#262730;">{author}</h4>
     <div class="metadata" style="font-size: 14px;
-    color: #000000;
+    color: #262730;
     margin-bottom: 10px;">
         <span class="id">{id}</span> | 
         <span class="category">{category}</span> | 
         <span class="published">{published}</span>
     </div>
     <div class="abstract" style="font-size: 16px;
-    margin-bottom: 10px; color: #000000;">
+    margin-bottom: 10px; color: #262730;">
         {abstract}
     </div>
     <a href="{url}" target="_blank" style="display: inline-block;
