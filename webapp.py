@@ -1,7 +1,9 @@
 # Import necessary modules
 import streamlit as st
 import streamlit.components.v1 as components
-
+import smtplib
+from email.message import EmailMessage
+import re
 
 import ScholarlyRecommender as sr
 import pandas as pd
@@ -29,6 +31,44 @@ def build_query(selected_sub_categories: dict) -> list:
         else:
             query.append(key)
     return query
+
+
+def validate_email(email):
+    regex = r"^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+    if re.match(regex, email):
+        return True
+    return False
+
+
+def send_email(**kwargs):
+    try:
+        EMAIL_ADDRESS = st.secrets.email_credentials.EMAIL
+        EMAIL_PASSWORD = st.secrets.email_credentials.EMAIL_PASSWORD
+
+        if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
+            raise ValueError("Email credentials not set in environment variables.")
+
+        SUBSCRIBERS = kwargs["subscribers"]
+
+        # Validate emails TODO
+        # for email in SUBSCRIBERS:
+        # if not validate_email(email):
+        # raise ValueError(f"Invalid email address: {email}")
+
+        msg = EmailMessage()
+        msg["Subject"] = "Your Scholarly Recommender Weekly Newsletter"
+        msg["From"] = EMAIL_ADDRESS
+        msg["To"] = SUBSCRIBERS
+
+        html_string = kwargs["content"]
+
+        msg.set_content(html_string, subtype="html")
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            smtp.send_message(msg)
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 
 def generate_feed_pipeline(
@@ -64,9 +104,7 @@ def generate_feed_pipeline(
     if not to_email or user_email is None:
         components.html(source_code, height=1000, scrolling=True)
     elif to_email and user_email is not None:
-        sr.send_email(
-            email=st.secrets.email_credentials.EMAIL,
-            password=st.secrets.email_credentials.EMAIL_PASSWORD,
+        send_email(
             subscribers=user_email,
             content=source_code,
         )
@@ -193,7 +231,9 @@ if navigation == "Get Recommendations":
     )
     to_email = st.checkbox("Email Recommendations?")
     if to_email:
-        user_email = st.text_input("your email address")
+        # user_email = st.text_input("your email address")
+        st.write("This feature is currently under development")
+        user_email = None
         st.write(
             "Disclaimer: Scholarly Recommender will only send you an email with your recommendations"
         )
