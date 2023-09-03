@@ -21,7 +21,6 @@ def update_sc_config(new_config):
     st.session_state.sys_config = new_config
 
 
-@st.cache_data(show_spinner=False)
 def build_query(selected_sub_categories: dict) -> list:
     query = []
     for key, value in selected_sub_categories.items():
@@ -32,7 +31,6 @@ def build_query(selected_sub_categories: dict) -> list:
     return query
 
 
-@st.cache_data(show_spinner=False)
 def generate_feed_pipeline(query: list, n: int, days: int):
     with st.status("Working...", expanded=True) as status:
         status.update(label="Searching for papers...", state="running", expanded=True)
