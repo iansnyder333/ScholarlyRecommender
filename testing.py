@@ -14,10 +14,11 @@ def Pipeline():
         to_path=None,
         as_df=True,
     )
-    sr.get_feed(
+    result = sr.get_feed(
         data=recommendations,
         email=False,
     )
-    print(
-        "Feed Generated, it is saved to ScholarlyRecommender/Newsletter/html/Feed.html"
-    )
+    if result:
+        print(f"Feed Generated, it is saved to: {sr.get_config()['feed_path']}")
+    else:
+        print("Feed Generation Failed")

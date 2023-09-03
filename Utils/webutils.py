@@ -2,7 +2,7 @@ search_categories = {
     "Computer Science": [
         "Artificial Intelligence",
         "Computer Vision and Pattern Recognition",
-        "Computation and Language",
+        "Natural language processing",
         "Databases",
         "Distributed, Parallel, and Cluster Computing",
         "Data Structures and Algorithms",

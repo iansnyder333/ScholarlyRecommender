@@ -88,7 +88,7 @@ def build_email(
         {abstract}
     </div>
     <a href="{url}" target="_blank" style="display: inline-block;
-    background-color: #007BFF;
+    background-color: #A2A2F5;
     color: white;
     padding: 8px 16px;
     border-radius: 4px;
@@ -127,11 +127,13 @@ def get_feed(
     if isinstance(data, pd.DataFrame):
         data.to_csv("ScholarlyRecommender/Repository/TempFeed.csv", index=False)
         df = clean_feed("ScholarlyRecommender/Repository/TempFeed.csv")
-        # build_html_feed(df, to_path)
         build_email(df, email=email, to_path=to_path)
+        return True
+
     elif isinstance(data, str):
         df = clean_feed(data)
         build_email(df, email=email, to_path=to_path)
-        # build_html_feed(df, to_path)
+        return True
+
     else:
         raise TypeError("data must be a pandas DataFrame or a path to a csv file")
