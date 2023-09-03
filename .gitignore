@@ -5,3 +5,4 @@ ScholarlyRecommender/.DS_Store
 .DS_Store
 .DS_Store
 
+.streamlit/secrets.toml
