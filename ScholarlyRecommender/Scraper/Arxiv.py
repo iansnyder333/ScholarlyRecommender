@@ -18,13 +18,20 @@ def search(
     repository = BASE_REPO()
 
     search = arxiv.Search(query=query, max_results=max_results, sort_by=sort_by)
+
     for result in search_client.results(search):
-        repository["Id"].append(result.entry_id.split("/")[-1])
-        repository["Category"].append(result.primary_category)
-        repository["Title"].append(result.title.strip("\n"))
-        repository["Published"].append(result.published)
-        repository["Abstract"].append(result.summary.strip("\n"))
-        repository["URL"].append(result.pdf_url)
+        try:
+            repository["Id"].append(result.entry_id.split("/")[-1])
+            repository["Category"].append(result.primary_category)
+            repository["Title"].append(result.title.strip("\n"))
+            repository["Published"].append(result.published)
+            repository["Abstract"].append(result.summary.strip("\n"))
+            repository["URL"].append(result.pdf_url)
+        except arxiv.arxiv.UnexpectedEmptyPageError as error:
+            print(error)
+            continue
+    if len(repository["Id"]) == 0:
+        raise ValueError("No papers found for this query")
     return pd.DataFrame(repository).set_index("Id")
 
 

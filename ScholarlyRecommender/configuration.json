@@ -1,11 +1,11 @@
 {
     "queries": [
         "Artificial Intelligence",
-        "Computation and Language",
-        "Machine Learning",
-        "Computer Vision and Pattern Recognition"
+        "Natural language processing",
+        "Computer Vision and Pattern Recognition",
+        "Machine Learning"
     ],
     "labels": "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv",
     "feed_length": 5,
-    "feed_path": "ScholarlyRecommender/Newsletter/html/Feed.html"
+    "feed_path": "ScholarlyRecommender/Newsletter/html/WebFeed.html"
 }

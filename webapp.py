@@ -7,6 +7,145 @@ import ScholarlyRecommender as sr
 import pandas as pd
 from Utils.webutils import search_categories
 
+
+@st.cache_data(show_spinner=False)
+def build_query(selected_sub_categories: dict) -> list:
+    """
+    Build a query from the selected sub-categories
+    @param selected_sub_categories: dict
+    @return: list of queries represented as strings
+    """
+    query = []
+    for key, value in selected_sub_categories.items():
+        if len(value) > 0:
+            query.extend(value)
+        else:
+            query.append(key)
+    return query
+
+
+@st.cache_data(show_spinner=False)
+def generate_feed_pipeline(query: list, n: int, days: int):
+    """
+    Generate a feed from a query, this is the main pipeline for generating recommendations
+    @param query: list of queries represented as strings, defaults to sr.get_config()["queries"]
+    @param n: number of recommendations to generate, defaults to 5
+    @param days: number of days back to search, defaults to 7
+    @return: None
+    """
+    with st.status("Working...", expanded=True) as status:
+        status.update(label="Searching for papers...", state="running", expanded=True)
+
+        if len(query) == 0:
+            query = sr.get_config()["queries"]
+        # Collect candidates
+        candidates = sr.source_candidates(queries=query, as_df=True, prev_days=days)
+        status.update(
+            label="Generating recommendations...", state="running", expanded=True
+        )
+
+        # Generate recommendations
+        recommendations = sr.get_recommendations(
+            data=candidates,
+            size=n,
+            as_df=True,
+        )
+        status.update(label="Generating feed...", state="running", expanded=True)
+
+        # Generate feed
+        res = sr.get_feed(
+            data=recommendations,
+            email=False,
+        )
+        # Check if feed was generated successfully
+        if res:
+            result = sr.get_config()["feed_path"]
+            HtmlFile = open(
+                result,
+                "r",
+                encoding="utf-8",
+            )
+            source_code = HtmlFile.read()
+            status.update(label="Feed Generated", state="complete", expanded=False)
+        # If not, display an error and return to prevent the app from crashing
+        else:
+            status.update(label="Error Generating Feed", state="error", expanded=False)
+            return
+    components.html(source_code, height=1000, scrolling=True)
+
+
+@st.cache_data(show_spinner=False)
+def fetch_papers(num_papers: int = 10) -> pd.DataFrame:
+    """
+    Collect a sample of papers from arXiv for calibration, sourced using the default configuration of interest categories
+    Papers are collected, shuffled, and returned as a formatted DataFrame
+    @param num_papers: number of papers to collect, defaults to 10
+    @return: DataFrame of papers formatted for labeling
+    """
+    # Import arxiv here to prevent unnecessary imports
+    import arxiv
+
+    # Source papers only once and store in session state
+    c = sr.source_candidates(
+        max_results=100,
+        as_df=True,
+        sort_by=arxiv.SortCriterion.Relevance,
+    )
+    sam = c.sample(frac=1)
+    sam.reset_index(inplace=True)
+    df = sam[["Title", "Abstract"]].copy()
+    df["Abstract"] = df["Abstract"].str[:500] + "..."
+    return df.head(num_papers)
+
+
+def calibrate_rec_sys(num_papers: int = 10, to_path: str = sr.get_config()["labels"]):
+    """
+    Interactive calibration tool for the recommender system, essentially serves as a user interface for manual labeling
+    @param num_papers: number of papers to rate, defaults to 10
+    @param to_path: path to save the labels, defaults to sr.get_config()["labels"]
+    @return: None, labels configured in sr.get_config()["labels"]
+    """
+    # Initialize session state variables if they don't exist
+    if "labels" not in st.session_state:
+        st.session_state.labels = []
+    if "current_index" not in st.session_state:
+        st.session_state.current_index = 0
+    if "papers_df" not in st.session_state:
+        st.session_state.papers_df = fetch_papers(num_papers=num_papers)
+
+    if st.session_state.current_index < num_papers:
+        # Display the paper at the current index
+        row = st.session_state.papers_df.iloc[st.session_state.current_index]
+        st.write(f"**{row['Title']}**")
+        st.write(f"{row['Abstract']}")
+        rating = st.number_input(
+            f"Rate this paper on a scale of 1 to 10?",
+            min_value=1,
+            max_value=10,
+        )
+
+        if st.button(f"Submit Rating for {row['Title']}"):
+            # Save the label and increment the index
+            st.session_state.labels.append(rating)
+            st.session_state.current_index += 1
+            st.experimental_rerun()
+
+    elif st.session_state.current_index == num_papers:
+        # Save all labels once all papers are rated
+        st.session_state.papers_df["label"] = st.session_state.labels
+        st.session_state.papers_df.to_csv(to_path)
+        # Update the config file
+        old_config = sr.get_config()
+        old_config["labels"] = to_path
+        sr.update_config(old_config)
+        st.success("Labels saved.")
+        # Increment to prevent re-running this block
+        st.session_state.current_index += 1
+
+    else:
+        st.write("Rating process is complete.")
+
+
 # Theme Configuration
 st.set_page_config(
     page_title="Scholarly Recommender",
@@ -15,7 +154,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Custom CSS for better UI
+# Custom CSS for further customization
 st.markdown(
     """
     <style>
@@ -70,106 +209,11 @@ if navigation == "Get Recommendations":
             )
     # Call to Action
     if st.button("Generate Recommendations"):
-        with st.status("Building Query...", expanded=True) as status:
-            # st.write("Building Query...")
-            query = []
-            for key, value in selected_sub_categories.items():
-                if len(value) > 0:
-                    query.extend(value)
-                else:
-                    query.append(key)
+        query = build_query(selected_sub_categories)
+        generate_feed_pipeline(query, n, days)
 
-            if len(query) == 0:
-                query = sr.get_config()["queries"]
-
-            # st.write("Searching for papers...")
-            status.update(
-                label="Searching for papers...", state="running", expanded=True
-            )
-            c = sr.source_candidates(queries=query, as_df=True, prev_days=days)
-            # c = sr.source_candidates(queries=query, as_df=True, prev_days=days)
-            # st.write("Generating recommendations...")
-            status.update(
-                label="Generating recommendations...", state="running", expanded=True
-            )
-            r = sr.get_recommendations(
-                data=c,
-                size=n,
-                as_df=True,
-            )
-            # st.write("Generating feed...")
-            status.update(label="Generating feed...", state="running", expanded=True)
-            sr.get_feed(
-                data=r,
-                email=False,
-                to_path="ScholarlyRecommender/Newsletter/html/WebFeed.html",
-            )
-            result = "ScholarlyRecommender/Newsletter/html/WebFeed.html"
-
-            HtmlFile = open(
-                result,
-                "r",
-                encoding="utf-8",
-            )
-            source_code = HtmlFile.read()
-            status.update(label="Feed Generated", state="complete", expanded=False)
-        components.html(source_code, height=1000, scrolling=True)
 
 elif navigation == "Configure":
-
-    def calibrate_rec_sys(num_papers: int = 10, to_path: str = "path_to_save.csv"):
-        # Initialize session state variables if they don't exist
-        if "labels" not in st.session_state:
-            st.session_state.labels = []
-        if "current_index" not in st.session_state:
-            st.session_state.current_index = 0
-        if "papers_df" not in st.session_state:
-            import arxiv
-
-            # Source papers only once and store in session state
-            c = sr.source_candidates(
-                max_results=100,
-                as_df=True,
-                sort_by=arxiv.SortCriterion.Relevance,
-            )
-            sam = c.sample(frac=1)
-            sam.reset_index(inplace=True)
-            df = sam[["Title", "Abstract"]].copy()
-            df["Abstract"] = df["Abstract"].str[:500] + "..."
-            st.session_state.papers_df = df.head(num_papers)
-
-        if st.session_state.current_index < num_papers:
-            # Display the paper at the current index
-            row = st.session_state.papers_df.iloc[st.session_state.current_index]
-            st.write(f"**{row['Title']}**")
-            st.write(f"{row['Abstract']}")
-            rating = st.number_input(
-                f"Rate this paper on a scale of 1 to 10?",
-                min_value=1,
-                max_value=10,
-            )
-
-            if st.button(f"Submit Rating for {row['Title']}"):
-                # Save the label and increment the index
-                st.session_state.labels.append(rating)
-                st.session_state.current_index += 1
-                st.experimental_rerun()
-
-        elif st.session_state.current_index == num_papers:
-            # Save all labels once all papers are rated
-            st.session_state.papers_df["label"] = st.session_state.labels
-            st.session_state.papers_df.to_csv(to_path)
-            old_config = sr.get_config()
-            old_config["labels"] = to_path
-            sr.update_config(old_config)
-            st.write("Labels saved.")
-            st.session_state.current_index += (
-                1  # Increment to prevent re-running this block
-            )
-
-        else:
-            st.write("Rating process is complete.")
-
     st.title("Scholarly Recommender Configuration")
     # User input section
     st.subheader("Welcome to the Scholarly Recommender System Calibration Tool \n")
@@ -198,13 +242,8 @@ elif navigation == "Configure":
             )
         if st.button("Done"):
             with st.spinner("Configuring..."):
-                query = []
-                for key, value in selected_sub_categories.items():
-                    if len(value) > 0:
-                        query.extend(value)
-                    else:
-                        query.append(key)
-                # Call your backend function here to generate recommendations
+                query = build_query(selected_sub_categories)
+                # prevent empty queries
                 assert len(query) > 0, "Please select at least one interest."
                 configuration = sr.get_config()
                 configuration["queries"] = query
@@ -218,21 +257,23 @@ elif navigation == "Configure":
         st.write(
             "Please rate the following papers on a scale of 1 to 10, 1 being the least relevant and 10 being the most relevant \n"
         )
-        st.write("You can also skip a paper if you don't want to rate it \n")
+        # st.write("You can also skip a paper if you don't want to rate it \n") (TODO: Implement this feature)
         st.write("You will be shown 10 papers to rate \n")
         st.write("Click on the button below to get started \n")
-
+        st.write(
+            "Note: Currently, if you want to start over or repeat this process, you must refresh the page \n"
+        )  # TODO: Fix this
         if st.button("Start Calibration"):
             st.session_state.calibration_started = True
 
         if st.session_state.calibration_started:
-            with st.spinner("Calibrating..."):
+            with st.spinner("Preparing Calibration..."):
                 calibrate_rec_sys(
                     num_papers=10,
                     to_path="ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv",
                 )
 
-    # About Page
+# About Page
 elif navigation == "About":
     st.title("About")
     st.write(
