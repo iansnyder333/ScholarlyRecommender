@@ -31,7 +31,9 @@ def build_query(selected_sub_categories: dict) -> list:
     return query
 
 
-def generate_feed_pipeline(query: list, n: int, days: int):
+def generate_feed_pipeline(
+    query: list, n: int, days: int, to_email: bool, user_email: str
+):
     with st.status("Working...", expanded=True) as status:
         status.update(label="Searching for papers...", state="running", expanded=True)
 
@@ -55,12 +57,20 @@ def generate_feed_pipeline(query: list, n: int, days: int):
         # Generate feed
         source_code = sr.get_feed(
             data=recommendations,
-            email=False,
+            email=to_email,
             web=True,
         )
         status.update(label="Feed Generated", state="complete", expanded=False)
-
-    components.html(source_code, height=1000, scrolling=True)
+    if not to_email or user_email is None:
+        components.html(source_code, height=1000, scrolling=True)
+    elif to_email and user_email is not None:
+        sr.send_email(
+            email=st.secrets.email_credentials.EMAIL,
+            password=st.secrets.email_credentials.EMAIL_PASSWORD,
+            subscribers=user_email,
+            content=source_code,
+        )
+        st.success("Email sent successfully!")
 
 
 def fetch_papers(num_papers: int = 10) -> pd.DataFrame:
@@ -183,11 +193,19 @@ if navigation == "Get Recommendations":
     )
     to_email = st.checkbox("Email Recommendations?")
     if to_email:
-        st.write("This feature is currently in development, please check back later.")
+        user_email = st.text_input("your email address")
+        st.write(
+            "Disclaimer: Scholarly Recommender will only send you an email with your recommendations"
+        )
+        st.write(
+            "We will not save your email and it will never be used for any other purpose"
+        )
+    else:
+        user_email = None
     # Call to Action
     if st.button("Generate Recommendations", type="primary"):
         query = build_query(selected_sub_categories)
-        generate_feed_pipeline(query, n, days)
+        generate_feed_pipeline(query, n, days, to_email, user_email)
 
 
 elif navigation == "Configure":

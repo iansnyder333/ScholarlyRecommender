@@ -41,8 +41,8 @@ def build_email(
     web: bool = False,
 ):
     flanT5_out = {
-        "headline": "Decoding the Future of AI: Ethical Dilemmas, Embedding Logic, and Emotion Analytics in Conversational Tech—A Curated Selection of Cutting-Edge Research",
-        "intro": "This edition aims to immerse you in the nuanced fabric of Large Language Models, spanning topics from ethical concerns in moderation and gender biases to highly technical advancements like embedding logic programming into Python's deep-learning ecosystem. Expect in-depth analyses and pioneering solutions that push the boundaries of conventional wisdom, handpicked to empower your specialized interest in these paradigms.",
+        "headline": "Your Scholarly Recommender Newsletter Feed",
+        "intro": "Thank you for using Scholarly Recommender. Here is your newsletter feed.",
     }
 
     html_content = """<!DOCTYPE html>
