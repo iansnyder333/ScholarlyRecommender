@@ -37,7 +37,7 @@ def extract_author_names(author_string):
 def build_email(
     df: pd.DataFrame,
     email: bool = False,
-    to_path: str = config["feed_path"],
+    to_path: str = None,
     web: bool = False,
 ):
     flanT5_out = {
@@ -119,6 +119,8 @@ def build_email(
     if web:
         return html_content
     else:
+        if to_path is None:
+            to_path = config["feed_path"]
         html_file_path = to_path
         with open(html_file_path, "w") as f:
             f.write(html_content)
@@ -129,7 +131,7 @@ def build_email(
 def get_feed(
     data,
     email: bool = False,
-    to_path: str = config["feed_path"],
+    to_path: str = None,
     web: bool = False,
 ):
     if isinstance(data, pd.DataFrame):

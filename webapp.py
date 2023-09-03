@@ -13,10 +13,6 @@ def load_sc_config():
     return sr.get_config()
 
 
-if "sys_config" not in st.session_state:
-    st.session_state.sys_config = load_sc_config()
-
-
 def get_sc_config():
     return st.session_state.sys_config
 
@@ -153,6 +149,8 @@ def calibrate_rec_sys(num_papers: int = 10):
         st.write("Rating process is complete.")
 
 
+if "sys_config" not in st.session_state:
+    st.session_state.sys_config = load_sc_config()
 # Theme Configuration
 st.set_page_config(
     page_title="Scholarly Recommender",
