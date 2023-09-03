@@ -168,26 +168,24 @@ if navigation == "Get Recommendations":
             f"Select sub-categories under {selected} (Optional)",
             search_categories[selected],
         )
-    with st.expander("Advanced Filters"):
-        n = st.slider(
-            "How many recommendations would you like?",
-            min_value=1,
-            max_value=10,
-            value=5,
-        )
-        days = st.slider(
-            "How many days back would you like to search?",
-            min_value=1,
-            max_value=30,
-            value=7,
-        )
-        to_email = st.checkbox("Email Recommendations?")
-        if to_email:
-            st.write(
-                "This feature is currently in development, please check back later."
-            )
+
+    n = st.slider(
+        "How many recommendations would you like?",
+        min_value=1,
+        max_value=10,
+        value=5,
+    )
+    days = st.slider(
+        "How many days back would you like to search?",
+        min_value=1,
+        max_value=30,
+        value=7,
+    )
+    to_email = st.checkbox("Email Recommendations?")
+    if to_email:
+        st.write("This feature is currently in development, please check back later.")
     # Call to Action
-    if st.button("Generate Recommendations"):
+    if st.button("Generate Recommendations", type="primary"):
         query = build_query(selected_sub_categories)
         generate_feed_pipeline(query, n, days)
 
@@ -268,7 +266,7 @@ elif navigation == "Contact":
 st.markdown(
     """
     <footer>
-        <p>Created by Ian Snyder</p>
+        
     </footer>
     """,
     unsafe_allow_html=True,
