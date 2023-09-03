@@ -1,0 +1,8 @@
+[theme]
+# Custom theme configurations
+base = "light"
+primaryColor = "#A2A2F5"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#E3E3fA"
+textColor = "#262730"
+font = "sans serif"
