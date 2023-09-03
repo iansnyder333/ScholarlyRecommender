@@ -36,7 +36,7 @@ def search(
 
 
 def source_candidates(
-    queries: list = config["queries"],
+    queries: list,
     max_results: int = 100,
     to_path: str = None,
     as_df: bool = False,
@@ -46,6 +46,8 @@ def source_candidates(
     """
     Scrape arxiv.org for papers matching the queries, filter them and return a dataframe or save it to a csv file.
     """
+    if queries is None:
+        queries = config["queries"]
     assert isinstance(queries, list), "queries must be a list of strings"
     assert (
         len(queries) > 0

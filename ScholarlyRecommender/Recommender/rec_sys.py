@@ -172,8 +172,8 @@ def fetch(ids: list) -> pd.DataFrame:
 
 def get_recommendations(
     data,
-    labels=config["labels"],
-    size: int = config["feed_length"],
+    labels,
+    size: int = None,
     to_path: str = None,
     as_df: bool = False,
 ):
@@ -181,6 +181,10 @@ def get_recommendations(
     Rank the papers in the data and return a dataframe or save it to a csv file.
     Data can be a pandas DataFrame or a path to a csv file.
     """
+    if labels is None:
+        labels = config["labels"]
+    if size is None:
+        size = config["size"]
     if isinstance(data, pd.DataFrame):
         df = data
         df.reset_index(inplace=True)
