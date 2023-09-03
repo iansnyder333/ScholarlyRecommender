@@ -1,6 +1,9 @@
 # Default configuration for ScholarlyRecommender
 import json
 
+with open("ScholarlyRecommender/configuration.json") as json_file:
+    config = json.load(json_file)
+
 
 def get_config():
     with open("ScholarlyRecommender/configuration.json") as json_file:
