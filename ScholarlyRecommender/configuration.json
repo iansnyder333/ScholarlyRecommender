@@ -2,7 +2,7 @@
     "queries": [
         "Artificial Intelligence",
         "Natural language processing",
-        "Computer Vision and Pattern Recognition",
+        "Computer Vision",
         "Machine Learning"
     ],
     "labels": "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv",
