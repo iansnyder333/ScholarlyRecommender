@@ -63,7 +63,6 @@ def generate_feed_pipeline(query: list, n: int, days: int):
     components.html(source_code, height=1000, scrolling=True)
 
 
-@st.cache_data(show_spinner=False)
 def fetch_papers(num_papers: int = 10) -> pd.DataFrame:
     # Import arxiv here to prevent unnecessary imports
     import arxiv
