@@ -51,9 +51,9 @@ def send_email(**kwargs):
         SUBSCRIBERS = kwargs["subscribers"]
 
         # Validate emails TODO
-        # for email in SUBSCRIBERS:
-        # if not validate_email(email):
-        # raise ValueError(f"Invalid email address: {email}")
+        for email in SUBSCRIBERS:
+            if not validate_email(email):
+                raise ValueError(f"Invalid email address: {email}")
 
         msg = EmailMessage()
         msg["Subject"] = "Your Scholarly Recommender Weekly Newsletter"
@@ -105,7 +105,7 @@ def generate_feed_pipeline(
         components.html(source_code, height=1000, scrolling=True)
     elif to_email and user_email is not None:
         send_email(
-            subscribers=user_email,
+            subscribers=[user_email],
             content=source_code,
         )
         st.success("Email sent successfully!")
@@ -233,7 +233,7 @@ if navigation == "Get Recommendations":
     if to_email:
         # user_email = st.text_input("your email address")
         st.write("This feature is currently under development")
-        user_email = None
+        user_email = st.text_input("your email address")
         st.write(
             "Disclaimer: Scholarly Recommender will only send you an email with your recommendations"
         )
