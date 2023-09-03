@@ -10,7 +10,7 @@ config = get_config()
 
 
 def rankerV3(
-    context: pd.DataFrame, labels: str, k: int = 6, on: str = "Abstract"
+    context: pd.DataFrame, labels: pd.DataFrame, k: int = 6, on: str = "Abstract"
 ) -> pd.DataFrame:
     """
     Rank the papers in the context using the normalized compression distance combined with a weighted top-k mean rating.
@@ -19,7 +19,7 @@ def rankerV3(
     The algorithim gets the top k most similar papers to each paper in the context that the user rated and calculates the mean rating of those papers as its prediction.
 
     """
-    likes = pd.read_csv(labels)
+    likes = labels
     candidates = context
 
     train = np.array([(row[on], row["label"]) for _, row in likes.iterrows()])
@@ -66,13 +66,15 @@ def rankerV3(
     return df
 
 
-def rank(context, labels: str = None, n: int = 5) -> list:
+def rank(context, labels=None, n: int = 5) -> list:
     """
     Run the rankerV3 algorithm on the context and return a list of the top 5 ranked papers.
     """
     if labels is None:
         labels = config["labels"]
-
+    if isinstance(labels, str):
+        labels = pd.read_csv(labels)
+    assert isinstance(labels, pd.DataFrame), "labels must be a pandas DataFrame"
     df1 = rankerV3(context, labels, on="Abstract")
     df2 = rankerV3(context, labels, on="Title")
     df = df1.copy()

@@ -7,8 +7,12 @@ from ScholarlyRecommender.config import get_config
 config = get_config()
 
 
-def clean_feed(path: str):
-    df = pd.read_csv(path)
+def clean_feed(dataframe: pd.DataFrame):
+    df = dataframe[
+        ["Id", "Category", "Title", "Published", "Abstract", "URL", "Author"]
+    ].copy()
+    df.reset_index(inplace=True)
+    df["Author"] = df["Author"].astype(str)
     df["Id"] = df["Id"].apply(lambda x: "Entry Id: " + str(x))
     df["Published"] = pd.to_datetime(df["Published"]).dt.strftime("%m-%d-%Y")
     df["Published"] = df["Published"].apply(lambda x: "Published on " + str(x))
@@ -33,7 +37,8 @@ def extract_author_names(author_string):
 def build_email(
     df: pd.DataFrame,
     email: bool = False,
-    to_path: str = "ScholarlyRecommender/Newsletter/html/Feed.html",
+    to_path: str = config["feed_path"],
+    web: bool = False,
 ):
     flanT5_out = {
         "headline": "Decoding the Future of AI: Ethical Dilemmas, Embedding Logic, and Emotion Analytics in Conversational Tech—A Curated Selection of Cutting-Edge Research",
@@ -111,11 +116,13 @@ def build_email(
     html_content += """ </body>
     </html>"""
     # Save the generated HTML to a file for demonstration
-    html_file_path = to_path
-    with open(html_file_path, "w") as f:
-        f.write(html_content)
-
-    html_file_path
+    if web:
+        return html_content
+    else:
+        html_file_path = to_path
+        with open(html_file_path, "w") as f:
+            f.write(html_content)
+        return True
 
 
 # build_html_feed(clean_feed())
@@ -123,17 +130,17 @@ def get_feed(
     data,
     email: bool = False,
     to_path: str = config["feed_path"],
+    web: bool = False,
 ):
     if isinstance(data, pd.DataFrame):
-        data.to_csv("ScholarlyRecommender/Repository/TempFeed.csv", index=False)
-        df = clean_feed("ScholarlyRecommender/Repository/TempFeed.csv")
-        build_email(df, email=email, to_path=to_path)
-        return True
+        df = clean_feed(data)
+        res = build_email(df, email=email, to_path=to_path, web=web)
+        return res
 
     elif isinstance(data, str):
-        df = clean_feed(data)
-        build_email(df, email=email, to_path=to_path)
-        return True
+        df = clean_feed(pd.read_csv(data))
+        res = build_email(df, email=email, to_path=to_path, web=web)
+        return res
 
     else:
         raise TypeError("data must be a pandas DataFrame or a path to a csv file")
