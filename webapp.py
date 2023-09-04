@@ -116,8 +116,13 @@ def fetch_papers(num_papers: int = 10) -> pd.DataFrame:
     sam = c.sample(frac=1)
     sam.reset_index(inplace=True)
     df = sam[["Title", "Abstract"]].copy()
-    df["Abstract"] = df["Abstract"].str[:500] + "..."
-    return df.head(num_papers)
+    df.sort_values(
+        by="Abstract", key=lambda x: x.str.len(), inplace=True, ascending=False
+    )
+    check = min(num_papers, len(df.index))
+    res = df[["Title", "Abstract"]].iloc[:check]
+    res["Abstract"] = res["Abstract"].str[:500] + "..."
+    return res
 
 
 def calibrate_rec_sys(num_papers: int = 10):
@@ -131,20 +136,24 @@ def calibrate_rec_sys(num_papers: int = 10):
 
     if st.session_state.current_index < num_papers:
         # Display the paper at the current index
-        row = st.session_state.papers_df.iloc[st.session_state.current_index]
-        st.write(f"**{row['Title']}**")
-        st.write(f"{row['Abstract']}")
-        rating = st.number_input(
-            f"Rate this paper on a scale of 1 to 10?",
-            min_value=1,
-            max_value=10,
-        )
+        with st.form("rating_form"):
+            row = st.session_state.papers_df.iloc[st.session_state.current_index]
+            st.markdown(f"""## {row['Title']} """)
+            st.markdown(f"""{row['Abstract']}""")
 
-        if st.button(f"Submit Rating for {row['Title']}"):
-            # Save the label and increment the index
-            st.session_state.labels.append(rating)
-            st.session_state.current_index += 1
-            st.experimental_rerun()
+            rating = st.number_input(
+                f"Rate this paper on a scale of 1 to 10?",
+                min_value=1,
+                max_value=10,
+            )
+            submit_rating = st.form_submit_button(
+                f"Submit Rating for Paper: {st.session_state.current_index + 1}"
+            )
+            if submit_rating:
+                # Save the label and increment the index
+                st.session_state.labels.append(rating)
+                st.session_state.current_index += 1
+                st.experimental_rerun()
 
     elif st.session_state.current_index == num_papers:
         # Save all labels once all papers are rated
@@ -279,6 +288,7 @@ if navigation == "Get Recommendations":
                 content=source_code,
             )
             st.success("Email sent successfully!")
+
         components.html(source_code, height=1000, scrolling=True)
 
 
