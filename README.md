@@ -128,6 +128,7 @@ The web app offers full functionality and serves as an api to the system, while 
 ## Roadmap
 
 - [ ] Adding email support on the web app, currently in testing.
+- [ ] Database to store user configurations, currently zero user data is saved.
 - [ ] Making it easier to give feedback to suggested papers to improve the system
 - [ ] Improving the overall labeling experience, specifically the pooling process and labeling setup to be more integrated.
 - [ ] Improve modularity in the webapp and try to improve caching for faster performance. 
