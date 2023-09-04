@@ -1,7 +1,7 @@
 search_categories = {
     "Computer Science": [
         "Artificial Intelligence",
-        "Computer Vision and Pattern Recognition",
+        "Computer Vision",
         "Natural language processing",
         "Databases",
         "Distributed, Parallel, and Cluster Computing",
@@ -25,7 +25,7 @@ search_categories = {
         "Genomics",
         "Neurons and Cognition",
         "Subcellular Processes",
-        "Quantitative Methods",
+        "Quantitative Biological Methods",
     ],
     "Physics": [
         "Astrophysics",
