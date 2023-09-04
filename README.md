@@ -91,7 +91,7 @@ MacOS
    ```sh
    git clone https://github.com/iansnyder333/ScholarlyRecommender.git
    ```
-2. cd into the repo and setup a enviroment
+2. cd into the repo and setup an enviroment
    ```sh
    cd ScholarlyRecommender
    python3.11 -m venv env
