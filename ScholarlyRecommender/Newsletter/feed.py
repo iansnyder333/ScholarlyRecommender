@@ -17,7 +17,11 @@ def clean_feed(dataframe: pd.DataFrame):
     df["Published"] = pd.to_datetime(df["Published"]).dt.strftime("%m-%d-%Y")
     df["Published"] = df["Published"].apply(lambda x: "Published on " + str(x))
     df["Author"] = df["Author"].apply(extract_author_names)
+    df["Author"] = df["Author"].str[:500] + "..."
     df["Abstract"] = df["Abstract"].str[:500] + "..."
+
+    df["Abstract"] = df["Abstract"].apply(remove_latex)
+    df["Title"] = df["Title"].apply(remove_latex)
     return df
 
 
@@ -29,6 +33,16 @@ def extract_author_names(author_string):
     matches = re.findall(pattern, author_string)
 
     return ", ".join(matches)
+
+
+def remove_latex(text):
+    # Remove inline LaTeX
+    clean_text = re.sub(r"\$.*?\$", "", text)
+
+    # Remove block LaTeX
+    clean_text = re.sub(r"\\begin{.*?}\\end{.*?}", "", clean_text)
+
+    return clean_text
 
 
 # Pipeline()

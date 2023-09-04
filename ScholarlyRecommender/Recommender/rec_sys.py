@@ -165,7 +165,8 @@ def fetch(ids: list) -> pd.DataFrame:
         repository["Published"].append(result.published)
         repository["Abstract"].append(result.summary.strip("\n"))
         repository["URL"].append(result.pdf_url)
-        repository["Author"].append(result.authors)
+        # repository["Author"].append(result.authors)
+        repository["Author"].append([author.name for author in result.authors])
 
     return pd.DataFrame(repository)
 
@@ -184,7 +185,7 @@ def get_recommendations(
     if labels is None:
         labels = config["labels"]
     if size is None:
-        size = config["size"]
+        size = config["feed_length"]
     if isinstance(data, pd.DataFrame):
         df = data
         df.reset_index(inplace=True)
