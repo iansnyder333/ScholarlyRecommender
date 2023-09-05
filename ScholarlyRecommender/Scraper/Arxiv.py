@@ -1,9 +1,19 @@
+# import logging
 import pandas as pd
 import arxiv
 from ScholarlyRecommender.const import BASE_REPO
 from ScholarlyRecommender.config import get_config
 
 config = get_config()
+"""
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s]: %(message)s",
+    handlers=[logging.StreamHandler()],
+)
+
+logging.disable(logging.CRITICAL)
+"""
 
 
 def search(
@@ -29,6 +39,7 @@ def search(
             repository["URL"].append(result.pdf_url)
         except arxiv.arxiv.UnexpectedEmptyPageError as error:
             print(error)
+            # logging.error(error)
             continue
     if len(repository["Id"]) == 0:
         raise ValueError("No papers found for this query")
@@ -48,46 +59,46 @@ def source_candidates(
     """
     if queries is None:
         queries = config["queries"]
-    assert isinstance(queries, list), "queries must be a list of strings"
-    assert (
-        len(queries) > 0
-    ), "queries must be a list of strings with at least one element"
-    assert prev_days > 0, "prev_days must be greater than 0"
-    assert len(queries) < 100, "Too many queries, please reduce the number of queries "
-
-    prev_days = min(prev_days, 30)
+    if not isinstance(queries, list) or len(queries) == 0:
+        raise ValueError("queries must be a list of strings with at least one element")
+    if prev_days <= 0 or prev_days >= 30:
+        raise ValueError("prev_days must be greater than 0 and at most 30")
+    if len(queries) > 100:
+        raise ValueError("Too many queries, please reduce the number of queries ")
+    # normalize queries if for recommendations
     if sort_by == arxiv.SortCriterion.SubmittedDate:
         max_results = max(((100 * prev_days) // len(queries)), 100)
+        num_days = pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=prev_days)
+    else:
+        max_results = 100
+        num_days = pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=1095)
+    # logging.info(f"Searching for {max_results} papers for each query")
+    # print(f"Searching for {max_results} papers for each query")
 
-    print(f"Searching for {max_results} papers for each query")
-    df = None
+    dfs = []
     for query in queries:
-        print(f"Searching for {query}")
-        if df is None:
-            df = search(query, max_results=max_results, sort_by=sort_by)
-            print(f"Number of papers extracted : {len(df.index)}")
-        else:
-            df2 = search(query, max_results=max_results, sort_by=sort_by)
-            print(f"Number of papers extracted : {len(df2.index)}")
-            df = pd.concat([df, df2])
+        # logging.info(f"Searching for {query}")
+        # print(f"Searching for {query}")
 
+        df2 = search(query, max_results=max_results, sort_by=sort_by)
+        # logging.info(f"Number of papers extracted : {len(df2.index)}")
+        # print(f"Number of papers extracted : {len(df2.index)}")
+        dfs.append(df2)
+
+    df = pd.concat(dfs)
+    if df.index.has_duplicates:
+        df = df[~df.index.duplicated(keep="first")]
     # Filter
-    print(f"Number of papers extracted : {len(df.index)}")
+
     # Remove duplicates
-    df = df[~df.index.duplicated(keep="first")]
-    print(f"Number of papers extracted : {len(df.index)}")
+    # df = df[~df.index.duplicated(keep="first")]
+
     # Only keep papers from the last week
     df["Published"] = pd.to_datetime(df["Published"])
-    if sort_by == arxiv.SortCriterion.SubmittedDate:
-        df = df[
-            df["Published"]
-            >= (pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=prev_days))
-        ]
-    else:
-        df = df[
-            df["Published"] >= (pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=1095))
-        ]
-    print(f"Number of papers extracted : {len(df.index)}")
+
+    df = df[df["Published"] >= num_days]
+    # logging.info(f"Number of papers extracted : {len(df.index)}")
+    # print(f"Number of papers extracted : {len(df.index)}")
     if to_path is not None:
         df.to_csv(to_path)
     if as_df:
