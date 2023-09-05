@@ -1,12 +1,16 @@
 # Import necessary modules
+# Third Party Imports
 import streamlit as st
 import streamlit.components.v1 as components
+import pandas as pd
+
+# Standard Library Imports
 import smtplib
 from email.message import EmailMessage
-import re
+from re import match
 
+# Local Imports
 import ScholarlyRecommender as sr
-import pandas as pd
 from Utils.webutils import search_categories
 
 
@@ -33,9 +37,9 @@ def build_query(selected_sub_categories: dict) -> list:
     return query
 
 
-def validate_email(email):
+def validate_email(email) -> bool:
     regex = r"^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
-    if re.match(regex, email):
+    if match(regex, email):
         return True
     return False
 
@@ -50,7 +54,7 @@ def send_email(**kwargs):
 
         SUBSCRIBERS = kwargs["subscribers"]
 
-        # Validate emails TODO
+        # Validate emails again before sending
         for email in SUBSCRIBERS:
             if not validate_email(email):
                 raise ValueError(f"Invalid email address: {email}")
@@ -59,16 +63,16 @@ def send_email(**kwargs):
         msg["Subject"] = "Your Scholarly Recommender Weekly Newsletter"
         msg["From"] = EMAIL_ADDRESS
         msg["To"] = SUBSCRIBERS
-
+        port = 465  # For SSL
         html_string = kwargs["content"]
 
         msg.set_content(html_string, subtype="html")
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        with smtplib.SMTP_SSL("smtp.gmail.com", port) as smtp:
             smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             smtp.send_message(msg)
 
     except Exception as e:
-        print(f"An error occurred: {e}")
+        st.write(f"An error occurred: {e}")
 
 
 def generate_feed_pipeline(query: list, n: int, days: int, to_email: bool):
@@ -102,26 +106,22 @@ def generate_feed_pipeline(query: list, n: int, days: int, to_email: bool):
         return source_code
 
 
+# TODO make this more efficient
 def fetch_papers(num_papers: int = 10) -> pd.DataFrame:
     # Import arxiv here to prevent unnecessary imports
-    import arxiv
+    from arxiv.arxiv import SortCriterion
 
-    # Source papers only once and store in session state
     c = sr.source_candidates(
         queries=get_sc_config()["queries"],
         max_results=100,
         as_df=True,
-        sort_by=arxiv.SortCriterion.Relevance,
+        sort_by=SortCriterion.Relevance,
     )
-    sam = c.sample(frac=1)
-    sam.reset_index(inplace=True)
-    df = sam[["Title", "Abstract"]].copy()
-    df.sort_values(
+    sam = c[["Title", "Abstract"]].sample(frac=1, random_state=1).reset_index(drop=True)
+    sam.sort_values(
         by="Abstract", key=lambda x: x.str.len(), inplace=True, ascending=False
     )
-    check = min(num_papers, len(df.index))
-    res = df[["Title", "Abstract"]].iloc[:check]
-    res["Abstract"] = res["Abstract"].str[:500] + "..."
+    res = sam.iloc[: min(num_papers, len(sam))].copy()
     return res
 
 
@@ -139,7 +139,8 @@ def calibrate_rec_sys(num_papers: int = 10):
         with st.form("rating_form"):
             row = st.session_state.papers_df.iloc[st.session_state.current_index]
             st.markdown(f"""## {row['Title']} """)
-            st.markdown(f"""{row['Abstract']}""")
+            trimmed_abstract = row["Abstract"][:500] + "..."
+            st.markdown(f"""{trimmed_abstract}""")
 
             rating = st.number_input(
                 f"Rate this paper on a scale of 1 to 10?",

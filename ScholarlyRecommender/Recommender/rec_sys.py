@@ -1,12 +1,23 @@
+# import logging
+
 import gzip
 import numpy as np
 from tqdm import tqdm
 import pandas as pd
-import arxiv
+from arxiv.arxiv import Search
 from ScholarlyRecommender.const import BASE_REPO
 from ScholarlyRecommender.config import get_config
 
 config = get_config()
+"""
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s]: %(message)s",
+    handlers=[logging.StreamHandler()],
+)
+
+logging.disable(logging.CRITICAL)
+"""
 
 
 def rankerV3(
@@ -26,8 +37,9 @@ def rankerV3(
     test = np.array([(row[on], row["Id"]) for _, row in candidates.iterrows()])
 
     results = []
-    print(f"Starting to rank {len(test)} candidates on {on}\n")
-    for x1, id in tqdm(test):
+    # logging.info(f"Starting to rank {len(test)} candidates on {on}\n")
+    # print(f"Starting to rank {len(test)} candidates on {on}\n")
+    for x1, id in tqdm(test, disable=True):
         # calculate the compressed length of the utf-8 encoded text
         Cx1 = len(gzip.compress(x1.encode()))
         # create a distance array
@@ -74,16 +86,20 @@ def rank(context, labels=None, n: int = 5) -> list:
         labels = config["labels"]
     if isinstance(labels, str):
         labels = pd.read_csv(labels)
-    assert isinstance(labels, pd.DataFrame), "labels must be a pandas DataFrame"
+    if not isinstance(labels, pd.DataFrame):
+        raise TypeError("labels must be a pandas DataFrame")
     df1 = rankerV3(context, labels, on="Abstract")
     df2 = rankerV3(context, labels, on="Title")
     df = df1.copy()
     df["predicted"] = (df1["predicted"] + df2["predicted"]) / 2
     df["rank"] = df["predicted"].rank(ascending=False)
-    df = df.sort_values(by=["rank"])
+    df = df[df["rank"] <= n]
+    if len(df.index) > n:
+        df = df.sort_values(by=["rank"])
     df["Id"] = df["Id"].apply(lambda x: str(x))
     reccommended = df["Id"].tolist()[0:n]
-    print(f"Finished Ranking.\n")
+    # logging.info(f"Finished Ranking.\n")
+    # print(f"Finished Ranking.\n")
 
     return reccommended
 
@@ -102,7 +118,8 @@ def evaluate(n: int = 5, k: int = 6, on: str = "Abstract") -> float:
     train = np.array([(row[on], row["label"]) for _, row in train_data.iterrows()])
     test = np.array([(row[on], row["label"]) for _, row in test_data.iterrows()])
     results = []
-    print(f"Starting to rank {len(test)} candidates...\n")
+    # logging.info(f"Starting to rank {len(test)} candidates...\n")
+    # print(f"Starting to rank {len(test)} candidates...\n")
     for x1, label in tqdm(test):
         # calculate the compressed length of the utf-8 encoded text
         Cx1 = len(gzip.compress(x1.encode()))
@@ -151,10 +168,11 @@ def fetch(ids: list) -> pd.DataFrame:
     """
     Fetch papers from arxiv.org matching the ids and return a dataframe matching the BASE_REPO including the authors.
     """
-    print(f"Fetching {len(ids)} papers from arxiv... \n")
+    # logging.info(f"Fetching {len(ids)} papers from arxiv... \n")
+    # print(f"Fetching {len(ids)} papers from arxiv... \n")
     repository = BASE_REPO()
     repository["Author"] = []
-    search = arxiv.Search(
+    search = Search(
         query="",
         id_list=ids,
     )
@@ -190,12 +208,14 @@ def get_recommendations(
         df = data
         df.reset_index(inplace=True)
     elif isinstance(data, str):
-        assert data.endswith(".csv"), "data must be a csv file"
+        # assert data.endswith(".csv"), "data must be a csv file"
         df = pd.read_csv(data)
     else:
         raise TypeError("data must be a pandas DataFrame or a path to a csv file")
-    assert size > 0, "size must be greater than 0"
-    assert size < len(df.index), "size must be less than the length of the data"
+    if size < 0 or size > len(df.index):
+        raise ValueError(
+            "size must be greater than 0 and less than the length of the data"
+        )
 
     reccommended = rank(
         context=df,
@@ -205,7 +225,8 @@ def get_recommendations(
     feed = fetch(reccommended)
     if to_path is not None:
         feed.set_index("Id").to_csv(to_path)
-        print(f"Feed saved to {to_path} \n")
+        # logging.info(f"Feed saved to {to_path} \n")
+        # print(f"Feed saved to {to_path} \n")
         # feed.to_csv(to_path)
     if as_df:
         return feed
