@@ -72,7 +72,7 @@ def send_email(**kwargs):
             smtp.send_message(msg)
 
     except Exception as e:
-        print(f"An error occurred: {e}")
+        st.write(f"An error occurred: {e}")
 
 
 def generate_feed_pipeline(query: list, n: int, days: int, to_email: bool):
