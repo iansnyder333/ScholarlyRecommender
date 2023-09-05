@@ -12,7 +12,7 @@
   <p align="center">
     End-to-end product that sources recent academic publications and prepares a feed of recommended readings in seconds. 
     <br />
-    <a href="https://scholarlyrecommender.streamlit.app/"><strong>Try it now »</strong></a>
+    <a href="https://scholarlyrecommender.streamlit.app"><strong>Try it now »</strong></a>
     <br />
     <br />
     <a href="https://github.com/iansnyder333/ScholarlyRecommender">View Demo</a>
@@ -52,7 +52,7 @@
 ## About The Project
 
 <div align="center">
-  <a href="https://github.com/iansnyder333/ScholarlyRecommender">
+  <a href="https://scholarlyrecommender.streamlit.app">
     <img src="images/example_1.png">
   </a>
 </div>
