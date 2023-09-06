@@ -28,6 +28,9 @@ def update_sc_config(new_config):
 
 
 def build_query(selected_sub_categories: dict) -> list:
+    if selected_sub_categories.__len__() == 0:
+        return []
+
     query = []
     for key, value in selected_sub_categories.items():
         if len(value) > 0:
