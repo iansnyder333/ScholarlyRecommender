@@ -110,7 +110,7 @@ MacOS
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Once installed, you want to calibrate the system to your own interests. The easiest way to do this is using the webapp.py file. Alternativley, you can use calibrate.py, which runs in the terminal.
+Once installed, you want to calibrate the system to your own interests. The easiest way to do this is using the webapp.py file. Alternativley, you can use calibrate.py, which runs on the console. 
 
 Make sure you are cd into the parent folder of the cloned repo.
 
@@ -122,6 +122,7 @@ streamlit run webapp.py
 Navigate to the configure tab and complete the steps. You can now navigate back to the get recommendations tab and generate results!
 The web app offers full functionality and serves as an api to the system, while using the webapp, updates made to the configuration will be applied and refreshed in a continuous manner. 
 
+**Note:** If you are using ScholarlyRecommender locally, certain features such as direct email will not work as the original applications database will not be available. If you want to configure the email feature for yourself, you can follow the instructions provided in [mail.py](https://github.com/iansnyder333/ScholarlyRecommender/blob/main/ScholarlyRecommender/Newsletter/mail.py). This will require some proficiency/familiarity with SMPT. If you are having issues please feel free to check the [docs](https://github.com/iansnyder333/ScholarlyRecommender/tree/main/docs), or make a discussion post [here](https://github.com/iansnyder333/ScholarlyRecommender/discussions) and someone will help you out.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
