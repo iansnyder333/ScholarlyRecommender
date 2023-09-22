@@ -46,6 +46,7 @@
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#methods">Methods</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -130,6 +131,7 @@ The web app offers full functionality and serves as an api to the system, while 
 - [ ] ✅ Adding email support on the web app ✅
 - [ ] Database to store user configurations, currently zero user data is saved. Also would like to improve data locality and cache to improve user experience.
 - [ ] Making it easier to give feedback to suggested papers to improve the system
+- [ ] Adding an intelligent system that can generate a summary for the users results, replacing the generic 'intro' paragraph currently used. Perhaps a job for a LoRA tuned llama2 or Flan-T5 model? ( I can't afford OpenAI Tokens 😭 )
 - [ ] Improving the overall labeling experience, specifically the pooling process and labeling setup to be more integrated.
 - [ ] Improve modularity in the webapp and try to improve caching for faster performance. 
 - [ ] Many visual and user experience improvements, a complete overhaul of the UX is likely.
@@ -183,13 +185,20 @@ Linkedin: [www.linkedin.com/in/ian-snyder-aa1600182/](https://www.linkedin.com/i
 <!-- METHODS -->
 ## Methods 
 
-Once candidates are sourced in the context of the configuration, they are ranked. The ranking process involves using the normalized compression distance combined with an inverse weighted top-k mean rating from the candidates to the labeled papers. This is a modified version of the algorithm described in the paper "“Low-Resource” Text Classification- A Parameter-Free Classification Method with Compressors." The algorithm gets the top k most similar papers to each paper in the context that the user rated and calculates a weighted mean rating of those papers as its prediction. The results are then sorted by the papers with the highest predicting rating and are returned in accordance with the desired amount.
+Once candidates are sourced in the context of the configuration, they are ranked. The ranking process involves using the normalized compression distance combined with an inverse weighted top-k mean rating from the candidates to the labeled papers. This is a modified version of the algorithm described in the paper "“Low-Resource” Text Classification- A Parameter-Free Classification Method with Compressors" (<a href="#acknowledgements">1</a>). The algorithm gets the top k most similar papers to each paper in the context that the user rated and calculates a weighted mean rating of those papers as its prediction. The results are then sorted by the papers with the highest predicting rating and are returned in accordance with the desired amount.
 
-This is by no means the best approach to source relevant content, but is a fairly accurate and lightweight one that can run on limited hardware with very little "training" data. 
+While using a large language model such as BERT might yield a higher accuracy, this approach is considerably more lightweight, can run on basically any computer, and requires virtually no labeled data to source relevant content. If this project scales to the capacity of a self improving newsletter, implementing a sophisticated deep learning model such as a transformer could be a worthwhile addition. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
 
+**1** - [“Low-Resource” Text Classification: A Parameter-Free Classification Method with Compressors](https://aclanthology.org/2023.findings-acl.426) (Jiang et al., Findings 2023)
+
+**README Template** - [Best-README-Template](https://github.com/othneildrew/Best-README-Template) by ([othneildrew](https://github.com/othneildrew))
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
