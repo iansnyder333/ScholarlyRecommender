@@ -49,33 +49,43 @@ def validate_email(email) -> bool:
 
 def send_email(**kwargs):
     try:
-        EMAIL_ADDRESS = st.secrets.email_credentials.EMAIL
-        EMAIL_PASSWORD = st.secrets.email_credentials.EMAIL_PASSWORD
-
-        if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
-            raise ValueError("Email credentials not set in environment variables.")
-
         SUBSCRIBERS = kwargs["subscribers"]
 
         # Validate emails again before sending
         for email in SUBSCRIBERS:
             if not validate_email(email):
-                raise ValueError(f"Invalid email address: {email}")
+                raise ValueError(
+                    f"{email} is not a valid email address. Please try again."
+                )
+
+        EMAIL_ADDRESS = st.secrets.email_credentials.EMAIL
+        EMAIL_PASSWORD = st.secrets.email_credentials.EMAIL_PASSWORD
+        PORT = st.secrets.email_credentials.PORT
+        if not EMAIL_ADDRESS or not EMAIL_PASSWORD or not PORT:
+            raise ValueError(
+                f"Email credentials not set in environment variables. Please report this issue to the developer."
+            )
+        if not kwargs["content"]:
+            raise ValueError(
+                f"Email content not set. Please report this issue to the developer."
+            )
 
         msg = EmailMessage()
-        msg["Subject"] = "Your Scholarly Recommender Weekly Newsletter"
+        msg["Subject"] = "Your Scholarly Recommender Newsletter"
         msg["From"] = EMAIL_ADDRESS
         msg["To"] = SUBSCRIBERS
-        port = 465  # For SSL
+
         html_string = kwargs["content"]
 
         msg.set_content(html_string, subtype="html")
-        with smtplib.SMTP_SSL("smtp.gmail.com", port) as smtp:
+        with smtplib.SMTP_SSL("smtp.gmail.com", PORT) as smtp:
             smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             smtp.send_message(msg)
+        st.success("Email sent successfully!")
 
     except Exception as e:
-        st.write(f"An error occurred: {e}")
+        st.error(f"Email failed to send. {e}", icon="🚨")
+        # st.write(f"An error occurred: {e}")
 
 
 def generate_feed_pipeline(query: list, n: int, days: int, to_email: bool):
@@ -220,7 +230,7 @@ if navigation == "Get Recommendations":
 
         - **Configure**: The first step is to configure the system to your interests. This can be done by navigating to the configure page. If you skip this step, the system will use a default configuration tailored to the interests of the developer.
         - **Get Recommendations**: Once you've configured the system, you can get recommendations by pressing the 'generate recommendations' button at the bottom of the page.
-        - **Categories & Sub-Categories**: You can customize your interests by selecting from a wide range of categories and sub-categories, by default, the system will search based on your configured interests.
+        - **Categories & Subcategories**: You can customize your interests by selecting from a wide range of categories and subcategories, by default, the system will search based on your configured interests.
         - **Recommendation Count**: Choose how many recommendations you want to receive.
         - **Time Range**: Decide the time frame for the articles you're interested in.
         
@@ -239,7 +249,7 @@ if navigation == "Get Recommendations":
     selected_sub_categories = {}
     for selected in categories:
         selected_sub_categories[selected] = st.multiselect(
-            f"Select sub-categories under {selected} (leave blank for all)",
+            f"Select subcategories under {selected} (leave blank for all)",
             search_categories[selected],
         )
 
@@ -275,10 +285,10 @@ if navigation == "Get Recommendations":
             submit_button = st.form_submit_button(label="Confirm")
             if submit_button:
                 if validate_email(user_email):
-                    st.success("Email address confirmed")
+                    st.success(f"Email address confirmed")
 
                 else:
-                    st.error("Please enter a valid email address")
+                    st.error(f"Please enter a valid email address", icon="🚨")
 
     else:
         user_email = ""
@@ -291,7 +301,7 @@ if navigation == "Get Recommendations":
                 subscribers=[user_email],
                 content=source_code,
             )
-            st.success("Email sent successfully!")
+            # st.success("Email sent successfully!")
 
         components.html(source_code, height=1000, scrolling=True)
 
@@ -310,10 +320,10 @@ elif navigation == "Configure":
     # User input section
     st.markdown(
         """
-        ### Configure your interests
+        ### Step 1: Configure your interests
             
         This section will help you configure the system to your interests.
-        This insures the system will use this to only scrape papers relevant to you.
+        This ensures the system will use this to only scrape papers relevant to you.
         Follow the steps below to get started.
                 """
     )
@@ -325,7 +335,7 @@ elif navigation == "Configure":
     selected_sub_categories = {}
     for selected in categories:
         selected_sub_categories[selected] = st.multiselect(
-            f"Select sub-categories under {selected} (Optional, leave blank for all)",
+            f"Select subcategories under {selected} (Optional, leave blank for all)",
             search_categories[selected],
         )
     if st.button("Done", type="primary"):
@@ -344,7 +354,7 @@ elif navigation == "Configure":
 
     st.markdown(
         """
-        ### Calibrate the Recommender System
+        ### Step 2: Calibrate the Recommender System
         
         This section will help you calibrate the recommender system based on your interests.
         This will help the system learn your preferences and will significantly improve recommendations.
@@ -363,6 +373,12 @@ elif navigation == "Configure":
     if st.session_state.calibration_started:
         with st.spinner("Preparing Calibration..."):
             calibrate_rec_sys(num_papers=10)
+    st.markdown(
+        """
+    ### Step 3: All done! Navigate to the Get Recommendations page to generate your personalized feed!"""
+    )
+    # TODO add a button to navigate to the get recommendations page
+
 
 # About Page
 elif navigation == "About":
@@ -378,7 +394,7 @@ elif navigation == "About":
         
         - **Configure**: The first step is to configure the system to your interests. This can be done by navigating to the configure page.
         - **Get Recommendations**: Once you've configured the system, you can generate recommendations by navigating to the get recommendations page.
-        - **Categories & Sub-Categories**: You can customize your interests by selecting from a wide range of categories and sub-categories, by default, the system will search based on your configured interests.
+        - **Categories & Subcategories**: You can customize your interests by selecting from a wide range of categories and subcategories, by default, the system will search based on your configured interests.
         - **Recommendation Count**: Choose how many recommendations you want to receive.
         - **Time Range**: Decide the time frame for the articles you're interested in.
 
@@ -390,7 +406,7 @@ elif navigation == "About":
 
         ### Mission Statement
 
-        As an upcoming data scientist with a strong passion for deep learning, I am always looking for new technologies and methodologies. Naturally, I spend a considerable amount of time researching and reading new publications to accomplish this. However, over 14,000 academic papers are published every day on average, making it extremely tedious to continuously source papers relevant to my interests. My primary motivation for creating ScholarlyRecommender is to address this, creating a fully automated and personalized system that prepares a feed of academic papers relevant to me. This feed is prepared on demand, through a completely abstracted streamlit web interface, or sent directly to my email on a timed basis. This project was designed to be scalable and adaptable, and can be very easily adapted not only to your own interests, but become a fully automated, self improving newsletter. Details on how to use this system, the methods used for retrieval and ranking, along with future plans and features planned or in development currently are listed below."
+        As an upcoming data scientist with a strong passion for deep learning, I am always looking for new technologies and methodologies. Naturally, I spend a considerable amount of time researching and reading new publications to accomplish this. However, over 14,000 academic papers are published every day on average, making it extremely tedious to continuously source papers relevant to my interests. My primary motivation for creating ScholarlyRecommender is to address this, creating a fully automated and personalized system that prepares a feed of academic papers relevant to me. This feed is prepared on demand, through a completely abstracted streamlit web interface, or sent directly to my email on a timed basis. This project was designed to be scalable and adaptable, and can be very easily adapted not only to your own interests, but become a fully automated, self improving newsletter. Details on how to use this system, the methods used for retrieval and ranking, along with future plans and features planned or in development currently are listed below.
 
    
         """
@@ -415,8 +431,8 @@ elif navigation == "Contact":
         I recently graduated college and am the sole developer of this project, so I would love any constructive feedback you have to offer to help me improve as a developer.
 
         - **Ian Snyder**: [@iansnydes](https://twitter.com/iansnydes) - idsnyder136@gmail.com 
-        - **Website and Portfolio**: [iansnyder333.github.io/frontend/](https://iansnyder333.github.io/frontend/)
-        - **LinkedIn**: [www.linkedin.com/in/ian-snyder-aa1600182/](https://www.linkedin.com/in/ian-snyder-aa1600182/)
+        - **Website and Portfolio**: [iansnyder333.github.io/frontend](https://iansnyder333.github.io/frontend)
+        - **LinkedIn**: [www.linkedin.com/in/ian-snyder-aa1600182](https://www.linkedin.com/in/ian-snyder-aa1600182)
         
 
                 """,
