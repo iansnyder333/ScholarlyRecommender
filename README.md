@@ -15,7 +15,7 @@
     <a href="https://scholarlyrecommender.streamlit.app"><strong>Try it now »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/iansnyder333/ScholarlyRecommender">View Demo</a>
+    <a href="https://github.com/iansnyder333/ScholarlyRecommender/tree/main/docs">Explore the Docs</a>
     ·
     <a href="https://github.com/iansnyder333/ScholarlyRecommender/issues">Report Bug</a>
     ·
