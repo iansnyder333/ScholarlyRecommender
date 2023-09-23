@@ -1,6 +1,6 @@
 """
-this will be the file to reconfigure the recommender system to work with the new data for a new user
-Many improvements can be made to this file, but for now it will be a simple calibration tool
+This script allows you to reconfigure the recommender system to your interests without having to use the web interface. 
+It is not nearly as robust as the web interface, but offers a quick and lightweight alternative for users who do not want to use the web interface.
 """
 import ScholarlyRecommender as sr
 import pandas as pd

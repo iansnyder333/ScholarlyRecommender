@@ -1,0 +1,12 @@
+{
+    "queries": [
+        "Artificial Intelligence",
+        "Natural language processing",
+        "Computer Vision",
+        "Machine Learning"
+       
+    ],
+    "labels": "ScholarlyRecommender/Repository/tests/test_candidates_labeled.csv",
+    "feed_length": 5,
+    "feed_path": "ScholarlyRecommender/Repository/tests/test_feed.html"
+}

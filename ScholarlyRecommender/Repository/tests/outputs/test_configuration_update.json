@@ -1,0 +1,9 @@
+{
+    "queries": [
+        "Computer Science",
+        "Mathematics"
+    ],
+    "labels": "ScholarlyRecommender/Repository/tests/test_candidates_labeled.csv",
+    "feed_length": 7,
+    "feed_path": "ScholarlyRecommender/Repository/tests/test_feed.html"
+}

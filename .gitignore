@@ -6,3 +6,6 @@ ScholarlyRecommender/.DS_Store
 .DS_Store
 
 .streamlit/secrets.toml
+
+/images/Logos-All
+.DS_Store
