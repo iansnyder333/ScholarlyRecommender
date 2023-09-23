@@ -129,7 +129,7 @@ The web app offers full functionality and serves as an api to the system, while 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] ✅ Adding email support on the web app ✅
+- [x] ✅ Adding email support on the web app ✅
 - [ ] Database to store user configurations, currently zero user data is saved. Also would like to improve data locality and cache to improve user experience.
 - [ ] Making it easier to give feedback to suggested papers to improve the system
 - [ ] Adding an intelligent system that can generate a summary for the users results, replacing the generic 'intro' paragraph currently used. Perhaps a job for a LoRA tuned llama2 or Flan-T5 model? ( I can't afford OpenAI Tokens 😭 )
