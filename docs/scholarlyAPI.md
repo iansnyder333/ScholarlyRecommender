@@ -46,6 +46,7 @@ TODO
 
 TODO
 
+
 ### get_config
 
 ```sh
@@ -54,11 +55,18 @@ ScholarlyRecommender.get_config() -> dict:
  
 Retrieves the current configurations being used by the ScholarlyRecommender system.
 
-- **parameters:**
+- **Parameters:**
   - None
-- **returns:**
+- **Returns:**
   - config: dict
     - A python dictionary representing the current configuration being used by the system. It is internally stored as a json file.
+- **Example**
+  - ```sh
+    import ScholarlyRecommender as sr
+
+    config = sr.get_config
+    queries = config['queries]
+    ```
 
 ### update_config
 
@@ -68,13 +76,17 @@ ScholarlyRecommender.update_config(new_config, **kwargs) -> None:
  
 what it does
 
-- **parameters:**
+- **Parameters:**
   - new_config: dict
     - A python dictionary representing the new configuration the system will use. This will be internally stored as a json file to configuration.json and will overwrite the previous configuration.
   - **kwargs: optional params
     - Optional keyword arguments used for testing and debugging. 
-- **returns:**
+- **Returns:**
   - None
+- **Example**
+  - ```sh
+    import ScholarlyRecommender as sr
+    ```
 
 ### source_candidates
 
@@ -91,7 +103,7 @@ ScholarlyRecommender.source_candidates(
  
 Scrapes the web for papers matching the queries, filters them and returns a dataframe containing the results. Results can also be saved to a csv file.
 
-- **parameters:**
+- **Parameters:**
   - queries: list of str
     - The search queries to scrape, represented as strings. At least one query is required.
   - max_results
@@ -99,7 +111,12 @@ Scrapes the web for papers matching the queries, filters them and returns a data
   - as_df
   - prev_dats
   - sort_by
-
+- **Returns:**
+  - None
+- **Example**
+  - ```sh
+    import ScholarlyRecommender as sr
+    ```
   
 ### get_recommendations
 
@@ -115,10 +132,14 @@ ScholarlyRecommender.get_recommendations(
  
 what it does
 
-- **parameters:**
+- **Parameters:**
   - None
-- **returns:**
+- **Returns:**
   - None
+- **Example**
+  - ```sh
+    import ScholarlyRecommender as sr
+    ```
 
 ### evaluate
 
@@ -126,12 +147,18 @@ what it does
 ScholarlyRecommender.evaluate(n: int = 5, k: int = 6, on: str = "Abstract") -> float:
 ```
  
-what it does
+Evaluate the recommender system on the labeled dataset. Uses the normalized compression distance to predict the masked rating.
+Calculates the mean squared error between the predicted and actual ratings and returns the total loss.
 
-- **parameters:**
+
+- **Parameters:**
   - None
-- **returns:**
+- **Returns:**
   - None
+- **Example**
+  - ```sh
+    import ScholarlyRecommender as sr
+    ```
 
 ### get_feed
 
@@ -146,7 +173,11 @@ ScholarlyRecommender.get_feed(
  
 what it does
 
-- **parameters:**
+- **Parameters:**
   - None
-- **returns:**
+- **Returns:**
   - None
+- **Example**
+  - ```sh
+    import ScholarlyRecommender as sr
+    ```
