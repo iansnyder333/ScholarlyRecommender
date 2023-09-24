@@ -3,6 +3,8 @@ import pandas as pd
 from pandas.testing import assert_frame_equal
 from json import load
 import unittest
+import time
+import tracemalloc
 
 """
 This module contains unit tests for the ScholarlyRecommender package.
@@ -31,6 +33,7 @@ TEST_LABELS_OUT = TEST_OUTPUT_DIR + "test_labels.csv"
 TEST_RECOMMENDATIONS_OUT = TEST_OUTPUT_DIR + "test_recommendations.csv"
 
 
+# Unit Tests
 class TestScholarlyRecommender(unittest.TestCase):
     # Setup the test environment
     def setUp(self):
@@ -149,5 +152,65 @@ class TestScholarlyRecommender(unittest.TestCase):
         )
 
 
+class ManualTests:
+    """
+    MANUAL TESTS
+
+    These tests are for manual testing of the ScholarlyRecommender package.
+    They are not run automatically when the tests are run. Usefull for debugging.
+    """
+
+    def __init__(self):
+        self.config = sr.get_config()
+        self.candidates = pd.read_csv(REF_CANDIDATES_PATH)
+        self.candidates_labeled = pd.read_csv(REF_LABELS_PATH)
+        self.recommendations = pd.read_csv(REF_RECOMMENDATIONS_PATH)
+
+    def run_all(self):
+        can = sr.source_candidates(
+            queries=self.config["queries"],
+            as_df=True,
+            prev_days=7,
+        )
+        rec = sr.get_recommendations(
+            data=REF_CANDIDATES_PATH,
+            labels=REF_LABELS_PATH,
+            as_df=True,
+        )
+        fee = sr.get_feed(
+            data=REF_RECOMMENDATIONS_PATH,
+            to_path="man_test.html",
+        )
+
+    # Test speed of recommendation function
+    def performance_test(self, n: int = 1):
+        times = []
+        memory = []
+        peaks = []
+        for i in range(n):
+            tracemalloc.start()
+            start_time = time.time()
+
+            rec = sr.get_recommendations(
+                data=REF_CANDIDATES_PATH,
+                labels=REF_LABELS_PATH,
+                as_df=True,
+            )
+            end_time = time.time()
+            mem = tracemalloc.get_traced_memory()
+
+            elapsed_time = end_time - start_time
+            memory.append(mem)
+            peaks.append(tracemalloc.get_traced_memory()[1])
+            tracemalloc.stop()
+            times.append(elapsed_time)
+            print(f"Elapsed time for test_get_recommendations: {elapsed_time} seconds")
+            print(f"Memory for test_get_recommendations: {mem} bytes")
+        print(f"Average time: {sum(times)/len(times)} seconds")
+        print(f"Average memory: {sum(peaks)/len(peaks)} bytes")
+
+
 if __name__ == "__main__":
     unittest.main()
+    # mt = ManualTests().run_all()
+    # ManualTests().performance_test(n=5)

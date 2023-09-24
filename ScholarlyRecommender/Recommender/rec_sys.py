@@ -30,22 +30,18 @@ def rankerV3(
     likes = labels
     candidates = context
 
-    # train_texts = np.array([row[on] for _, row in likes.iterrows()])
-    # test_texts = np.array([row[on] for _, row in candidates.iterrows()])
-    # train_texts = np.array([row[on] for _, row in likes.iterrows()], dtype=np.str_)
-    # test_texts = np.array([row[on] for _, row in candidates.iterrows()], dtype=np.str_)
     train_texts = np.array([row[on] for _, row in likes.iterrows()], dtype="object")
     test_texts = np.array([row[on] for _, row in candidates.iterrows()], dtype="object")
-    train_ratings = np.array(
-        [row["label"] for _, row in likes.iterrows()], dtype=int
-    )  # Assuming 'Rating' is the column you want
+    train_ratings = np.array([row["label"] for _, row in likes.iterrows()], dtype=int)
 
     results = []
 
+    # Calculate the normalized compression distance between each test text and each train text using cython
     ncd_results = calculate_ncd(test_texts, train_texts)
 
     # logging.info(f"Starting to rank {len(test)} candidates on {on}\n")
     # print(f"Starting to rank {len(test)} candidates on {on}\n")
+
     for i, (x1, id) in enumerate(
         tqdm(np.column_stack((test_texts, candidates["Id"])), disable=True)
     ):
@@ -73,6 +69,63 @@ def rankerV3(
     return df
 
 
+def rankerV2(
+    context: pd.DataFrame, labels: pd.DataFrame, k: int = 6, on: str = "Abstract"
+) -> pd.DataFrame:
+    """
+    Rank the papers in the context using the normalized compression distance combined with a weighted top-k mean rating.
+    Return a list of the top n ranked papers.
+    This is a modified version of the algorithm described in the paper "“Low-Resource” Text Classification- A Parameter-Free Classification Method with Compressors."
+    The algorithim gets the top k most similar papers to each paper in the context that the user rated and calculates the mean rating of those papers as its prediction.
+
+    """
+    likes = labels
+    candidates = context
+
+    train = np.array([(row[on], row["label"]) for _, row in likes.iterrows()])
+    test = np.array([(row[on], row["Id"]) for _, row in candidates.iterrows()])
+
+    results = []
+    # logging.info(f"Starting to rank {len(test)} candidates on {on}\n")
+    # print(f"Starting to rank {len(test)} candidates on {on}\n")
+    for x1, id in tqdm(test, disable=True):
+        # calculate the compressed length of the utf-8 encoded text
+        Cx1 = len(gzip.compress(x1.encode()))
+        # create a distance array
+        similarity_to_x1 = []
+        for x2, _ in train:
+            # calculate the compressed length of the utf-8 encoded text
+            Cx2 = len(gzip.compress(x2.encode()))
+            # concatenate the two texts
+            x1x2 = " ".join([x1, x2])
+            # calculate the compressed length of the utf-8 encoded concatenated text
+            Cx1x2 = len(gzip.compress(x1x2.encode()))
+            # calculate the normalized compression distance: a normalized version of information distance
+            ncd = (Cx1x2 - min(Cx1, Cx2)) / max(Cx1, Cx2)
+
+            similarity_to_x1.append(ncd)
+
+        # calculate the similarity weights for the top k most similar papers
+        # Converting the list to a numpy array for vectorized operations
+        similarity_to_x1 = np.array(similarity_to_x1)
+        # sort the array and get the top k most similar papers
+        sorted_idx = np.argsort(similarity_to_x1)
+        values = similarity_to_x1[sorted_idx[:k]]
+        # calculate the similarity weights for the top k most similar papers
+        weights = values / np.sum(values)
+        # Weights need to be inverted so that the most similar papers (lowest distance) have the highest weights
+        inverse_weights = 1 / weights
+        inverse_weights_norm = (inverse_weights) / np.sum(inverse_weights)
+        # get the top k ratings
+        top_k_ratings = train[sorted_idx[:k], 1].astype(int)
+        # calculate the prediction as the inverse weighted mean of the top k ratings
+        prediction = np.sum(np.dot(inverse_weights_norm, top_k_ratings))
+        results.append((prediction, id))
+
+    df = pd.DataFrame(results, columns=["predicted", "Id"])
+    return df
+
+
 def rank(context, labels=None, n: int = 5) -> list:
     """
     Run the rankerV3 algorithm on the context and return a list of the top 5 ranked papers.
@@ -83,20 +136,16 @@ def rank(context, labels=None, n: int = 5) -> list:
         labels = pd.read_csv(labels)
     if not isinstance(labels, pd.DataFrame):
         raise TypeError("labels must be a pandas DataFrame")
+
     df1 = rankerV3(context, labels, on="Abstract")
     df2 = rankerV3(context, labels, on="Title")
-    df = df1.copy()
-    df["predicted"] = (df1["predicted"] + df2["predicted"]) / 2
-    df["rank"] = df["predicted"].rank(ascending=False)
-    df = df[df["rank"] <= n]
-    if len(df.index) > n:
-        df = df.sort_values(by=["rank"])
-    df["Id"] = df["Id"].apply(lambda x: str(x))
-    reccommended = df["Id"].tolist()[0:n]
-    # logging.info(f"Finished Ranking.\n")
-    # print(f"Finished Ranking.\n")
+    df1["predicted"] = (df1["predicted"] + df2["predicted"]) / 2
+    df1["rank"] = df1["predicted"].rank(ascending=False)
+    df1 = df1.nsmallest(n, "rank")
+    df1["Id"] = df1["Id"].astype(str)
+    recommended = df1["Id"].iloc[:n].tolist()
 
-    return reccommended
+    return recommended
 
 
 def evaluate(n: int = 5, k: int = 6, on: str = "Abstract") -> float:

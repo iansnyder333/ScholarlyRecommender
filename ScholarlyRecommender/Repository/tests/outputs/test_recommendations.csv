@@ -1,14 +1,14 @@
 Id,Category,Title,Published,Abstract,URL,Author
-2309.11495v1,cs.CL,Chain-of-Verification Reduces Hallucination in Large Language Models,2023-09-20 17:50:55+00:00,"Generation of plausible yet incorrect factual information, termed
-hallucination, is an unsolved issue in large language models. We study the
-ability of language models to deliberate on the responses they give in order to
-correct their mistakes. We develop the Chain-of-Verification (CoVe) method
-whereby the model first (i) drafts an initial response; then (ii) plans
-verification questions to fact-check its draft; (iii) answers those questions
-independently so the answers are not biased by other responses; and (iv)
-generates its final verified response. In experiments, we show CoVe decreases
-hallucinations across a variety of tasks, from list-based questions from
-Wikidata, closed book MultiSpanQA and longform text generation.",http://arxiv.org/pdf/2309.11495v1,"['Shehzaad Dhuliawala', 'Mojtaba Komeili', 'Jing Xu', 'Roberta Raileanu', 'Xian Li', 'Asli Celikyilmaz', 'Jason Weston']"
+2309.11852v1,cs.CL,Knowledge Sanitization of Large Language Models,2023-09-21 07:49:55+00:00,"We explore a knowledge sanitization approach to mitigate the privacy concerns
+associated with large language models (LLMs). LLMs trained on a large corpus of
+Web data can memorize and potentially reveal sensitive or confidential
+information, raising critical security concerns. Our technique fine-tunes these
+models, prompting them to generate harmless responses such as ``I don't know''
+when queried about specific information. Experimental results in a closed-book
+question-answering task show that our straightforward method not only minimizes
+particular knowledge leakage but also preserves the overall performance of LLM.
+These two advantages strengthen the defense against extraction attacks and
+reduces the emission of harmful content such as hallucinations.",http://arxiv.org/pdf/2309.11852v1,"['Yoichi Ishibashi', 'Hidetoshi Shimodaira']"
 2309.11295v1,cs.CL,CPLLM: Clinical Prediction with Large Language Models,2023-09-20 13:24:12+00:00,"We present Clinical Prediction with Large Language Models (CPLLM), a method
 that involves fine-tuning a pre-trained Large Language Model (LLM) for clinical
 disease prediction. We utilized quantization and fine-tuned the LLM using
@@ -20,47 +20,6 @@ is the current state-of-the-art model for disease prediction using structured
 EHR data. Our experiments have shown that CPLLM surpasses all the tested models
 in terms of both PR-AUC and ROC-AUC metrics, displaying noteworthy enhancements
 compared to the baseline models.",http://arxiv.org/pdf/2309.11295v1,"['Ofir Ben Shoham', 'Nadav Rappoport']"
-2309.11259v1,cs.CL,Sequence-to-Sequence Spanish Pre-trained Language Models,2023-09-20 12:35:19+00:00,"In recent years, substantial advancements in pre-trained language models have
-paved the way for the development of numerous non-English language versions,
-with a particular focus on encoder-only and decoder-only architectures. While
-Spanish language models encompassing BERT, RoBERTa, and GPT have exhibited
-prowess in natural language understanding and generation, there remains a
-scarcity of encoder-decoder models designed for sequence-to-sequence tasks
-involving input-output pairs. This paper breaks new ground by introducing the
-implementation and evaluation of renowned encoder-decoder architectures,
-exclusively pre-trained on Spanish corpora. Specifically, we present Spanish
-versions of BART, T5, and BERT2BERT-style models and subject them to a
-comprehensive assessment across a diverse range of sequence-to-sequence tasks,
-spanning summarization, rephrasing, and generative question answering. Our
-findings underscore the competitive performance of all models, with BART and T5
-emerging as top performers across all evaluated tasks. As an additional
-contribution, we have made all models publicly available to the research
-community, fostering future exploration and development in Spanish language
-processing.",http://arxiv.org/pdf/2309.11259v1,"['Vladimir Araujo', 'Maria Mihaela Trusca', 'Rodrigo Tufiño', 'Marie-Francine Moens']"
-2309.10982v1,cs.AI,Is GPT4 a Good Trader?,2023-09-20 00:47:52+00:00,"Recently, large language models (LLMs), particularly GPT-4, have demonstrated
-significant capabilities in various planning and reasoning tasks
-\cite{cheng2023gpt4,bubeck2023sparks}. Motivated by these advancements, there
-has been a surge of interest among researchers to harness the capabilities of
-GPT-4 for the automated design of quantitative factors that do not overlap with
-existing factor libraries, with an aspiration to achieve alpha returns
-\cite{webpagequant}. In contrast to these work, this study aims to examine the
-fidelity of GPT-4's comprehension of classic trading theories and its
-proficiency in applying its code interpreter abilities to real-world trading
-data analysis. Such an exploration is instrumental in discerning whether the
-underlying logic GPT-4 employs for trading is intrinsically reliable.
-Furthermore, given the acknowledged interpretative latitude inherent in most
-trading theories, we seek to distill more precise methodologies of deploying
-these theories from GPT-4's analytical process, potentially offering invaluable
-insights to human traders.
-  To achieve this objective, we selected daily candlestick (K-line) data from
-specific periods for certain assets, such as the Shanghai Stock Index. Through
-meticulous prompt engineering, we guided GPT-4 to analyze the technical
-structures embedded within this data, based on specific theories like the
-Elliott Wave Theory. We then subjected its analytical output to manual
-evaluation, assessing its interpretative depth and accuracy vis-\`a-vis these
-trading theories from multiple dimensions. The results and findings from this
-study could pave the way for a synergistic amalgamation of human expertise and
-AI-driven insights in the realm of trading.",http://arxiv.org/pdf/2309.10982v1,['Bingzhe Wu']
 2309.12053v1,cs.CL,"AceGPT, Localizing Large Language Models in Arabic",2023-09-21 13:20:13+00:00,"This paper explores the imperative need and methodology for developing a
 localized Large Language Model (LLM) tailored for Arabic, a language with
 unique cultural characteristics that are not adequately addressed by current
@@ -81,3 +40,36 @@ outperforms ChatGPT in the popular Vicuna-80 benchmark when evaluated with
 GPT-4, despite the benchmark's limited scale. % Natural Language Understanding
 (NLU) benchmark (i.e., ALUE)
   Codes, data, and models are in https://github.com/FreedomIntelligence/AceGPT.",http://arxiv.org/pdf/2309.12053v1,"['Huang Huang', 'Fei Yu', 'Jianqing Zhu', 'Xuening Sun', 'Hao Cheng', 'Dingjie Song', 'Zhihong Chen', 'Abdulmohsen Alharthi', 'Bang An', 'Ziche Liu', 'Zhiyi Zhang', 'Junying Chen', 'Jianquan Li', 'Benyou Wang', 'Lian Zhang', 'Ruoyu Sun', 'Xiang Wan', 'Haizhou Li', 'Jinchao Xu']"
+2309.11495v1,cs.CL,Chain-of-Verification Reduces Hallucination in Large Language Models,2023-09-20 17:50:55+00:00,"Generation of plausible yet incorrect factual information, termed
+hallucination, is an unsolved issue in large language models. We study the
+ability of language models to deliberate on the responses they give in order to
+correct their mistakes. We develop the Chain-of-Verification (CoVe) method
+whereby the model first (i) drafts an initial response; then (ii) plans
+verification questions to fact-check its draft; (iii) answers those questions
+independently so the answers are not biased by other responses; and (iv)
+generates its final verified response. In experiments, we show CoVe decreases
+hallucinations across a variety of tasks, from list-based questions from
+Wikidata, closed book MultiSpanQA and longform text generation.",http://arxiv.org/pdf/2309.11495v1,"['Shehzaad Dhuliawala', 'Mojtaba Komeili', 'Jing Xu', 'Roberta Raileanu', 'Xian Li', 'Asli Celikyilmaz', 'Jason Weston']"
+2309.12307v1,cs.CL,LongLoRA: Efficient Fine-tuning of Long-Context Large Language Models,2023-09-21 17:59:11+00:00,"We present LongLoRA, an efficient fine-tuning approach that extends the
+context sizes of pre-trained large language models (LLMs), with limited
+computation cost. Typically, training LLMs with long context sizes is
+computationally expensive, requiring extensive training hours and GPU
+resources. For example, training on the context length of 8192 needs 16x
+computational costs in self-attention layers as that of 2048. In this paper, we
+speed up the context extension of LLMs in two aspects. On the one hand,
+although dense global attention is needed during inference, fine-tuning the
+model can be effectively and efficiently done by sparse local attention. The
+proposed shift short attention effectively enables context extension, leading
+to non-trivial computation saving with similar performance to fine-tuning with
+vanilla attention. Particularly, it can be implemented with only two lines of
+code in training, while being optional in inference. On the other hand, we
+revisit the parameter-efficient fine-tuning regime for context expansion.
+Notably, we find that LoRA for context extension works well under the premise
+of trainable embedding and normalization. LongLoRA demonstrates strong
+empirical results on various tasks on LLaMA2 models from 7B/13B to 70B.
+LongLoRA adopts LLaMA2 7B from 4k context to 100k, or LLaMA2 70B to 32k on a
+single 8x A100 machine. LongLoRA extends models' context while retaining their
+original architectures, and is compatible with most existing techniques, like
+FlashAttention-2. In addition, to make LongLoRA practical, we collect a
+dataset, LongQA, for supervised fine-tuning. It contains more than 3k long
+context question-answer pairs.",http://arxiv.org/pdf/2309.12307v1,"['Yukang Chen', 'Shengju Qian', 'Haotian Tang', 'Xin Lai', 'Zhijian Liu', 'Song Han', 'Jiaya Jia']"
