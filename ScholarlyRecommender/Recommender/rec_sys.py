@@ -5,35 +5,14 @@ import numpy as np
 from tqdm import tqdm
 import pandas as pd
 from arxiv.arxiv import Search
-from copy import deepcopy
 
-# from ScholarlyRecommender.const import BASE_REPO
-# from ScholarlyRecommender.config import get_config
-from cython_functions import calculate_ncd
 
-BASE_REPO = lambda: deepcopy(
-    {
-        "Id": [],
-        "Category": [],
-        "Title": [],
-        "Published": [],
-        "Abstract": [],
-        "URL": [],
-    }
-)
+from ScholarlyRecommender.const import BASE_REPO
+from ScholarlyRecommender.config import get_config
+from ScholarlyRecommender.Recommender.cython_functions import calculate_ncd
 
-config = {
-    "queries": [
-        "Artificial Intelligence",
-        "Natural language processing",
-        "Computer Vision",
-        "Machine Learning",
-    ],
-    "labels": "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv",
-    "feed_length": 5,
-    "feed_path": "ScholarlyRecommender/Newsletter/html/WebFeed.html",
-}
-# config = get_config()
+
+config = get_config()
 """
 logging.basicConfig(
     level=logging.INFO,
@@ -246,17 +225,3 @@ def get_recommendations(
         # feed.to_csv(to_path)
     if as_df:
         return feed
-
-
-if __name__ == "__main__":
-    content = pd.read_csv(
-        "/Users/iansnyder/Desktop/Projects/LLM/ScholarlyRecommender/Repository/tests/inputs/ref_candidates.csv"
-    )
-    labels = pd.read_csv(
-        "/Users/iansnyder/Desktop/Projects/LLM/ScholarlyRecommender/Repository/tests/inputs/ref_labels.csv"
-    )
-    res = rank(content, labels)
-    feed = fetch(res)
-    feed.to_csv(
-        "/Users/iansnyder/Desktop/Projects/LLM/ScholarlyRecommender/Repository/tests/cython.csv"
-    )

@@ -3,9 +3,9 @@ import numpy as np
 from datetime import datetime
 import re
 
-# from ScholarlyRecommender.config import get_config
+from ScholarlyRecommender.config import get_config
 
-# config = get_config()
+config = get_config()
 
 
 def clean_feed(dataframe: pd.DataFrame):
@@ -161,9 +161,3 @@ def get_feed(
 
     else:
         raise TypeError("data must be a pandas DataFrame or a path to a csv file")
-
-
-get_feed(
-    data="/Users/iansnyder/Desktop/Projects/LLM/ScholarlyRecommender/Repository/tests/cython.csv",
-    to_path="/Users/iansnyder/Desktop/Projects/LLM/ScholarlyRecommender/Repository/tests/test_cp_feed.html",
-)
