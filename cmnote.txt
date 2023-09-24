@@ -1,0 +1,37 @@
+
+### OLD Rank, OLD Merge
+Elapsed time for test_get_recommendations: 14.113464117050171 seconds
+Memory for test_get_recommendations: (672404, 12648341) bytes
+Elapsed time for test_get_recommendations: 16.26404595375061 seconds
+Memory for test_get_recommendations: (52855, 12256412) bytes
+Elapsed time for test_get_recommendations: 12.902935028076172 seconds
+Memory for test_get_recommendations: (49176, 12251393) bytes
+Elapsed time for test_get_recommendations: 12.90117597579956 seconds
+Memory for test_get_recommendations: (47018, 12251625) bytes
+Elapsed time for test_get_recommendations: 14.130686283111572 seconds
+Memory for test_get_recommendations: (45153, 12251524) bytes
+
+Average time: 14.062461471557617 seconds
+Average memory: 12331859.0 bytes
+12.331859 Mb
+
+### NEW rank, NEW Merge
+
+Elapsed time for test_get_recommendations: 8.508472204208374 seconds
+Memory for test_get_recommendations: (681437, 1696402) bytes
+Elapsed time for test_get_recommendations: 15.803746223449707 seconds
+Memory for test_get_recommendations: (54290, 1297321) bytes
+Elapsed time for test_get_recommendations: 9.480475902557373 seconds
+Memory for test_get_recommendations: (45226, 1289734) bytes
+Elapsed time for test_get_recommendations: 8.373626947402954 seconds
+Memory for test_get_recommendations: (42921, 1290271) bytes
+Elapsed time for test_get_recommendations: 8.30s6680917739868 seconds
+Memory for test_get_recommendations: (43353, 1289631) bytes
+Average time: 10.094600439071655 seconds
+Average memory: 1372671.8 bytes
+1.3726718 Mb
+
+Difference
+
+3.96786103249 Seconds (32.8505% improvement)
+10.9591872 Megabytes (159.935% improvement)
