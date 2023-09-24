@@ -6,8 +6,8 @@ setup(
     name="CythonizedNCD",
     ext_modules=cythonize(
         Extension(
-            "cython_functions",
-            sources=["cython_functions.pyx"],
+            "ScholarlyRecommender.Recommender.cython_functions",
+            sources=["ScholarlyRecommender/Recommender/cython/cython_functions.pyx"],
             extra_compile_args=["-arch", "x86_64"],
         )
     ),
