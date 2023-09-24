@@ -95,7 +95,7 @@ ScholarlyRecommender.source_candidates(
     queries: list,
     max_results: int = 100,
     to_path: str = None,
-    as_df: bool = True,
+    as_df: bool = False,
     prev_days: int = 7,
     sort_by=arxiv.SortCriterion.SubmittedDate,
 ) -> pd.DataFrame:
@@ -105,17 +105,12 @@ Scrapes the web for papers matching the queries, filters them and returns a data
 
 - **Parameters:**
   - queries: list of str
-    - The search queries to scrape, represented as strings. The length of queries must be greater than zero and less than 100.
-  - max_results: int, *optional*
-    - The maximum number of candidates to source per query, defaults to 100 and dynamically scales based on the length of queries.
-  - to_path: str, path object, file-like object, *optional*
-    - Where to store the resulting candidates if desired, the dataframe will be saved here as a csv. Defaults to None.
-  - as_df: bool, *optional*
-    - Boolean to indicate if the resulting candidates should be returned as a Pandas Dataframe. defaults to True, and should only be changed to False if to_path is provided.
-  - prev_days: int, *optional*
-    - The maximum number of days (inclusive) since the publication date for candidates, defaults to 7, must be greater than 0 and less than 31.
-  - sort_by: arxiv.SortCriterion, *optional*
-    - TODO
+    - The search queries to scrape, represented as strings. At least one query is required.
+  - max_results
+  - to_path
+  - as_df
+  - prev_dats
+  - sort_by
 - **Returns:**
   - None
 - **Example**
