@@ -5,10 +5,35 @@ import numpy as np
 from tqdm import tqdm
 import pandas as pd
 from arxiv.arxiv import Search
-from ScholarlyRecommender.const import BASE_REPO
-from ScholarlyRecommender.config import get_config
+from copy import deepcopy
 
-config = get_config()
+# from ScholarlyRecommender.const import BASE_REPO
+# from ScholarlyRecommender.config import get_config
+from cython_functions import calculate_ncd
+
+BASE_REPO = lambda: deepcopy(
+    {
+        "Id": [],
+        "Category": [],
+        "Title": [],
+        "Published": [],
+        "Abstract": [],
+        "URL": [],
+    }
+)
+
+config = {
+    "queries": [
+        "Artificial Intelligence",
+        "Natural language processing",
+        "Computer Vision",
+        "Machine Learning",
+    ],
+    "labels": "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv",
+    "feed_length": 5,
+    "feed_path": "ScholarlyRecommender/Newsletter/html/WebFeed.html",
+}
+# config = get_config()
 """
 logging.basicConfig(
     level=logging.INFO,
@@ -23,38 +48,29 @@ logging.disable(logging.CRITICAL)
 def rankerV3(
     context: pd.DataFrame, labels: pd.DataFrame, k: int = 6, on: str = "Abstract"
 ) -> pd.DataFrame:
-    """
-    Rank the papers in the context using the normalized compression distance combined with a weighted top-k mean rating.
-    Return a list of the top n ranked papers.
-    This is a modified version of the algorithm described in the paper "“Low-Resource” Text Classification- A Parameter-Free Classification Method with Compressors."
-    The algorithim gets the top k most similar papers to each paper in the context that the user rated and calculates the mean rating of those papers as its prediction.
-
-    """
     likes = labels
     candidates = context
 
-    train = np.array([(row[on], row["label"]) for _, row in likes.iterrows()])
-    test = np.array([(row[on], row["Id"]) for _, row in candidates.iterrows()])
+    # train_texts = np.array([row[on] for _, row in likes.iterrows()])
+    # test_texts = np.array([row[on] for _, row in candidates.iterrows()])
+    # train_texts = np.array([row[on] for _, row in likes.iterrows()], dtype=np.str_)
+    # test_texts = np.array([row[on] for _, row in candidates.iterrows()], dtype=np.str_)
+    train_texts = np.array([row[on] for _, row in likes.iterrows()], dtype="object")
+    test_texts = np.array([row[on] for _, row in candidates.iterrows()], dtype="object")
+    train_ratings = np.array(
+        [row["label"] for _, row in likes.iterrows()], dtype=int
+    )  # Assuming 'Rating' is the column you want
 
     results = []
+
+    ncd_results = calculate_ncd(test_texts, train_texts)
+
     # logging.info(f"Starting to rank {len(test)} candidates on {on}\n")
     # print(f"Starting to rank {len(test)} candidates on {on}\n")
-    for x1, id in tqdm(test, disable=True):
-        # calculate the compressed length of the utf-8 encoded text
-        Cx1 = len(gzip.compress(x1.encode()))
-        # create a distance array
-        similarity_to_x1 = []
-        for x2, _ in train:
-            # calculate the compressed length of the utf-8 encoded text
-            Cx2 = len(gzip.compress(x2.encode()))
-            # concatenate the two texts
-            x1x2 = " ".join([x1, x2])
-            # calculate the compressed length of the utf-8 encoded concatenated text
-            Cx1x2 = len(gzip.compress(x1x2.encode()))
-            # calculate the normalized compression distance: a normalized version of information distance
-            ncd = (Cx1x2 - min(Cx1, Cx2)) / max(Cx1, Cx2)
-
-            similarity_to_x1.append(ncd)
+    for i, (x1, id) in enumerate(
+        tqdm(np.column_stack((test_texts, candidates["Id"])), disable=True)
+    ):
+        similarity_to_x1 = ncd_results[i]
 
         # calculate the similarity weights for the top k most similar papers
         # Converting the list to a numpy array for vectorized operations
@@ -68,7 +84,7 @@ def rankerV3(
         inverse_weights = 1 / weights
         inverse_weights_norm = (inverse_weights) / np.sum(inverse_weights)
         # get the top k ratings
-        top_k_ratings = train[sorted_idx[:k], 1].astype(int)
+        top_k_ratings = train_ratings[sorted_idx[:k]]
         # calculate the prediction as the inverse weighted mean of the top k ratings
         prediction = np.sum(np.dot(inverse_weights_norm, top_k_ratings))
 
@@ -230,3 +246,17 @@ def get_recommendations(
         # feed.to_csv(to_path)
     if as_df:
         return feed
+
+
+if __name__ == "__main__":
+    content = pd.read_csv(
+        "/Users/iansnyder/Desktop/Projects/LLM/ScholarlyRecommender/Repository/tests/inputs/ref_candidates.csv"
+    )
+    labels = pd.read_csv(
+        "/Users/iansnyder/Desktop/Projects/LLM/ScholarlyRecommender/Repository/tests/inputs/ref_labels.csv"
+    )
+    res = rank(content, labels)
+    feed = fetch(res)
+    feed.to_csv(
+        "/Users/iansnyder/Desktop/Projects/LLM/ScholarlyRecommender/Repository/tests/cython.csv"
+    )

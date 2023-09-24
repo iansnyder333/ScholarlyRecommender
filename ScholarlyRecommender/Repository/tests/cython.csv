@@ -1,0 +1,83 @@
+,Id,Category,Title,Published,Abstract,URL,Author
+0,2309.11495v1,cs.CL,Chain-of-Verification Reduces Hallucination in Large Language Models,2023-09-20 17:50:55+00:00,"Generation of plausible yet incorrect factual information, termed
+hallucination, is an unsolved issue in large language models. We study the
+ability of language models to deliberate on the responses they give in order to
+correct their mistakes. We develop the Chain-of-Verification (CoVe) method
+whereby the model first (i) drafts an initial response; then (ii) plans
+verification questions to fact-check its draft; (iii) answers those questions
+independently so the answers are not biased by other responses; and (iv)
+generates its final verified response. In experiments, we show CoVe decreases
+hallucinations across a variety of tasks, from list-based questions from
+Wikidata, closed book MultiSpanQA and longform text generation.",http://arxiv.org/pdf/2309.11495v1,"['Shehzaad Dhuliawala', 'Mojtaba Komeili', 'Jing Xu', 'Roberta Raileanu', 'Xian Li', 'Asli Celikyilmaz', 'Jason Weston']"
+1,2309.11295v1,cs.CL,CPLLM: Clinical Prediction with Large Language Models,2023-09-20 13:24:12+00:00,"We present Clinical Prediction with Large Language Models (CPLLM), a method
+that involves fine-tuning a pre-trained Large Language Model (LLM) for clinical
+disease prediction. We utilized quantization and fine-tuned the LLM using
+prompts, with the task of predicting whether patients will be diagnosed with a
+target disease during their next visit or in the subsequent diagnosis,
+leveraging their historical diagnosis records. We compared our results versus
+various baselines, including Logistic Regression, RETAIN, and Med-BERT, which
+is the current state-of-the-art model for disease prediction using structured
+EHR data. Our experiments have shown that CPLLM surpasses all the tested models
+in terms of both PR-AUC and ROC-AUC metrics, displaying noteworthy enhancements
+compared to the baseline models.",http://arxiv.org/pdf/2309.11295v1,"['Ofir Ben Shoham', 'Nadav Rappoport']"
+2,2309.11259v1,cs.CL,Sequence-to-Sequence Spanish Pre-trained Language Models,2023-09-20 12:35:19+00:00,"In recent years, substantial advancements in pre-trained language models have
+paved the way for the development of numerous non-English language versions,
+with a particular focus on encoder-only and decoder-only architectures. While
+Spanish language models encompassing BERT, RoBERTa, and GPT have exhibited
+prowess in natural language understanding and generation, there remains a
+scarcity of encoder-decoder models designed for sequence-to-sequence tasks
+involving input-output pairs. This paper breaks new ground by introducing the
+implementation and evaluation of renowned encoder-decoder architectures,
+exclusively pre-trained on Spanish corpora. Specifically, we present Spanish
+versions of BART, T5, and BERT2BERT-style models and subject them to a
+comprehensive assessment across a diverse range of sequence-to-sequence tasks,
+spanning summarization, rephrasing, and generative question answering. Our
+findings underscore the competitive performance of all models, with BART and T5
+emerging as top performers across all evaluated tasks. As an additional
+contribution, we have made all models publicly available to the research
+community, fostering future exploration and development in Spanish language
+processing.",http://arxiv.org/pdf/2309.11259v1,"['Vladimir Araujo', 'Maria Mihaela Trusca', 'Rodrigo Tufiño', 'Marie-Francine Moens']"
+3,2309.10982v1,cs.AI,Is GPT4 a Good Trader?,2023-09-20 00:47:52+00:00,"Recently, large language models (LLMs), particularly GPT-4, have demonstrated
+significant capabilities in various planning and reasoning tasks
+\cite{cheng2023gpt4,bubeck2023sparks}. Motivated by these advancements, there
+has been a surge of interest among researchers to harness the capabilities of
+GPT-4 for the automated design of quantitative factors that do not overlap with
+existing factor libraries, with an aspiration to achieve alpha returns
+\cite{webpagequant}. In contrast to these work, this study aims to examine the
+fidelity of GPT-4's comprehension of classic trading theories and its
+proficiency in applying its code interpreter abilities to real-world trading
+data analysis. Such an exploration is instrumental in discerning whether the
+underlying logic GPT-4 employs for trading is intrinsically reliable.
+Furthermore, given the acknowledged interpretative latitude inherent in most
+trading theories, we seek to distill more precise methodologies of deploying
+these theories from GPT-4's analytical process, potentially offering invaluable
+insights to human traders.
+  To achieve this objective, we selected daily candlestick (K-line) data from
+specific periods for certain assets, such as the Shanghai Stock Index. Through
+meticulous prompt engineering, we guided GPT-4 to analyze the technical
+structures embedded within this data, based on specific theories like the
+Elliott Wave Theory. We then subjected its analytical output to manual
+evaluation, assessing its interpretative depth and accuracy vis-\`a-vis these
+trading theories from multiple dimensions. The results and findings from this
+study could pave the way for a synergistic amalgamation of human expertise and
+AI-driven insights in the realm of trading.",http://arxiv.org/pdf/2309.10982v1,['Bingzhe Wu']
+4,2309.12053v1,cs.CL,"AceGPT, Localizing Large Language Models in Arabic",2023-09-21 13:20:13+00:00,"This paper explores the imperative need and methodology for developing a
+localized Large Language Model (LLM) tailored for Arabic, a language with
+unique cultural characteristics that are not adequately addressed by current
+mainstream models like ChatGPT. Key concerns additionally arise when
+considering cultural sensitivity and local values. To this end, the paper
+outlines a packaged solution, including further pre-training with Arabic texts,
+supervised fine-tuning (SFT) using native Arabic instructions and GPT-4
+responses in Arabic, and reinforcement learning with AI feedback (RLAIF) using
+a reward model that is sensitive to local culture and values. The objective is
+to train culturally aware and value-aligned Arabic LLMs that can serve the
+diverse application-specific needs of Arabic-speaking communities.
+  Extensive evaluations demonstrated that the resulting LLM called
+`\textbf{AceGPT}' is the SOTA open Arabic LLM in various benchmarks, including
+instruction-following benchmark (i.e., Arabic Vicuna-80 and Arabic AlpacaEval),
+knowledge benchmark (i.e., Arabic MMLU and EXAMs), as well as the
+newly-proposed Arabic cultural \& value alignment benchmark. Notably, AceGPT
+outperforms ChatGPT in the popular Vicuna-80 benchmark when evaluated with
+GPT-4, despite the benchmark's limited scale. % Natural Language Understanding
+(NLU) benchmark (i.e., ALUE)
+  Codes, data, and models are in https://github.com/FreedomIntelligence/AceGPT.",http://arxiv.org/pdf/2309.12053v1,"['Huang Huang', 'Fei Yu', 'Jianqing Zhu', 'Xuening Sun', 'Hao Cheng', 'Dingjie Song', 'Zhihong Chen', 'Abdulmohsen Alharthi', 'Bang An', 'Ziche Liu', 'Zhiyi Zhang', 'Junying Chen', 'Jianquan Li', 'Benyou Wang', 'Lian Zhang', 'Ruoyu Sun', 'Xiang Wan', 'Haizhou Li', 'Jinchao Xu']"
