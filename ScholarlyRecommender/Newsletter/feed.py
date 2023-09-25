@@ -159,4 +159,5 @@ def get_feed(
         return res
 
     else:
-        raise TypeError("data must be a pandas DataFrame or a path to a csv file")
+        raise TypeError(
+            "data must be a pandas DataFrame or a path to a csv file")
