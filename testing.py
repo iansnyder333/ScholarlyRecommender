@@ -56,18 +56,21 @@ class TestScholarlyRecommender(unittest.TestCase):
         # Check that the config file is valid
         self.assertEqual(self.config.keys(), self.ref_config.keys())
 
+    def test_config_query(self):
         # Test the queries
         config_queries = self.config["queries"]
         self.assertTrue(isinstance(config_queries, list))
         self.assertTrue(len(config_queries) > 0)
         self.assertTrue(all(isinstance(item, str) for item in config_queries))
 
+    def test_config_labels(self):
         # Test the labels
         config_labels = pd.read_csv(self.config["labels"])
         expected_columns = list(self.candidates_labeled.columns)
         columns = list(config_labels.columns)
         self.assertEqual(columns, expected_columns)
 
+    def test_config_feed_length(self):
         # Test the feed length
         self.assertTrue(isinstance(self.config["feed_length"], int))
         self.assertTrue(self.config["feed_length"] > 0)
