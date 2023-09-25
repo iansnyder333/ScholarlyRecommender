@@ -102,7 +102,10 @@ MacOS
    ```sh
    pip3.11 install -r requirements.txt
    ```
-
+4. run the app
+   ```sh
+   make run
+   ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -115,6 +118,10 @@ Once installed, you want to calibrate the system to your own interests. The easi
 Make sure you are cd into the parent folder of the cloned repo.
 
 Run this in your terminal as follows:
+```sh
+make run
+```
+This is the same as running:
 ```sh
 streamlit run webapp.py
 ```
@@ -130,9 +137,10 @@ The web app offers full functionality and serves as an api to the system, while 
 ## Roadmap
 
 - [x] ✅ Adding email support on the web app ✅
+- [ ] OS support, specifically for windows.
+- [ ] shell scripts to make installs, updates, and usage easier.
 - [ ] Database to store user configurations, currently zero user data is saved. Also would like to improve data locality and cache to improve user experience.
 - [ ] Making it easier to give feedback to suggested papers to improve the system
-- [ ] Adding an intelligent system that can generate a summary for the users results, replacing the generic 'intro' paragraph currently used. Perhaps a job for a LoRA tuned llama2 or Flan-T5 model? ( I can't afford OpenAI Tokens 😭 )
 - [ ] Improving the overall labeling experience, specifically the pooling process and labeling setup to be more integrated.
 - [ ] Improve modularity in the webapp and try to improve caching for faster performance. 
 - [ ] Many visual and user experience improvements, a complete overhaul of the UX is likely.
