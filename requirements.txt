@@ -24,11 +24,13 @@ charset-normalizer==3.2.0
     # via requests
 click==8.1.7
     # via streamlit
+cython==3.0.2
+    # via -r requirements.in
 feedparser==6.0.10
     # via arxiv
 gitdb==4.0.10
     # via gitpython
-gitpython==3.1.35
+gitpython==3.1.37
     # via streamlit
 idna==3.4
     # via requests
@@ -38,7 +40,7 @@ jinja2==3.1.2
     # via
     #   altair
     #   pydeck
-jsonschema==4.19.0
+jsonschema==4.19.1
     # via altair
 jsonschema-specifications==2023.7.1
     # via jsonschema
@@ -67,7 +69,7 @@ pandas==2.0.1
     #   streamlit
 pillow==9.5.0
     # via streamlit
-protobuf==4.24.2
+protobuf==4.24.3
     # via streamlit
 pyarrow==13.0.0
     # via streamlit
@@ -81,7 +83,7 @@ python-dateutil==2.8.2
     # via
     #   pandas
     #   streamlit
-pytz==2023.3
+pytz==2023.3.post1
     # via pandas
 pytz-deprecation-shim==0.1.0.post0
     # via tzlocal
@@ -93,9 +95,9 @@ requests==2.31.0
     # via
     #   -r requirements.in
     #   streamlit
-rich==13.5.2
+rich==13.5.3
     # via streamlit
-rpds-py==0.10.0
+rpds-py==0.10.3
     # via
     #   jsonschema
     #   referencing
@@ -103,7 +105,7 @@ sgmllib3k==1.0.0
     # via feedparser
 six==1.16.0
     # via python-dateutil
-smmap==5.0.0
+smmap==5.0.1
     # via gitdb
 soupsieve==2.5
     # via beautifulsoup4
@@ -119,7 +121,7 @@ tornado==6.3.3
     # via streamlit
 tqdm==4.65.0
     # via -r requirements.in
-typing-extensions==4.7.1
+typing-extensions==4.8.0
     # via streamlit
 tzdata==2023.3
     # via
@@ -127,9 +129,12 @@ tzdata==2023.3
     #   pytz-deprecation-shim
 tzlocal==4.3.1
     # via streamlit
-urllib3==2.0.4
+urllib3==2.0.5
     # via requests
 validators==0.22.0
     # via streamlit
-zipp==3.16.2
+zipp==3.17.0
     # via importlib-metadata
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools

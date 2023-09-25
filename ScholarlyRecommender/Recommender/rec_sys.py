@@ -88,20 +88,16 @@ def rank(context, labels=None, n: int = 5) -> list:
         labels = pd.read_csv(labels)
     if not isinstance(labels, pd.DataFrame):
         raise TypeError("labels must be a pandas DataFrame")
+
     df1 = rankerV3(context, labels, on="Abstract")
     df2 = rankerV3(context, labels, on="Title")
-    df = df1.copy()
-    df["predicted"] = (df1["predicted"] + df2["predicted"]) / 2
-    df["rank"] = df["predicted"].rank(ascending=False)
-    df = df[df["rank"] <= n]
-    if len(df.index) > n:
-        df = df.sort_values(by=["rank"])
-    df["Id"] = df["Id"].apply(lambda x: str(x))
-    reccommended = df["Id"].tolist()[0:n]
-    # logging.info(f"Finished Ranking.\n")
-    # print(f"Finished Ranking.\n")
+    df1["predicted"] = (df1["predicted"] + df2["predicted"]) / 2
+    df1["rank"] = df1["predicted"].rank(ascending=False)
+    df1 = df1.nsmallest(n, "rank")
+    df1["Id"] = df1["Id"].astype(str)
+    recommended = df1["Id"].iloc[:n].tolist()
 
-    return reccommended
+    return recommended
 
 
 def evaluate(n: int = 5, k: int = 6, on: str = "Abstract") -> float:

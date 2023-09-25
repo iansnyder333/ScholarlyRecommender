@@ -40,6 +40,9 @@ def calibrate_rec_sys(query: list, num_papers: int = 10, to_path: str = to_path)
 
 
 def main():
+    print(
+        "\n WARNING: This script is deprecated and will be removed in a future release. Please use the web interface instead. \n"
+    )
     print("Welcome to the Scholarly Recommender System Calibration Tool \n")
     print(
         "This tool will help you calibrate the recommender system to your interests \n"

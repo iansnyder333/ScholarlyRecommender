@@ -11,7 +11,7 @@ from re import match
 
 # Local Imports
 import ScholarlyRecommender as sr
-from Utils.webutils import search_categories
+from utils.webutils import search_categories
 
 
 @st.cache_data(show_spinner=False)
