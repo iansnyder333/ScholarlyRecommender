@@ -25,6 +25,7 @@ def update_sc_config(new_config):
     st.session_state.sys_config = new_config
 
 
+@st.cache_data(show_spinner=False)
 def build_query(cats: dict) -> list:
     if cats.__len__() == 0:
         return []
@@ -38,6 +39,7 @@ def build_query(cats: dict) -> list:
     return usr_query
 
 
+@st.cache_data(show_spinner=False)
 def validate_email(email) -> bool:
     regex = r"^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
     if match(regex, email):
@@ -164,7 +166,7 @@ def calibrate_rec_sys(num_papers: int = 10):
                 # Save the label and increment the index
                 st.session_state.labels.append(rating)
                 st.session_state.current_index += 1
-                st.experimental_rerun()
+                st.rerun()
 
     elif st.session_state.current_index == num_papers:
         # Save all labels once all papers are rated
@@ -344,11 +346,12 @@ elif navigation == "Configure":
             # prevent empty queries
             if len(user_config_query) == 0:
                 st.error("Please select at least one interest.")
-            configuration = get_sc_config()
-            configuration["queries"] = user_config_query
-            update_sc_config(configuration)
+            else:
+                configuration = get_sc_config()
+                configuration["queries"] = user_config_query
+                update_sc_config(configuration)
 
-            st.success("Preferences updated successfully!")
+                st.success("Preferences updated successfully!")
     # Initialize a session state variable for calibration status if it doesn't exist
     if "calibration_started" not in st.session_state:
         st.session_state.calibration_started = False
