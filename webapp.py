@@ -226,8 +226,8 @@ if navigation == "Get Recommendations":
         """
         ## Welcome to the Scholarly Recommender API
 
-        This platform is designed to offer you highly tailored scholarly recommendations. 
-        Whether you're a researcher, academic, or just someone interested in scientific literature, 
+        This platform is designed to offer you highly tailored scholarly recommendations.
+        Whether you're a researcher, academic, or just someone interested in scientific literature,
         this service is built to cater to your specific needs.
 
         ### To Get Started
@@ -237,7 +237,7 @@ if navigation == "Get Recommendations":
         - **Categories & Subcategories**: You can customize your interests by selecting from a wide range of categories and subcategories, by default, the system will search based on your configured interests.
         - **Recommendation Count**: Choose how many recommendations you want to receive.
         - **Time Range**: Decide the time frame for the articles you're interested in.
-        
+
         """,
         unsafe_allow_html=True,
     )
@@ -329,7 +329,7 @@ elif navigation == "Configure":
     st.markdown(
         """
         ### Step 1: Configure your interests
-            
+
         This section will help you configure the system to your interests.
         This ensures the system will use this to only scrape papers relevant to you.
         Follow the steps below to get started.
@@ -364,13 +364,13 @@ elif navigation == "Configure":
     st.markdown(
         """
         ### Step 2: Calibrate the Recommender System
-        
+
         This section will help you calibrate the recommender system based on your interests.
         This will help the system learn your preferences and will significantly improve recommendations.
         This process will show you snippets of 10 papers and ask you to rate them on a scale of 1 to 10 (1 being the least relevant and 10 being the most relevant).
         Many improvements are planned for this process, including the ability to skip papers, change sample size, and dynamically update the system based on your feedback from the generated feed.
 
-        Click on the button below to get started. 
+        Click on the button below to get started.
 
         **Note** : Currently, if you want to start over or repeat this process, you must refresh the page
         """
@@ -395,12 +395,12 @@ elif navigation == "About":
         """
         ## Welcome to the Scholarly Recommender Cloud API
 
-        This platform is designed to offer you highly tailored scholarly recommendations. 
-        Whether you're a researcher, academic, or just someone interested in scientific literature, 
+        This platform is designed to offer you highly tailored scholarly recommendations.
+        Whether you're a researcher, academic, or just someone interested in scientific literature,
         this service is built to cater to your specific needs.
 
         ### How It Works
-        
+
         - **Configure**: The first step is to configure the system to your interests. This can be done by navigating to the configure page.
         - **Get Recommendations**: Once you've configured the system, you can generate recommendations by navigating to the get recommendations page.
         - **Categories & Subcategories**: You can customize your interests by selecting from a wide range of categories and subcategories, by default, the system will search based on your configured interests.
@@ -417,7 +417,7 @@ elif navigation == "About":
 
         As an upcoming data scientist with a strong passion for deep learning, I am always looking for new technologies and methodologies. Naturally, I spend a considerable amount of time researching and reading new publications to accomplish this. However, over 14,000 academic papers are published every day on average, making it extremely tedious to continuously source papers relevant to my interests. My primary motivation for creating ScholarlyRecommender is to address this, creating a fully automated and personalized system that prepares a feed of academic papers relevant to me. This feed is prepared on demand, through a completely abstracted streamlit web interface, or sent directly to my email on a timed basis. This project was designed to be scalable and adaptable, and can be very easily adapted not only to your own interests, but become a fully automated, self improving newsletter. Details on how to use this system, the methods used for retrieval and ranking, along with future plans and features planned or in development currently are listed below.
 
-   
+
         """
     )
 
@@ -439,10 +439,10 @@ elif navigation == "Contact":
         If you have any questions or concerns, please feel free to reach out to me directly.
         I recently graduated college and am the sole developer of this project, so I would love any constructive feedback you have to offer to help me improve as a developer.
 
-        - **Ian Snyder**: [@iansnydes](https://twitter.com/iansnydes) - idsnyder136@gmail.com 
+        - **Ian Snyder**: [@iansnydes](https://twitter.com/iansnydes) - idsnyder136@gmail.com
         - **Website and Portfolio**: [iansnyder333.github.io/frontend](https://iansnyder333.github.io/frontend)
         - **LinkedIn**: [www.linkedin.com/in/ian-snyder-aa1600182](https://www.linkedin.com/in/ian-snyder-aa1600182)
-        
+
 
                 """,
         unsafe_allow_html=True,
@@ -453,7 +453,7 @@ elif navigation == "Contact":
 st.markdown(
     """
     <footer>
-        
+
     </footer>
     """,
     unsafe_allow_html=True,
