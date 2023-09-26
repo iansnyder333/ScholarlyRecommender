@@ -130,8 +130,7 @@ class TestScholarlyRecommender(unittest.TestCase):
         self.assertListEqual(list(df_candidates.columns), expected_columns)
 
         # Compare the data types of each column
-        self.assertDictEqual(candidates.dtypes.astype(
-            str).to_dict(), expected_dtypes)
+        self.assertDictEqual(candidates.dtypes.astype(str).to_dict(), expected_dtypes)
 
     # Test that the outputs from the ranking are the correct shape and type, in both return formats
     def test_get_recommendations(self):
@@ -149,8 +148,7 @@ class TestScholarlyRecommender(unittest.TestCase):
 
         # Compare the column names
         self.assertListEqual(list(recommendations.columns), expected_columns)
-        self.assertListEqual(
-            list(df_recommendations.columns), expected_columns)
+        self.assertListEqual(list(df_recommendations.columns), expected_columns)
         # Compare the data types of each column
         self.assertDictEqual(
             recommendations.dtypes.astype(str).to_dict(), expected_dtypes
