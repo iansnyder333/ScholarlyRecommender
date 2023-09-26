@@ -96,8 +96,8 @@ def build_email(
     <div class="metadata" style="font-size: 14px;
     color: #262730;
     margin-bottom: 10px;">
-        <span class="id">{id}</span> | 
-        <span class="category">{category}</span> | 
+        <span class="id">{id}</span> |
+        <span class="category">{category}</span> |
         <span class="published">{published}</span>
     </div>
     <div class="abstract" style="font-size: 16px;

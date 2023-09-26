@@ -13,7 +13,6 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s]: %(message)s",
     handlers=[logging.StreamHandler()],
 )
-
 logging.disable(logging.CRITICAL)
 """
 
@@ -22,11 +21,13 @@ def rankerV3(
     context: pd.DataFrame, labels: pd.DataFrame, k: int = 6, on: str = "Abstract"
 ) -> pd.DataFrame:
     """
-    Rank the papers in the context using the normalized compression distance combined with a weighted top-k mean rating.
+    Rank the papers in the context using the normalized compression distance
+    combined with a weighted top-k mean rating.
     Return a list of the top n ranked papers.
-    This is a modified version of the algorithm described in the paper "“Low-Resource” Text Classification- A Parameter-Free Classification Method with Compressors."
-    The algorithim gets the top k most similar papers to each paper in the context that the user rated and calculates the mean rating of those papers as its prediction.
-
+    This is a modified version of the algorithm described in the paper "“Low-Resource”
+    Text Classification- A Parameter-Free Classification Method with Compressors."
+    The algorithim gets the top k most similar papers to each paper in the context that
+    the user rated and calculates the mean rating of those papers as its prediction.
     """
     likes = labels
     candidates = context
@@ -49,7 +50,7 @@ def rankerV3(
             x1x2 = " ".join([x1, x2])
             # calculate the compressed length of the utf-8 encoded concatenated text
             Cx1x2 = len(gzip.compress(x1x2.encode()))
-            # calculate the normalized compression distance: a normalized version of information distance
+            # calculate the normalized compression distance
             ncd = (Cx1x2 - min(Cx1, Cx2)) / max(Cx1, Cx2)
 
             similarity_to_x1.append(ncd)
@@ -62,7 +63,7 @@ def rankerV3(
         values = similarity_to_x1[sorted_idx[:k]]
         # calculate the similarity weights for the top k most similar papers
         weights = values / np.sum(values)
-        # Weights need to be inverted so that the most similar papers (lowest distance) have the highest weights
+        # Weights need to be inverted so that the most similar papers (lowest distance)
         inverse_weights = 1 / weights
         inverse_weights_norm = (inverse_weights) / np.sum(inverse_weights)
         # get the top k ratings
@@ -78,7 +79,8 @@ def rankerV3(
 
 def rank(context, labels=None, n: int = 5) -> list:
     """
-    Run the rankerV3 algorithm on the context and return a list of the top 5 ranked papers.
+    Run the rankerV3 algorithm on the context and return a list
+    of the top 5 ranked papers.
     """
     if labels is None:
         labels = config["labels"]
@@ -126,7 +128,7 @@ def evaluate(k: int = 6, on: str = "Abstract") -> float:
             x1x2 = " ".join([x1, x2])
             # calculate the compressed length of the utf-8 encoded concatenated text
             Cx1x2 = len(gzip.compress(x1x2.encode()))
-            # calculate the normalized compression distance: a normalized version of information distance
+            # calculate the normalized compression distance
             ncd = (Cx1x2 - min(Cx1, Cx2)) / max(Cx1, Cx2)
 
             similarity_to_x1.append(ncd)
@@ -137,7 +139,7 @@ def evaluate(k: int = 6, on: str = "Abstract") -> float:
         values = similarity_to_x1[sorted_idx[:k]]
         # calculate the similarity weights for the top k most similar papers
         weights = values / np.sum(values)
-        # Weights need to be inverted so that the most similar papers (lowest distance) have the highest weights
+        # Weights need to be inverted so that the most similar papers (lowest distance)
         inverse_weights = 1 / weights
         inverse_weights_norm = (inverse_weights) / np.sum(inverse_weights)
         # get the top k ratings
@@ -159,7 +161,8 @@ def evaluate(k: int = 6, on: str = "Abstract") -> float:
 
 def fetch(ids: list) -> pd.DataFrame:
     """
-    Fetch papers from arxiv.org matching the ids and return a dataframe matching the BASE_REPO including the authors.
+    Fetch papers from arxiv.org matching the ids and return a dataframe matching
+    the BASE_REPO including the authors.
     """
     # logging.info(f"Fetching {len(ids)} papers from arxiv... \n")
     # print(f"Fetching {len(ids)} papers from arxiv... \n")
@@ -221,3 +224,4 @@ def get_recommendations(
         # feed.to_csv(to_path)
     if as_df:
         return feed
+    return None
