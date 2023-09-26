@@ -1,4 +1,3 @@
-
 import gzip
 import numpy as np
 from tqdm import tqdm
@@ -110,10 +109,8 @@ def evaluate(n: int = 5, k: int = 6, on: str = "Abstract") -> float:
     train_data = likes.sample(frac=0.9, random_state=0)
     test_data = likes.drop(train_data.index)
 
-    train = np.array([(row[on], row["label"])
-                     for _, row in train_data.iterrows()])
-    test = np.array([(row[on], row["label"])
-                    for _, row in test_data.iterrows()])
+    train = np.array([(row[on], row["label"]) for _, row in train_data.iterrows()])
+    test = np.array([(row[on], row["label"]) for _, row in test_data.iterrows()])
     results = []
     # logging.info(f"Starting to rank {len(test)} candidates...\n")
     # print(f"Starting to rank {len(test)} candidates...\n")
@@ -205,8 +202,7 @@ def get_recommendations(
     elif isinstance(data, str):
         df = pd.read_csv(data)
     else:
-        raise TypeError(
-            "data must be a pandas DataFrame or a path to a csv file")
+        raise TypeError("data must be a pandas DataFrame or a path to a csv file")
     if size < 0 or size > len(df.index):
         raise ValueError(
             "size must be greater than 0 and less than the length of the data"

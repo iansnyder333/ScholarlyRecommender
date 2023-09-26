@@ -23,13 +23,11 @@ def search(
     Scrape arxiv.org for papers matching the query and return a dataframe matching the BASE_REPO format.
     """
 
-    search_client = arxiv.Client(
-        page_size=max_results, delay_seconds=3, num_retries=5)
+    search_client = arxiv.Client(page_size=max_results, delay_seconds=3, num_retries=5)
 
     repository = BASE_REPO()
 
-    search = arxiv.Search(
-        query=query, max_results=max_results, sort_by=sort_by)
+    search = arxiv.Search(query=query, max_results=max_results, sort_by=sort_by)
 
     for result in search_client.results(search):
         try:
@@ -62,13 +60,11 @@ def source_candidates(
     if queries is None:
         queries = config["queries"]
     if not isinstance(queries, list) or len(queries) == 0:
-        raise ValueError(
-            "queries must be a list of strings with at least one element")
+        raise ValueError("queries must be a list of strings with at least one element")
     if prev_days <= 0 or prev_days >= 30:
         raise ValueError("prev_days must be greater than 0 and at most 30")
     if len(queries) > 100:
-        raise ValueError(
-            "Too many queries, please reduce the number of queries ")
+        raise ValueError("Too many queries, please reduce the number of queries ")
     # normalize queries if for recommendations
     if sort_by == arxiv.SortCriterion.SubmittedDate:
         max_results = max(((100 * prev_days) // len(queries)), 100)
