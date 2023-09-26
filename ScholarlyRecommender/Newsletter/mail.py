@@ -16,9 +16,7 @@ import re
 
 
 def validate_email(email):
-    """
-    Validate an email address using regex
-    """
+    """Validate an email address using regex."""
     regex = r"^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
     if re.match(regex, email):
         return True
@@ -26,9 +24,7 @@ def validate_email(email):
 
 
 def send_email(**kwargs):
-    """
-    Send an email using the configured email server
-    """
+    """Send an email using the configured email server."""
     EMAIL_ADDRESS = input("Enter your email address: ")
     EMAIL_PASSWORD = input("Enter your email password: ")
     SUBSCRIBERS = input(
