@@ -1,4 +1,4 @@
-# Currently supported categories and subcategories, changing these will be reflected in the web app
+# Currently supported categories and subcategories
 search_categories = {
     "Computer Science": [
         "Artificial Intelligence",

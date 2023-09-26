@@ -1,17 +1,18 @@
+"""
+This module contains unit tests for the ScholarlyRecommender package.
+Before pushing to the repository, please run the tests to ensure that the package
+is working as expected.
+More tests will be added as the package is developed.
+
+TODO Test feed outputs for email, webapp, etc. Add more tests for the webapp,
+and more comprehensive tests for the API.
+"""
 import ScholarlyRecommender as sr
 import pandas as pd
 from json import load
 import unittest
 import time
 import tracemalloc
-
-"""
-This module contains unit tests for the ScholarlyRecommender package.
-Before pushing to the repository, please run the tests to ensure that the package is working as expected.
-More tests will be added as the package is developed.
-
-TODO Test feed outputs for email, webapp, etc. Add more tests for the webapp, and more comprehensive tests for the API.
-"""
 
 
 # Test Constants
@@ -34,6 +35,21 @@ TEST_FEED_OUT = TEST_OUTPUT_DIR + "test_feed.html"
 
 
 class TestScholarlyRecommender(unittest.TestCase):
+    """
+    CONFIGURATION TESTS
+
+    First, these tests ensure that the current configuration is valid, validating
+    the keys, value types, and value shapes against the reference.
+    Second, the retrieval and update functions for the ScholarlyRecommender
+    configuration API are tested.
+
+    ScholarlyRecommender API TESTS
+
+    These tests ensure that the ScholarlyRecommender API is working as expected.
+    Each test checks that the output is the correct shape and type, in both return
+    formats.These tests are run under the assumption that the configuration is valid.
+    """
+
     # Setup the test environment
     def setUp(self):
         with open(TEST_CONFIG_PATH) as json_file:
@@ -42,13 +58,6 @@ class TestScholarlyRecommender(unittest.TestCase):
         self.candidates = pd.read_csv(REF_CANDIDATES_PATH)
         self.candidates_labeled = pd.read_csv(REF_LABELS_PATH)
         self.recommendations = pd.read_csv(REF_RECOMMENDATIONS_PATH)
-
-    """
-    CONFIGURATION TESTS
-
-    First, these tests ensure that the current configuration is valid, validating the keys, value types, and value shapes against the reference.
-    Second, the retrieval and update functions for the ScholarlyRecommender configuration API are tested.
-    """
 
     # Test the configuration file and its contents
     def test_config(self):
@@ -88,9 +97,9 @@ class TestScholarlyRecommender(unittest.TestCase):
         # Change as necessary
         expected_config = {
             "queries": ["Computer Science", "Mathematics"],
-            "labels": "ScholarlyRecommender/Repository/tests/test_candidates_labeled.csv",
+            "labels": BASE_TEST_DIR + "test_candidates_labeled.csv",
             "feed_length": 7,
-            "feed_path": "ScholarlyRecommender/Repository/tests/test_feed.html",
+            "feed_path": BASE_TEST_DIR + "test_feed.html",
         }
         sr.update_config(
             expected_config, test_mode=True, test_path=TEST_CONFIG_UPDATE_OUT
@@ -100,16 +109,7 @@ class TestScholarlyRecommender(unittest.TestCase):
 
         self.assertEqual(config, expected_config)
 
-    """
-    ScholarlyRecommender API TESTS
-
-    These tests ensure that the ScholarlyRecommender API is working as expected. 
-    Each test checks that the output is the correct shape and type, in both return formats.
-    These tests are run under the assumption that the configuration is valid.
-
-    """
-
-    # Test that the outputs from candidate sourcing are the correct shape and type, in both return formats
+    # Test that the outputs from candidate sourcing are the correct shape and type
     def test_source_candidates(self):
         out = TEST_CANDIDATES_OUT
         df_candidates = sr.source_candidates(
@@ -131,7 +131,7 @@ class TestScholarlyRecommender(unittest.TestCase):
         # Compare the data types of each column
         self.assertDictEqual(candidates.dtypes.astype(str).to_dict(), expected_dtypes)
 
-    # Test that the outputs from the ranking are the correct shape and type, in both return formats
+    # Test that the outputs from the ranking are the correct shape and type
     def test_get_recommendations(self):
         out = TEST_RECOMMENDATIONS_OUT
         df_recommendations = sr.get_recommendations(
@@ -158,9 +158,8 @@ class BenchmarkTests:
     """
     This class contains a basic benchmarking tests for the ScholarlyRecommender package.
     The benchmarking tests are run under the assumption that the configuration is valid.
-
-    Gives the runtime and memory usage of each function in the package, as well as the total runtime and memory usage for the whole pipeline.
-
+    Gives the runtime and memory usage of each function in the package, as well as
+    the total runtime and memory usage for the whole pipeline.
     """
 
     def __init__(self):
@@ -234,12 +233,14 @@ class BenchmarkTests:
         )
         if save_log:
             return times, memory
+        return None
 
     @staticmethod
     def _display(name, runtime, current_memory, peak_memory):
-        print(
-            f"{name} \n Runtime: {runtime} seconds \n Memory: {current_memory} bytes in current memory, {peak_memory} bytes in peak memory \n"
-        )
+        print(f"{name}")
+        print(f"Runtime: {runtime} seconds")
+        print(f"Memory: {current_memory} bytes in current memory")
+        print(f"{peak_memory} bytes in peak memory \n")
 
 
 if __name__ == "__main__":

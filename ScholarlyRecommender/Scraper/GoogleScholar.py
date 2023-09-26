@@ -4,6 +4,8 @@ import pandas as pd
 
 
 class ScraperForGoogleScholar:
+    """Scraper for google scholar"""
+
     def __init__(self, headers, repository: dict = None):
         self.headers = headers
         if repository is None:

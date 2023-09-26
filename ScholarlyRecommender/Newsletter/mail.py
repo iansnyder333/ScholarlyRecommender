@@ -1,3 +1,15 @@
+"""
+Example of how to configure the email server if you have installed ScholarlyRecommender
+locally:
+Replace the constants with your own email address, password, port number and
+subscribers (delivery address).
+Note that you need to enable less secure apps in your google account settings,
+otherwise this will not work.
+Once you have your own constants working, you can delete the input() calls and replace
+them with your own constants.
+To send an email, simply call send_email(content=html_string) from the Newsletter
+module. html_string is the return value from the get_feed() function in feed.py.
+"""
 import smtplib
 from email.message import EmailMessage
 import re
@@ -8,16 +20,6 @@ def validate_email(email):
     if re.match(regex, email):
         return True
     return False
-
-
-"""
-Example of how to configure the email server if you have installed ScholarlyRecommender locally:
-Replace the constants with your own email address, password, port number and subscribers (delivery address).
-Note that you need to enable less secure apps in your google account settings, otherwise this will not work.
-Once you have your own constants working, you can delete the input() calls and replace them with your own constants.
-To send an email, simply call send_email(content=html_string) from the Newsletter module. 
-html_string is the return value from the get_feed() function in feed.py.
-"""
 
 
 def send_email(**kwargs):

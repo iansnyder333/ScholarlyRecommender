@@ -1,17 +1,17 @@
-# Create and manage the database for the recommender system
+"""
+This module contains functions to create and manage the database for the
+ recommender system.
+"""
 import pandas as pd
 import arxiv
 
 from ScholarlyRecommender.const import BASE_REPO
 
-"""
-This module contains functions to create and manage the database for the recommender system.
-"""
-
 
 def get_papers(ids: list, query: str = "") -> pd.DataFrame:
     """
-    Scrape arxiv.org for papers matching the query and return a dataframe matching the BASE_REPO format.
+    Scrape arxiv.org for papers matching the query and return a dataframe matching
+      the BASE_REPO format.
     """
     repository = BASE_REPO()
     search = arxiv.Search(

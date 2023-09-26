@@ -20,7 +20,8 @@ def search(
     query: str, max_results: int = 100, sort_by=arxiv.SortCriterion.SubmittedDate
 ) -> pd.DataFrame:
     """
-    Scrape arxiv.org for papers matching the query and return a dataframe matching the BASE_REPO format.
+    Scrape arxiv.org for papers matching the query and return a dataframe
+    matching the BASE_REPO format.
     """
 
     search_client = arxiv.Client(page_size=max_results, delay_seconds=3, num_retries=5)
@@ -55,7 +56,8 @@ def source_candidates(
     sort_by=arxiv.SortCriterion.SubmittedDate,
 ):
     """
-    Scrape arxiv.org for papers matching the queries, filter them and return a dataframe or save it to a csv file.
+    Scrape arxiv.org for papers matching the queries,
+    filter them and return a dataframe or save it to a csv file.
     """
     if queries is None:
         queries = config["queries"]
@@ -103,3 +105,4 @@ def source_candidates(
         df.to_csv(to_path)
     if as_df:
         return df
+    return None
