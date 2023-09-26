@@ -201,7 +201,6 @@ class BenchmarkTests:
             labels=REF_LABELS_PATH,
             as_df=True,
         )
-        # end_time = time.time()
         elapsed_time = time.time() - start_time
         times.append(elapsed_time)
         memory.append(tracemalloc.get_traced_memory())
