@@ -92,9 +92,8 @@ def main():
         )
 
         return
-    else:
-        print("Something went wrong. Please try again. \n")
-        return
+    print("Something went wrong. Please try again. \n")
+    return
 
 
 if __name__ == "__main__":
