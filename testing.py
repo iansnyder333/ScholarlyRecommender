@@ -170,7 +170,7 @@ class BenchmarkTests:
         self.recommendations = pd.read_csv(REF_RECOMMENDATIONS_PATH)
 
     def benchmark(self, save_log=False):
-        print(f"\n Running benchmarks... \n")
+        print("\n Running benchmarks... \n")
         times = []
         memory = []
         tracemalloc.start()

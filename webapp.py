@@ -61,11 +61,11 @@ def send_email(**kwargs):
         PORT = st.secrets.email_credentials.PORT
         if not EMAIL_ADDRESS or not EMAIL_PASSWORD or not PORT:
             raise ValueError(
-                f"Email credentials not set in environment variables. Please report this issue to the developer."
+                "Email credentials not set in environment variables. Please report this issue to the developer."
             )
         if not kwargs["content"]:
             raise ValueError(
-                f"Email content not set. Please report this issue to the developer."
+                "Email content not set. Please report this issue to the developer."
             )
 
         msg = EmailMessage()
@@ -153,7 +153,7 @@ def calibrate_rec_sys(num_papers: int = 10):
             st.markdown(f"""{trimmed_abstract}""")
 
             rating = st.number_input(
-                f"Rate this paper on a scale of 1 to 10?",
+                "Rate this paper on a scale of 1 to 10?",
                 min_value=1,
                 max_value=10,
             )
@@ -282,10 +282,10 @@ if navigation == "Get Recommendations":
             submit_button = st.form_submit_button(label="Confirm")
             if submit_button:
                 if validate_email(user_email):
-                    st.success(f"Email address confirmed")
+                    st.success("Email address confirmed")
 
                 else:
-                    st.error(f"Please enter a valid email address", icon="🚨")
+                    st.error("Please enter a valid email address", icon="🚨")
 
     else:
         user_email = ""
