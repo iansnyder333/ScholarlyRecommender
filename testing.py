@@ -1,6 +1,5 @@
 import ScholarlyRecommender as sr
 import pandas as pd
-from pandas.testing import assert_frame_equal
 from json import load
 import unittest
 import time
