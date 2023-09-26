@@ -8,12 +8,12 @@ def BASE_REPO():
     @return: a dictionary (str:list)
     """
     return deepcopy(
-    {
-        "Id": [],
-        "Category": [],
-        "Title": [],
-        "Published": [],
-        "Abstract": [],
-        "URL": [],
-    }
-)
+        {
+            "Id": [],
+            "Category": [],
+            "Title": [],
+            "Published": [],
+            "Abstract": [],
+            "URL": [],
+        }
+    )
