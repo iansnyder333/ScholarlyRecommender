@@ -1,6 +1,4 @@
 import pandas as pd
-import numpy as np
-from datetime import datetime
 import re
 from ScholarlyRecommender.config import get_config
 

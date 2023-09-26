@@ -1,7 +1,6 @@
 import smtplib
 from email.message import EmailMessage
 import re
-import os
 
 
 def validate_email(email):
