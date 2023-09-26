@@ -27,17 +27,17 @@ def update_sc_config(new_config):
     st.session_state.sys_config = new_config
 
 
-def build_query(selected_sub_categories: dict) -> list:
-    if selected_sub_categories.__len__() == 0:
+def build_query(cats: dict) -> list:
+    if cats.__len__() == 0:
         return []
 
-    query = []
-    for key, value in selected_sub_categories.items():
+    usr_query = []
+    for key, value in cats.items():
         if len(value) > 0:
-            query.extend(value)
+            usr_query.extend(value)
         else:
-            query.append(key)
-    return query
+            usr_query.append(key)
+    return usr_query
 
 
 def validate_email(email) -> bool:
@@ -257,22 +257,22 @@ if navigation == "Get Recommendations":
             search_categories[selected],
         )
 
-    n = st.slider(
+    user_n = st.slider(
         "How many recommendations would you like?",
         min_value=1,
         max_value=10,
         value=5,
     )
-    days = st.slider(
+    user_days = st.slider(
         "How many days back would you like to search?",
         min_value=1,
         max_value=30,
         value=7,
     )
 
-    to_email = st.checkbox("Email Recommendations?")
+    user_to_email = st.checkbox("Email Recommendations?")
 
-    if to_email:
+    if user_to_email:
         with st.form("email_form"):
             st.write(
                 "This feature is currently under development, please report any issues you encounter."
@@ -298,16 +298,20 @@ if navigation == "Get Recommendations":
         user_email = ""
     # Call to Action
     if st.button("Generate Recommendations", type="primary"):
-        query = build_query(selected_sub_categories)
-        source_code = generate_feed_pipeline(query, n, days, to_email)
-        if to_email:
+        user_query = build_query(selected_sub_categories)
+
+        user_feed = generate_feed_pipeline(
+            query=user_query, n=user_n, days=user_days, to_email=user_to_email
+        )
+
+        if user_to_email:
             send_email(
                 subscribers=[user_email],
-                content=source_code,
+                content=user_feed,
             )
             # st.success("Email sent successfully!")
 
-        components.html(source_code, height=1000, scrolling=True)
+        components.html(user_feed, height=1000, scrolling=True)
 
 
 elif navigation == "Configure":
@@ -344,11 +348,12 @@ elif navigation == "Configure":
         )
     if st.button("Done", type="primary"):
         with st.spinner("Configuring..."):
-            query = build_query(selected_sub_categories)
+            user_config_query = build_query(selected_sub_categories)
             # prevent empty queries
-            assert len(query) > 0, "Please select at least one interest."
+            assert len(
+                user_config_query) > 0, "Please select at least one interest."
             configuration = get_sc_config()
-            configuration["queries"] = query
+            configuration["queries"] = user_config_query
             update_sc_config(configuration)
 
             st.success("Preferences updated successfully!")
