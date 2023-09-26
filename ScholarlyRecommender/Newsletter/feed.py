@@ -45,8 +45,6 @@ def remove_latex(text):
     return clean_text
 
 
-
-
 def build_email(
     df: pd.DataFrame,
     email: bool = False,
