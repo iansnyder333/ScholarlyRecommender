@@ -26,20 +26,24 @@ class ScraperForGoogleScholar:
         # parse using beautiful soup
         return BeautifulSoup(response.text, "html.parser")
 
-    def _get_tags(self, doc: BeautifulSoup) -> tuple:
+    @staticmethod
+    def _get_tags(doc: BeautifulSoup) -> tuple:
         paper_tag = doc.select("[data-lid]")
         link_tag = doc.find_all("h3", {"class": "gs_rt"})
         author_tag = doc.find_all("div", {"class": "gs_a"})
         abstract_tag = doc.find_all("div", {"class": "gs_rs"})
         return (paper_tag, link_tag, author_tag, abstract_tag)
 
-    def _get_papertitle(self, paper_tag: list) -> list:
+    @staticmethod
+    def _get_papertitle(paper_tag: list) -> list:
         return [tag.select("h3")[0].get_text() for tag in paper_tag]
 
-    def _get_link(self, link_tag: list) -> list:
+    @staticmethod
+    def _get_link(link_tag: list) -> list:
         return [link_tag[i].a["href"] for i in range(len(link_tag))]
 
-    def _get_author_publisher_info(self, authors_tag: list) -> tuple:
+    @staticmethod
+    def _get_author_publisher_info(authors_tag: list) -> tuple:
         authors = []
         publishers = []
         for v, i in enumerate(authors_tag):
@@ -57,7 +61,8 @@ class ScraperForGoogleScholar:
 
         return (authors, publishers)
 
-    def _get_abstract(self, abstract_tag: list) -> list:
+    @staticmethod
+    def _get_abstract(abstract_tag: list) -> list:
         abstract = []
         for i, v in enumerate(abstract_tag):
             s = (abstract_tag[i].text).strip().split("-")
