@@ -342,7 +342,8 @@ elif navigation == "Configure":
         with st.spinner("Configuring..."):
             user_config_query = build_query(selected_sub_categories)
             # prevent empty queries
-            assert len(user_config_query) > 0, "Please select at least one interest."
+            if len(user_config_query) == 0:
+                st.error("Please select at least one interest.")
             configuration = get_sc_config()
             configuration["queries"] = user_config_query
             update_sc_config(configuration)

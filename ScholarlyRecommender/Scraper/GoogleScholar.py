@@ -109,15 +109,3 @@ class ScraperForGoogleScholar:
         if to_df:
             return paper
         return paper.to_dict()
-
-
-if __name__ == "__main__":
-    test = ScraperForGoogleScholar(
-        headers={
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36"
-        }
-    )
-    ret = test.scrape(
-        "https://scholar.google.com/scholar?scisbd=1&q=%22deep+learning%22&hl=en&as_sdt=0,39"
-    )
-    print(ret["Abstract"][0])
