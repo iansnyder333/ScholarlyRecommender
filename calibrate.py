@@ -10,7 +10,7 @@ to_path = "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv"
 old_config = sr.get_config()
 
 
-def calibrate_rec_sys(query: list, num_papers: int = 10, to_path: str = to_path):
+def calibrate_rec_sys(query: list, num_papers: int = 10):
     # get sample of papers to label
     c = sr.source_candidates(
         queries=query,

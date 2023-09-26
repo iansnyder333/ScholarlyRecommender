@@ -98,7 +98,7 @@ def rank(context, labels=None, n: int = 5) -> list:
     return recommended
 
 
-def evaluate(n: int = 5, k: int = 6, on: str = "Abstract") -> float:
+def evaluate(k: int = 6, on: str = "Abstract") -> float:
     """
     Evaluate the recommender system using the normalized compression distance.
     Calculate the mean squared error between the predicted and actual ratings.
