@@ -68,7 +68,7 @@ def build_email(
     <h2 class="title-main" style='font-family: "Open Sans", sans-serif; color: #262730;font-family: Arial, sans-serif;
         font-size: 28px;
         letter-spacing: 0.05em;
-        
+
         color: #2C3E50;
         margin-bottom: 10px;'>{headline}</h2>
     <p style='font-family: "Open Sans", sans-serif; color: #262730; font-size: 18px;  margin-bottom: 20px; line-height: 1.6;'>
