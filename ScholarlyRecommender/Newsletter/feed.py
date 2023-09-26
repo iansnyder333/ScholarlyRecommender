@@ -56,7 +56,7 @@ def build_email(
 ):
     flanT5_out = {
         "headline": "Your Scholarly Recommender Newsletter Feed",
-        "intro": "Thank you for using Scholarly Recommender. Here is your newsletter feed.",
+        "intro": "Thank you for using Scholarly Recommender. Here is your feed.",
     }
 
     html_content = """<!DOCTYPE html>
@@ -65,16 +65,19 @@ def build_email(
     """
     if email:
         body_template = """
-    <h2 class="title-main" style='font-family: "Open Sans", sans-serif; color: #262730;font-family: Arial, sans-serif;
+    <h2 class="title-main" style='font-family: "Open Sans", sans-serif; color: #262730;
+    font-family: Arial, sans-serif;
         font-size: 28px;
         letter-spacing: 0.05em;
         
         color: #2C3E50;
         margin-bottom: 10px;'>{headline}</h2>
-    <p style='font-family: "Open Sans", sans-serif; color: #262730; font-size: 18px;  margin-bottom: 20px; line-height: 1.6;'>
+    <p style='font-family: "Open Sans", sans-serif; color: #262730; font-size: 18px;
+        margin-bottom: 20px; line-height: 1.6;'>
         Dear Reader,
         </p>
-    <p style='font-family: "Open Sans", sans-serif; color: #262730; font-size: 18px;  margin-bottom: 20px; line-height: 1.6;'>
+    <p style='font-family: "Open Sans", sans-serif; color: #262730; font-size: 18px; 
+    margin-bottom: 20px; line-height: 1.6;'>
             {intro}
     </p>
         """
@@ -159,5 +162,4 @@ def get_feed(
         return res
 
     else:
-        raise TypeError(
-            "data must be a pandas DataFrame or a path to a csv file")
+        raise TypeError("data must be a pandas DataFrame or a path to a csv file")

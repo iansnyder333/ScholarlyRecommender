@@ -63,11 +63,11 @@ def send_email(**kwargs):
         PORT = st.secrets.email_credentials.PORT
         if not EMAIL_ADDRESS or not EMAIL_PASSWORD or not PORT:
             raise ValueError(
-                f"Email credentials not set in environment variables. Please report this issue to the developer."
+                "Email credentials not set in environment variables. Please report this issue to the developer."
             )
         if not kwargs["content"]:
             raise ValueError(
-                f"Email content not set. Please report this issue to the developer."
+                "Email content not set. Please report this issue to the developer."
             )
 
         msg = EmailMessage()
