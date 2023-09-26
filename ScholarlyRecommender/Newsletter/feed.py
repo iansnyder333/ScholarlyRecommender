@@ -6,6 +6,7 @@ config = get_config()
 
 
 def clean_feed(dataframe: pd.DataFrame):
+    """Clean the dataframe to match the BASE_REPO format."""
     df = dataframe[
         ["Id", "Category", "Title", "Published", "Abstract", "URL", "Author"]
     ].copy()
@@ -24,6 +25,7 @@ def clean_feed(dataframe: pd.DataFrame):
 
 
 def extract_author_names(author_string):
+    """Extract the author names from the author string."""
     # The regular expression to match any characters enclosed within single quotes
     pattern = r"\'(.*?)\'"
 
@@ -34,6 +36,7 @@ def extract_author_names(author_string):
 
 
 def remove_latex(text):
+    """Remove LaTeX from the text."""
     # Remove inline LaTeX
     clean_text = re.sub(r"\$.*?\$", "", text)
 
@@ -49,6 +52,7 @@ def build_email(
     to_path: str = None,
     web: bool = False,
 ):
+    """Build the HTML email."""
     flanT5_out = {
         "headline": "Your Scholarly Recommender Newsletter Feed",
         "intro": "Thank you for using Scholarly Recommender. Here is your feed.",
@@ -144,6 +148,7 @@ def get_feed(
     to_path: str = None,
     web: bool = False,
 ):
+    """Get the feed."""
     if isinstance(data, pd.DataFrame):
         df = clean_feed(data)
         res = build_email(df, email=email, to_path=to_path, web=web)

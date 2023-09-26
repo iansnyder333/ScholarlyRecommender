@@ -12,6 +12,10 @@ old_config = sr.get_config()
 
 
 def calibrate_rec_sys(query: list, num_papers: int = 10):
+    """
+    Interactive calibration tool for the recommender system, essentially serves
+    as a user interface for manual labeling.
+    """
     # get sample of papers to label
     c = sr.source_candidates(
         queries=query,
@@ -41,6 +45,10 @@ def calibrate_rec_sys(query: list, num_papers: int = 10):
 
 
 def main():
+    """
+    This script allows you to reconfigure the recommender system to your interests
+    without having to use the web interface.
+    """
     print("\n WARNING: This script is deprecated")
     print("Please use the web interface!")
     print("Welcome to the Scholarly Recommender System Calibration Tool \n")
