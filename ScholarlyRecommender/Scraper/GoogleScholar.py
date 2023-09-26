@@ -108,8 +108,7 @@ class ScraperForGoogleScholar:
 
         if to_df:
             return paper
-        else:
-            return paper.to_dict()
+        return paper.to_dict()
 
 
 if __name__ == "__main__":

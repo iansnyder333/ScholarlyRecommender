@@ -129,13 +129,12 @@ def build_email(
     # Save the generated HTML to a file for demonstration
     if web:
         return html_content
-    else:
-        if to_path is None:
-            to_path = config["feed_path"]
-        html_file_path = to_path
-        with open(html_file_path, "w") as f:
-            f.write(html_content)
-        return True
+    if to_path is None:
+        to_path = config["feed_path"]
+    html_file_path = to_path
+    with open(html_file_path, "w") as f:
+        f.write(html_content)
+    return True
 
 
 def get_feed(
@@ -149,10 +148,8 @@ def get_feed(
         res = build_email(df, email=email, to_path=to_path, web=web)
         return res
 
-    elif isinstance(data, str):
+    if isinstance(data, str):
         df = clean_feed(pd.read_csv(data))
         res = build_email(df, email=email, to_path=to_path, web=web)
         return res
-
-    else:
-        raise TypeError("data must be a pandas DataFrame or a path to a csv file")
+    raise TypeError("data must be a pandas DataFrame or a path to a csv file")
