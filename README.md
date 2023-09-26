@@ -89,30 +89,31 @@ To try ScholarlyRecommender, you can use the streamlit web application found  [H
 
 ### Prerequisites
 
-In order to install this app locally you need to have git along with a suitable Python version. This app was developed using Python 3.11 and has not been tested on any earlier versions.
+In order to install this app locally you need to have following:
+- git
+- python3.9 or greater *(earlier versions may work)*
+- pip3
 
 
 ### Installation
 
-MacOS
-1. Clone the repo
+To install ScholarlyRecommender, run the following in your command line shell
+
+1. Clone the repository from github and cd into it
    ```sh
    git clone https://github.com/iansnyder333/ScholarlyRecommender.git
-   ```
-2. cd into the repo and setup an enviroment
-   ```sh
    cd ScholarlyRecommender
-   python3.11 -m venv env
-   source env/bin/activate
    ```
-3. install dependencies 
+2. Set up the enviroment and install dependencies
    ```sh
-   pip3.11 install -r requirements.txt
+   make build
    ```
-4. run the app
-   ```sh
-   make run
-   ```
+All done, ScholarlyRecommender is now installed.
+You can now run the app with
+```sh
+make run
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
