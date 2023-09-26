@@ -1,6 +1,7 @@
 from copy import deepcopy
 
-BASE_REPO = lambda: deepcopy(
+
+def BASE_REPO(): return deepcopy(
     {
         "Id": [],
         "Category": [],
