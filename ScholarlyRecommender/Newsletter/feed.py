@@ -111,7 +111,7 @@ def build_email(
     """
 
     # Iterate through the DataFrame and fill in the HTML template
-    for index, row in df.iterrows():
+    for _, row in df.iterrows():
         item_html = html_template.format(
             title=row["Title"],
             author=row["Author"],

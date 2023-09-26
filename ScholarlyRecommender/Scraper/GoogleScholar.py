@@ -46,7 +46,7 @@ class ScraperForGoogleScholar:
     def _get_author_publisher_info(authors_tag: list) -> tuple:
         authors = []
         publishers = []
-        for v, i in enumerate(authors_tag):
+        for v, _ in enumerate(authors_tag):
             authortag_text = (authors_tag[v].text).split("-")
 
             if len(authortag_text) == 0:
@@ -64,7 +64,7 @@ class ScraperForGoogleScholar:
     @staticmethod
     def _get_abstract(abstract_tag: list) -> list:
         abstract = []
-        for i, v in enumerate(abstract_tag):
+        for i, _ in enumerate(abstract_tag):
             s = (abstract_tag[i].text).strip().split("-")
             s = " ".join(s[1:])
             s = s.strip("\n")

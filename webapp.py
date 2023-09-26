@@ -81,7 +81,7 @@ def send_email(**kwargs):
             smtp.send_message(msg)
         st.success("Email sent successfully!")
 
-    except Exception as e:
+    except Exception as e:  # skipcq: PYL-W0703
         st.error(f"Email failed to send. {e}", icon="🚨")
 
 

@@ -27,9 +27,9 @@ def search(
 
     repository = BASE_REPO()
 
-    search = arxiv.Search(query=query, max_results=max_results, sort_by=sort_by)
+    arx_search = arxiv.Search(query=query, max_results=max_results, sort_by=sort_by)
 
-    for result in search_client.results(search):
+    for result in search_client.results(arx_search):
         try:
             repository["Id"].append(result.entry_id.split("/")[-1])
             repository["Category"].append(result.primary_category)
