@@ -22,7 +22,8 @@ class ScraperForGoogleScholar:
         # download the page
         response = requests.get(paper_url, headers=self.headers)
         # check successful response
-        assert response.status_code == 200, f"Failed to fetch web page {paper_url}"
+        if response.status_code != 200:
+            raise AssertionError(f"Failed to fetch web page {paper_url}")
         # parse using beautiful soup
         return BeautifulSoup(response.text, "html.parser")
 
