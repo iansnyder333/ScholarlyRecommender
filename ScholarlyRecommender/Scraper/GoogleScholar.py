@@ -20,6 +20,7 @@ class ScraperForGoogleScholar:
             self.repository = repository
 
     def _get_paperinfo(self, paper_url: str):
+        """get the paper info from the url"""
         # download the page
         response = requests.get(paper_url, headers=self.headers)
         # check successful response
@@ -30,6 +31,7 @@ class ScraperForGoogleScholar:
 
     @staticmethod
     def _get_tags(doc: BeautifulSoup) -> tuple:
+        """get the tags from the document"""
         paper_tag = doc.select("[data-lid]")
         link_tag = doc.find_all("h3", {"class": "gs_rt"})
         author_tag = doc.find_all("div", {"class": "gs_a"})
@@ -38,14 +40,17 @@ class ScraperForGoogleScholar:
 
     @staticmethod
     def _get_papertitle(paper_tag: list) -> list:
+        """get the paper title from the tag"""
         return [tag.select("h3")[0].get_text() for tag in paper_tag]
 
     @staticmethod
     def _get_link(link_tag: list) -> list:
+        """get the link from the tag"""
         return [link_tag[i].a["href"] for i in range(len(link_tag))]
 
     @staticmethod
     def _get_author_publisher_info(authors_tag: list) -> tuple:
+        """get the author and publisher info from the tag"""
         authors = []
         publishers = []
         for v, _ in enumerate(authors_tag):
@@ -65,6 +70,7 @@ class ScraperForGoogleScholar:
 
     @staticmethod
     def _get_abstract(abstract_tag: list) -> list:
+        """get the abstract from the tag"""
         abstract = []
         for i, _ in enumerate(abstract_tag):
             s = (abstract_tag[i].text).strip().split("-")
@@ -74,6 +80,7 @@ class ScraperForGoogleScholar:
         return abstract
 
     def _add_in_paper_repo(self, **kwargs) -> pd.DataFrame:
+        """add the paper info in the repository"""
         self.repository["Paper Title"].extend(kwargs["papername"])
         self.repository["Author"].extend(kwargs["author"])
         self.repository["Publication"].extend(kwargs["publisher"])
@@ -82,8 +89,7 @@ class ScraperForGoogleScholar:
         return pd.DataFrame(self.repository)
 
     def scrape(self, url: str, to_df: bool = True):
-        # get url for the each page
-
+        """scrape google scholar"""
         # function for the get content of each page
         doc = self._get_paperinfo(url)
 

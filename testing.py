@@ -50,8 +50,8 @@ class TestScholarlyRecommender(unittest.TestCase):
     formats.These tests are run under the assumption that the configuration is valid.
     """
 
-    # Setup the test environment
     def setUp(self):
+        """Setup the test enviroment for unittest"""
         with open(TEST_CONFIG_PATH) as json_file:
             self.ref_config = load(json_file)
         self.config = sr.get_config()
@@ -61,39 +61,39 @@ class TestScholarlyRecommender(unittest.TestCase):
 
     # Test the configuration file and its contents
     def test_config(self):
-        # Check that the config file is valid
+        """Check that the config file is valid"""
         self.assertEqual(self.config.keys(), self.ref_config.keys())
 
     def test_config_query(self):
-        # Test the queries
+        """Test the queries"""
         config_queries = self.config["queries"]
         self.assertTrue(isinstance(config_queries, list))
         self.assertTrue(len(config_queries) > 0)
         self.assertTrue(all(isinstance(item, str) for item in config_queries))
 
     def test_config_labels(self):
-        # Test the labels
+        """Test the labels"""
         config_labels = pd.read_csv(self.config["labels"])
         expected_columns = list(self.candidates_labeled.columns)
         columns = list(config_labels.columns)
         self.assertEqual(columns, expected_columns)
 
     def test_config_feed_length(self):
-        # Test the feed length
+        """Test the feed length"""
         self.assertTrue(isinstance(self.config["feed_length"], int))
         self.assertTrue(self.config["feed_length"] > 0)
         self.assertTrue(self.config["feed_length"] <= 10)
 
-    # Test the config retrieval function
     def test_get_config(self):
+        """Test that the config retrieval function works as expected."""
         with open("ScholarlyRecommender/configuration.json") as json_file:
             expected_config = load(json_file)
 
         config = sr.get_config()
         self.assertEqual(config, expected_config)
 
-    # Test the config update function
     def test_update_config(self):
+        """Test that the config update function works as expected."""
         # Change as necessary
         expected_config = {
             "queries": ["Computer Science", "Mathematics"],
@@ -109,8 +109,9 @@ class TestScholarlyRecommender(unittest.TestCase):
 
         self.assertEqual(config, expected_config)
 
-    # Test that the outputs from candidate sourcing are the correct shape and type
     def test_source_candidates(self):
+        """Test that the outputs from candidate sourcing are the correct
+        shape and type"""
         out = TEST_CANDIDATES_OUT
         df_candidates = sr.source_candidates(
             queries=self.config["queries"],
@@ -131,8 +132,8 @@ class TestScholarlyRecommender(unittest.TestCase):
         # Compare the data types of each column
         self.assertDictEqual(candidates.dtypes.astype(str).to_dict(), expected_dtypes)
 
-    # Test that the outputs from the ranking are the correct shape and type
     def test_get_recommendations(self):
+        """Test that the outputs from the ranking are the correct shape and type"""
         out = TEST_RECOMMENDATIONS_OUT
         df_recommendations = sr.get_recommendations(
             data=REF_CANDIDATES_PATH,
@@ -169,6 +170,7 @@ class BenchmarkTests:
         self.recommendations = pd.read_csv(REF_RECOMMENDATIONS_PATH)
 
     def benchmark(self, save_log=False):
+        """Run the benchmarking tests."""
         print("\n Running benchmarks... \n")
         times = []
         memory = []
@@ -237,6 +239,7 @@ class BenchmarkTests:
 
     @staticmethod
     def _display(name, runtime, current_memory, peak_memory):
+        """Display the results of the benchmarking tests."""
         print(f"{name}")
         print(f"Runtime: {runtime} seconds")
         print(f"Memory: {current_memory} bytes in current memory")
