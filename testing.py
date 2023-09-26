@@ -110,8 +110,10 @@ class TestScholarlyRecommender(unittest.TestCase):
         self.assertEqual(config, expected_config)
 
     def test_source_candidates(self):
-        """Test that the outputs from candidate sourcing are the correct
-        shape and type"""
+        """
+        Test that the outputs from candidate sourcing are the correct
+        shape and type.
+        """
         out = TEST_CANDIDATES_OUT
         df_candidates = sr.source_candidates(
             queries=self.config["queries"],
