@@ -73,7 +73,8 @@ def main():
     print(f"Thank you for your input. You selected {categories} \n")
     print("Now we will ask you to rate a few papers to help us know you better.")
     print("This will take a few minutes.")
-    res = input("Press enter if you want to proceed, or skip if you want to skip: \n")
+    res = input(
+        "Press enter if you want to proceed, or skip if you want to skip: \n")
     if res == "skip":
         print("You have chosen to skip this step. \n")
         print("The recommender system will not be calibrated to your interests. \n")
