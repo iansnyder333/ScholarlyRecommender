@@ -27,12 +27,12 @@ def update_sc_config(new_config):
     st.session_state.sys_config = new_config
 
 
-def build_query(selected: dict) -> list:
-    if selected.__len__() == 0:
+def build_query(cats: dict) -> list:
+    if cats.__len__() == 0:
         return []
 
     usr_query = []
-    for key, value in selected.items():
+    for key, value in cats.items():
         if len(value) > 0:
             usr_query.extend(value)
         else:
