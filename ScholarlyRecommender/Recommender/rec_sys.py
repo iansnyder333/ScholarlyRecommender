@@ -1,4 +1,3 @@
-# import logging
 
 import gzip
 import numpy as np
@@ -158,7 +157,6 @@ def evaluate(n: int = 5, k: int = 6, on: str = "Abstract") -> float:
     df["squared_error"] = (df["predicted"] - df["actual"]) ** 2
     # loss function
     loss = np.sqrt(df["squared_error"].sum() / df.shape[0])
-    # print(df.head())
     return loss
 
 
@@ -181,7 +179,6 @@ def fetch(ids: list) -> pd.DataFrame:
         repository["Published"].append(result.published)
         repository["Abstract"].append(result.summary.strip("\n"))
         repository["URL"].append(result.pdf_url)
-        # repository["Author"].append(result.authors)
         repository["Author"].append([author.name for author in result.authors])
 
     return pd.DataFrame(repository)
@@ -206,7 +203,6 @@ def get_recommendations(
         df = data
         df.reset_index(inplace=True)
     elif isinstance(data, str):
-        # assert data.endswith(".csv"), "data must be a csv file"
         df = pd.read_csv(data)
     else:
         raise TypeError(

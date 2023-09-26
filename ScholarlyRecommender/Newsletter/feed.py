@@ -45,7 +45,6 @@ def remove_latex(text):
     return clean_text
 
 
-# Pipeline()
 
 
 def build_email(
@@ -141,7 +140,6 @@ def build_email(
         return True
 
 
-# build_html_feed(clean_feed())
 def get_feed(
     data,
     email: bool = False,

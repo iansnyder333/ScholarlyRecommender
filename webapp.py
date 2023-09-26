@@ -1,5 +1,3 @@
-# Import necessary modules
-# Third Party Imports
 import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
@@ -85,7 +83,6 @@ def send_email(**kwargs):
 
     except Exception as e:
         st.error(f"Email failed to send. {e}", icon="🚨")
-        # st.write(f"An error occurred: {e}")
 
 
 def generate_feed_pipeline(query: list, n: int, days: int, to_email: bool):
@@ -309,7 +306,6 @@ if navigation == "Get Recommendations":
                 subscribers=[user_email],
                 content=user_feed,
             )
-            # st.success("Email sent successfully!")
 
         components.html(user_feed, height=1000, scrolling=True)
 
