@@ -236,7 +236,8 @@ class BenchmarkTests:
         if save_log:
             return times, memory
 
-    def _display(self, name, runtime, current_memory, peak_memory):
+    @staticmethod
+    def _display(name, runtime, current_memory, peak_memory):
         print(
             f"{name} \n Runtime: {runtime} seconds \n Memory: {current_memory} bytes in current memory, {peak_memory} bytes in peak memory \n"
         )
