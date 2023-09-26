@@ -29,18 +29,14 @@ def get_papers(ids: list, query: str = "") -> pd.DataFrame:
 
 
 def build_arxiv_repo(ids: list, path: str) -> None:
-    """
-    Build a csv file containing the papers matching the ids.
-    """
+    """Build a csv file containing the papers matching the ids."""
     assert path.endswith(".csv"), "Path must be a csv file"
     df = get_papers(ids)
     df.to_csv(path)
 
 
 def add_paper(ids: list, to_repo: str) -> None:
-    """
-    Add papers matching the ids to the repository. Duplicates are removed.
-    """
+    """Add papers matching the ids to the repository. Duplicates are removed."""
     assert to_repo.endswith(".csv"), "Repository must be a csv file"
     df1 = pd.read_csv(to_repo, index_col="Id")
     df2 = get_papers(ids)
@@ -50,9 +46,7 @@ def add_paper(ids: list, to_repo: str) -> None:
 
 
 def remove_paper(ids: list, from_repo: str) -> None:
-    """
-    Remove papers matching the ids from the repository.
-    """
+    """Remove papers matching the ids from the repository."""
     assert from_repo.endswith(".csv"), "Repository must be a csv file"
     df1 = pd.read_csv(from_repo, index_col="Id")
     df2 = get_papers(ids)
