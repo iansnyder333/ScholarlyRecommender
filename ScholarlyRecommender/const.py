@@ -1,12 +1,19 @@
 from copy import deepcopy
 
-BASE_REPO = lambda: deepcopy(
-    {
-        "Id": [],
-        "Category": [],
-        "Title": [],
-        "Published": [],
-        "Abstract": [],
-        "URL": [],
-    }
-)
+
+def BASE_REPO():
+    """
+    initialize a new base repo as a deep copy
+    @param: None
+    @return: a dictionary (str:list)
+    """
+    return deepcopy(
+        {
+            "Id": [],
+            "Category": [],
+            "Title": [],
+            "Published": [],
+            "Abstract": [],
+            "URL": [],
+        }
+    )
