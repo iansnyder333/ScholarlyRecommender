@@ -3,7 +3,7 @@ version = 1
 test_patterns = ["testing.py"]
 
 [[analyzers]]
-name = "test-coverage"
+name = "secrets"
 
 [[analyzers]]
 name = "cxx"
