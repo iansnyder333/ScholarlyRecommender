@@ -3,7 +3,6 @@ This script allows you to reconfigure the recommender system to your interests w
 It is not nearly as robust as the web interface, but offers a quick and lightweight alternative for users who do not want to use the web interface.
 """
 import ScholarlyRecommender as sr
-import pandas as pd
 import arxiv
 
 to_path = "ScholarlyRecommender/Repository/labeled/Candidates_Labeled.csv"
@@ -40,21 +39,18 @@ def calibrate_rec_sys(query: list, num_papers: int = 10):
 
 
 def main():
-    print(
-        "\n WARNING: This script is deprecated and will be removed in a future release. Please use the web interface instead. \n"
-    )
+    print("\n WARNING: This script is deprecated")
+    print("Please use the web interface!")
     print("Welcome to the Scholarly Recommender System Calibration Tool \n")
     print(
         "This tool will help you calibrate the recommender system to your interests \n"
     )
     print("Please answer the following questions to help us get to know you better \n")
     print("Select the categories that interest you the most: \n")
-    print(
-        "1. Computer Science \n 2. Mathematics \n 3. Physics \n 4. Quantitative Biology \n 5. Quantitative Finance \n 6. Statistics \n"
-    )
-    print(
-        "Please enter the numbers of the categories that interest you the most, separated by commas: \n"
-    )
+    print("1. Computer Science \n 2. Mathematics \n 3. Physics")
+    print("4. Quantitative Biology \n 5. Quantitative Finance \n 6. Statistics \n")
+    print("Please enter the numbers of the categories that interest you the most.")
+    print("Separate each number with a comma. ex: 1,2,3 \n")
     categories = input("Enter a list of numbers: ")
     categories = categories.split(",")
     categories = [int(i) for i in categories]
@@ -68,28 +64,19 @@ def main():
     }
     categories = list(map(search_categories.get, categories))
     print(f"Thank you for your input. You selected {categories} \n")
-    print(
-        "Now we will ask you to rate a few papers to help us get to know you better. This will take a few minutes."
-    )
-    res = input(
-        "Press enter if you want to proceed, If you want to skip this step, enter 'skip': \n"
-    )
+    print("Now we will ask you to rate a few papers to help us get to know you better.")
+    print("This will take a few minutes.")
+    res = input("Press enter if you want to proceed, enter 'skip' to skip: \n")
     if res == "skip":
         print("You have chosen to skip this step. \n")
-        print(
-            "The recommender system will not be calibrated to your interests unless you complete this step! \n"
-        )
+        print("The recommender system will not be calibrated to your interests. \n")
         return
     print("Please rate the following papers on a scale of 1 to 10 \n")
     state = calibrate_rec_sys(categories)
     if state:
-        print(
-            f"Thank you for your input. Your results have been saved to config.json . \n"
-        )
+        print("Thank you for your input. Your results have been saved. \n")
         print("The recommender system will now be calibrated to your interests \n")
-        print(
-            "This process is automatic, please do not change any files or default arguments! \n"
-        )
+        print("No further action is required! \n")
 
         return
     print("Something went wrong. Please try again. \n")
