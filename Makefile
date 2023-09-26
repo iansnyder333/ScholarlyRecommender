@@ -21,7 +21,7 @@ ENV_DIR = env
 PIP_VERSION = pip3
 
 # Phony targets
-.PHONY: all build setup install run clean
+.PHONY: all build setup install run test clean
 
 # Default target
 all: setup install run
@@ -44,10 +44,15 @@ install:
 
 build: setup install
 
+
 ## Run Streamlit App (virtual env already activated)
 run:
 	streamlit run webapp.py
 
+# Run tests
+test:
+	$(PYTHON) testing.py
+	
 # Clean the environment
 clean:
 	rm -rf $(ENV_DIR)
