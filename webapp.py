@@ -90,12 +90,14 @@ def send_email(**kwargs):
 
 def generate_feed_pipeline(query: list, n: int, days: int, to_email: bool):
     with st.status("Working...", expanded=True) as status:
-        status.update(label="Searching for papers...", state="running", expanded=True)
+        status.update(label="Searching for papers...",
+                      state="running", expanded=True)
 
         if len(query) == 0:
             query = get_sc_config()["queries"]
         # Collect candidates
-        candidates = sr.source_candidates(queries=query, as_df=True, prev_days=days)
+        candidates = sr.source_candidates(
+            queries=query, as_df=True, prev_days=days)
         status.update(
             label="Generating recommendations...", state="running", expanded=True
         )
@@ -107,7 +109,8 @@ def generate_feed_pipeline(query: list, n: int, days: int, to_email: bool):
             size=n,
             as_df=True,
         )
-        status.update(label="Generating feed...", state="running", expanded=True)
+        status.update(label="Generating feed...",
+                      state="running", expanded=True)
 
         # Generate feed
         source_code = sr.get_feed(
@@ -130,7 +133,8 @@ def fetch_papers(num_papers: int = 10) -> pd.DataFrame:
         as_df=True,
         sort_by=SortCriterion.Relevance,
     )
-    sam = c[["Title", "Abstract"]].sample(frac=1, random_state=1).reset_index(drop=True)
+    sam = c[["Title", "Abstract"]].sample(
+        frac=1, random_state=1).reset_index(drop=True)
     sam.sort_values(
         by="Abstract", key=lambda x: x.str.len(), inplace=True, ascending=False
     )
@@ -346,7 +350,8 @@ elif navigation == "Configure":
         with st.spinner("Configuring..."):
             user_config_query = build_query(selected_sub_categories)
             # prevent empty queries
-            assert len(user_config_query) > 0, "Please select at least one interest."
+            assert len(
+                user_config_query) > 0, "Please select at least one interest."
             configuration = get_sc_config()
             configuration["queries"] = user_config_query
             update_sc_config(configuration)
