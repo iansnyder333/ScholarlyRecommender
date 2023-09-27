@@ -68,17 +68,18 @@ def fast_search(
     # Turn queries into a single string of each query, seperated by " OR "
     queries = " OR ".join(queries)
     max_results = 500
-    logging.info(f"Searching for {queries}")
+
+    logging.info("Searching for %s", queries)
     df = search(queries, max_results=max_results, sort_by=sort_by)
 
-    logging.info(f"Number of papers extracted : {len(df.index)}")
+    logging.info("Number of papers extracted : %s", len(df.index))
 
     if df.index.has_duplicates:
         df = df[~df.index.duplicated(keep="first")]
     df["Published"] = pd.to_datetime(df["Published"])
     num_days = pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=prev_days)
     df = df[df["Published"] >= num_days]
-    logging.info(f"Number of papers extracted : {len(df.index)}")
+    logging.info("Number of papers extracted : %s", len(df.index))
     if to_path is not None:
         df.to_csv(to_path)
     if as_df:
@@ -116,10 +117,10 @@ def source_candidates(
 
     dfs = []
     for query in queries:
-        logging.info(f"Searching for {query}")
+        logging.info("Searching for %s", query)
 
         df2 = search(query, max_results=max_results, sort_by=sort_by)
-        logging.info(f"Number of papers extracted : {len(df2.index)}")
+        logging.info("Number of papers extracted : %s", len(df2.index))
 
         dfs.append(df2)
 
@@ -134,7 +135,7 @@ def source_candidates(
     df["Published"] = pd.to_datetime(df["Published"])
 
     df = df[df["Published"] >= num_days]
-    logging.info(f"Number of papers extracted : {len(df.index)}")
+    logging.info("Number of papers extracted : %s", len(df.index))
 
     if to_path is not None:
         df.to_csv(to_path)

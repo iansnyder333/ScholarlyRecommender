@@ -262,8 +262,8 @@ class BenchmarkTests:
         self._display(
             "Average Fast Search",
             sum(times) / len(times),
-            sum([m[0] for m in memory]) / len(memory),
-            sum([m[1] for m in memory]) / len(memory),
+            sum(m[0] for m in memory) / len(memory),
+            sum(m[1] for m in memory) / len(memory),
         )
         times = []
         memory = []
@@ -282,8 +282,8 @@ class BenchmarkTests:
         self._display(
             "Average Source Candidates",
             sum(times) / len(times),
-            sum([m[0] for m in memory]) / len(memory),
-            sum([m[1] for m in memory]) / len(memory),
+            sum(m[0] for m in memory) / len(memory),
+            sum(m[1] for m in memory) / len(memory),
         )
 
     @staticmethod
