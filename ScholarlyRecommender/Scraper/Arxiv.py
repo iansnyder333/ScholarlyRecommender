@@ -22,7 +22,7 @@ def search(
     Scrape arxiv.org for papers matching the query and return a dataframe
     matching the BASE_REPO format.
     """
-    search_client = arxiv.Client(page_size=max_results, delay_seconds=3, num_retries=5)
+    search_client = arxiv.Client(page_size=max_results, delay_seconds=3, num_retries=3)
 
     repository = BASE_REPO()
 
@@ -70,10 +70,24 @@ def fast_search(
     max_results = 500
 
     logging.info("Searching for %s", queries)
-    df = search(queries, max_results=max_results, sort_by=sort_by)
-
-    logging.info("Number of papers extracted : %s", len(df.index))
-
+    # df = search(queries, max_results=max_results, sort_by=sort_by)
+    repository = BASE_REPO()
+    arx_search = arxiv.Search(query=queries, max_results=max_results, sort_by=sort_by)
+    for result in arx_search.results():
+        try:
+            repository["Id"].append(result.entry_id.split("/")[-1])
+            repository["Category"].append(result.primary_category)
+            repository["Title"].append(result.title.strip("\n"))
+            repository["Published"].append(result.published)
+            repository["Abstract"].append(result.summary.strip("\n"))
+            repository["URL"].append(result.pdf_url)
+        except arxiv.arxiv.UnexpectedEmptyPageError as error:
+            print(error)
+            logging.error(error)
+            continue
+    if len(repository["Id"]) == 0:
+        raise ValueError("No papers found for this query")
+    df = pd.DataFrame(repository).set_index("Id")
     if df.index.has_duplicates:
         df = df[~df.index.duplicated(keep="first")]
     df["Published"] = pd.to_datetime(df["Published"])
@@ -120,8 +134,6 @@ def source_candidates(
         logging.info("Searching for %s", query)
 
         df2 = search(query, max_results=max_results, sort_by=sort_by)
-        logging.info("Number of papers extracted : %s", len(df2.index))
-
         dfs.append(df2)
 
     df = pd.concat(dfs)

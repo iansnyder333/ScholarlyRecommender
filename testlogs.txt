@@ -1,4 +1,0 @@
-
-Runtime: 14.30406141281128 seconds
-Memory: 949490.0 bytes in current memory
-3944351.4 bytes in peak memory

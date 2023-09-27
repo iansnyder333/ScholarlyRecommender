@@ -1,52 +1,23 @@
 Id,Category,Title,Published,Abstract,URL,Author
-2309.11259v1,cs.CL,Sequence-to-Sequence Spanish Pre-trained Language Models,2023-09-20 12:35:19+00:00,"In recent years, substantial advancements in pre-trained language models have
-paved the way for the development of numerous non-English language versions,
-with a particular focus on encoder-only and decoder-only architectures. While
-Spanish language models encompassing BERT, RoBERTa, and GPT have exhibited
-prowess in natural language understanding and generation, there remains a
-scarcity of encoder-decoder models designed for sequence-to-sequence tasks
-involving input-output pairs. This paper breaks new ground by introducing the
-implementation and evaluation of renowned encoder-decoder architectures,
-exclusively pre-trained on Spanish corpora. Specifically, we present Spanish
-versions of BART, T5, and BERT2BERT-style models and subject them to a
-comprehensive assessment across a diverse range of sequence-to-sequence tasks,
-spanning summarization, rephrasing, and generative question answering. Our
-findings underscore the competitive performance of all models, with BART and T5
-emerging as top performers across all evaluated tasks. As an additional
-contribution, we have made all models publicly available to the research
-community, fostering future exploration and development in Spanish language
-processing.",http://arxiv.org/pdf/2309.11259v1,"['Vladimir Araujo', 'Maria Mihaela Trusca', 'Rodrigo Tufiño', 'Marie-Francine Moens']"
-2309.12053v1,cs.CL,"AceGPT, Localizing Large Language Models in Arabic",2023-09-21 13:20:13+00:00,"This paper explores the imperative need and methodology for developing a
-localized Large Language Model (LLM) tailored for Arabic, a language with
-unique cultural characteristics that are not adequately addressed by current
-mainstream models like ChatGPT. Key concerns additionally arise when
-considering cultural sensitivity and local values. To this end, the paper
-outlines a packaged solution, including further pre-training with Arabic texts,
-supervised fine-tuning (SFT) using native Arabic instructions and GPT-4
-responses in Arabic, and reinforcement learning with AI feedback (RLAIF) using
-a reward model that is sensitive to local culture and values. The objective is
-to train culturally aware and value-aligned Arabic LLMs that can serve the
-diverse application-specific needs of Arabic-speaking communities.
-  Extensive evaluations demonstrated that the resulting LLM called
-`\textbf{AceGPT}' is the SOTA open Arabic LLM in various benchmarks, including
-instruction-following benchmark (i.e., Arabic Vicuna-80 and Arabic AlpacaEval),
-knowledge benchmark (i.e., Arabic MMLU and EXAMs), as well as the
-newly-proposed Arabic cultural \& value alignment benchmark. Notably, AceGPT
-outperforms ChatGPT in the popular Vicuna-80 benchmark when evaluated with
-GPT-4, despite the benchmark's limited scale. % Natural Language Understanding
-(NLU) benchmark (i.e., ALUE)
-  Codes, data, and models are in https://github.com/FreedomIntelligence/AceGPT.",http://arxiv.org/pdf/2309.12053v1,"['Huang Huang', 'Fei Yu', 'Jianqing Zhu', 'Xuening Sun', 'Hao Cheng', 'Dingjie Song', 'Zhihong Chen', 'Abdulmohsen Alharthi', 'Bang An', 'Ziche Liu', 'Zhiyi Zhang', 'Junying Chen', 'Jianquan Li', 'Benyou Wang', 'Lian Zhang', 'Ruoyu Sun', 'Xiang Wan', 'Haizhou Li', 'Jinchao Xu']"
-2309.11295v1,cs.CL,CPLLM: Clinical Prediction with Large Language Models,2023-09-20 13:24:12+00:00,"We present Clinical Prediction with Large Language Models (CPLLM), a method
-that involves fine-tuning a pre-trained Large Language Model (LLM) for clinical
-disease prediction. We utilized quantization and fine-tuned the LLM using
-prompts, with the task of predicting whether patients will be diagnosed with a
-target disease during their next visit or in the subsequent diagnosis,
-leveraging their historical diagnosis records. We compared our results versus
-various baselines, including Logistic Regression, RETAIN, and Med-BERT, which
-is the current state-of-the-art model for disease prediction using structured
-EHR data. Our experiments have shown that CPLLM surpasses all the tested models
-in terms of both PR-AUC and ROC-AUC metrics, displaying noteworthy enhancements
-compared to the baseline models.",http://arxiv.org/pdf/2309.11295v1,"['Ofir Ben Shoham', 'Nadav Rappoport']"
+2309.11400v1,q-fin.TR,Transformers versus LSTMs for electronic trading,2023-09-20 15:25:43+00:00,"With the rapid development of artificial intelligence, long short term memory
+(LSTM), one kind of recurrent neural network (RNN), has been widely applied in
+time series prediction.
+  Like RNN, Transformer is designed to handle the sequential data. As
+Transformer achieved great success in Natural Language Processing (NLP),
+researchers got interested in Transformer's performance on time series
+prediction, and plenty of Transformer-based solutions on long time series
+forecasting have come out recently. However, when it comes to financial time
+series prediction, LSTM is still a dominant architecture. Therefore, the
+question this study wants to answer is: whether the Transformer-based model can
+be applied in financial time series prediction and beat LSTM.
+  To answer this question, various LSTM-based and Transformer-based models are
+compared on multiple financial prediction tasks based on high-frequency limit
+order book data. A new LSTM-based model called DLSTM is built and new
+architecture for the Transformer-based model is designed to adapt for financial
+prediction. The experiment result reflects that the Transformer-based model
+only has the limited advantage in absolute price sequence prediction. The
+LSTM-based models show better and more robust performance on difference
+sequence prediction, such as price difference and price movement.",http://arxiv.org/pdf/2309.11400v1,"['Paul Bilokon', 'Yitao Qiu']"
 2309.10982v1,cs.AI,Is GPT4 a Good Trader?,2023-09-20 00:47:52+00:00,"Recently, large language models (LLMs), particularly GPT-4, have demonstrated
 significant capabilities in various planning and reasoning tasks
 \cite{cheng2023gpt4,bubeck2023sparks}. Motivated by these advancements, there
@@ -81,3 +52,34 @@ independently so the answers are not biased by other responses; and (iv)
 generates its final verified response. In experiments, we show CoVe decreases
 hallucinations across a variety of tasks, from list-based questions from
 Wikidata, closed book MultiSpanQA and longform text generation.",http://arxiv.org/pdf/2309.11495v1,"['Shehzaad Dhuliawala', 'Mojtaba Komeili', 'Jing Xu', 'Roberta Raileanu', 'Xian Li', 'Asli Celikyilmaz', 'Jason Weston']"
+2309.11830v1,cs.CL,A Chinese Prompt Attack Dataset for LLMs with Evil Content,2023-09-21 07:07:49+00:00,"Large Language Models (LLMs) present significant priority in text
+understanding and generation. However, LLMs suffer from the risk of generating
+harmful contents especially while being employed to applications. There are
+several black-box attack methods, such as Prompt Attack, which can change the
+behaviour of LLMs and induce LLMs to generate unexpected answers with harmful
+contents. Researchers are interested in Prompt Attack and Defense with LLMs,
+while there is no publicly available dataset to evaluate the abilities of
+defending prompt attack. In this paper, we introduce a Chinese Prompt Attack
+Dataset for LLMs, called CPAD. Our prompts aim to induce LLMs to generate
+unexpected outputs with several carefully designed prompt attack approaches and
+widely concerned attacking contents. Different from previous datasets involving
+safety estimation, We construct the prompts considering three dimensions:
+contents, attacking methods and goals, thus the responses can be easily
+evaluated and analysed. We run several well-known Chinese LLMs on our dataset,
+and the results show that our prompts are significantly harmful to LLMs, with
+around 70% attack success rate. We will release CPAD to encourage further
+studies on prompt attack and defense.",http://arxiv.org/pdf/2309.11830v1,"['Chengyuan Liu', 'Fubang Zhao', 'Lizhi Qing', 'Yangyang Kang', 'Changlong Sun', 'Kun Kuang', 'Fei Wu']"
+2309.11688v1,cs.CL,LLM Guided Inductive Inference for Solving Compositional Problems,2023-09-20 23:44:16+00:00,"While large language models (LLMs) have demonstrated impressive performance
+in question-answering tasks, their performance is limited when the questions
+require knowledge that is not included in the model's training data and can
+only be acquired through direct observation or interaction with the real world.
+Existing methods decompose reasoning tasks through the use of modules invoked
+sequentially, limiting their ability to answer deep reasoning tasks. We
+introduce a method, Recursion based extensible LLM (REBEL), which handles
+open-world, deep reasoning tasks by employing automated reasoning techniques
+like dynamic planning and forward-chaining strategies. REBEL allows LLMs to
+reason via recursive problem decomposition and utilization of external tools.
+The tools that REBEL uses are specified only by natural language description.
+We further demonstrate REBEL capabilities on a set of problems that require a
+deeply nested use of external tools in a compositional and conversational
+setting.",http://arxiv.org/pdf/2309.11688v1,"['Abhigya Sodani', 'Lauren Moos', 'Matthew Mirman']"
