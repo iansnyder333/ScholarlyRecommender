@@ -22,7 +22,7 @@ def search(
     Scrape arxiv.org for papers matching the query and return a dataframe
     matching the BASE_REPO format.
     """
-    search_client = arxiv.Client(page_size=max_results, delay_seconds=3, num_retries=3)
+    search_client = arxiv.Client(page_size=max_results, delay_seconds=3, num_retries=5)
 
     repository = BASE_REPO()
 
