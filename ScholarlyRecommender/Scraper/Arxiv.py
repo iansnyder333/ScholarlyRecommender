@@ -12,7 +12,7 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()],
 )
 
-logging.disable(logging.CRITICAL)
+# logging.disable(logging.CRITICAL)
 
 
 def search(
