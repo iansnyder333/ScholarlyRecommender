@@ -22,7 +22,7 @@ def search(
     Scrape arxiv.org for papers matching the query and return a dataframe
     matching the BASE_REPO format.
     """
-    search_client = arxiv.Client(page_size=max_results, delay_seconds=3, num_retries=3)
+    search_client = arxiv.Client(page_size=max_results, delay_seconds=3, num_retries=5)
 
     repository = BASE_REPO()
 
@@ -37,8 +37,7 @@ def search(
             repository["Abstract"].append(result.summary.strip("\n"))
             repository["URL"].append(result.pdf_url)
         except arxiv.arxiv.UnexpectedEmptyPageError as error:
-            print(error)
-            logging.error(error)
+            logging.exception(error)
             continue
     if len(repository["Id"]) == 0:
         raise ValueError("No papers found for this query")
@@ -82,8 +81,7 @@ def fast_search(
             repository["Abstract"].append(result.summary.strip("\n"))
             repository["URL"].append(result.pdf_url)
         except arxiv.arxiv.UnexpectedEmptyPageError as error:
-            print(error)
-            logging.error(error)
+            logging.exception(error)
             continue
     if len(repository["Id"]) == 0:
         raise ValueError("No papers found for this query")
