@@ -683,7 +683,7 @@ stable under marginalization under linearity and Gaussianity assumptions. We
 show that computing the maximum likelihood estimation of this model is
 equivalent to training a neural network. We implement a GPU-based algorithm
 that computes the maximum likelihood estimation of these models.",http://arxiv.org/pdf/2309.14073v1
-2309.14065v1,cs.CV,AsymFormer: Asymmetrical Cross-Modal Representation Learning for Mobile Platform Real-Time RGB-D Semantic Segmentation,2023-09-25 11:57:16+00:00,"In the realm of robotic intelligence, achieving efficient and precise RGB-D
+2309.14065v2,cs.CV,AsymFormer: Asymmetrical Cross-Modal Representation Learning for Mobile Platform Real-Time RGB-D Semantic Segmentation,2023-09-25 11:57:16+00:00,"In the realm of robotic intelligence, achieving efficient and precise RGB-D
 semantic segmentation is a key cornerstone. State-of-the-art multimodal
 semantic segmentation methods, primarily rooted in symmetrical skeleton
 networks, find it challenging to harmonize computational efficiency and
@@ -700,12 +700,12 @@ fuse features from different modalities by leveraging their dependencies.
 Subsequently, a Cross-Modal Attention-Guided Feature Correlation Embedding
 (CMA) module is introduced to further extract cross-modal representations. This
 method is evaluated on NYUv2 and SUNRGBD datasets, with AsymFormer
-demonstrating competitive results with 52.0\% mIoU on NYUv2 and 49.1\% mIoU on
+demonstrating competitive results with 52.0% mIoU on NYUv2 and 49.1% mIoU on
 SUNRGBD. Notably, AsymFormer achieves an inference speed of 65 FPS and after
 implementing mixed precision quantization, it attains an impressive inference
 speed of 79 FPS on RTX3090. This significantly outperforms existing multi-modal
 methods, thereby demonstrating that AsymFormer can strike a balance between
-high accuracy and efficiency for RGB-D semantic segmentation.",http://arxiv.org/pdf/2309.14065v1
+high accuracy and efficiency for RGB-D semantic segmentation.",http://arxiv.org/pdf/2309.14065v2
 2309.14054v1,cs.LG,Adapt then Unlearn: Exploiting Parameter Space Semantics for Unlearning in Generative Adversarial Networks,2023-09-25 11:36:20+00:00,"The increased attention to regulating the outputs of deep generative models,
 driven by growing concerns about privacy and regulatory compliance, has
 highlighted the need for effective control over these models. This necessity
@@ -1032,7 +1032,7 @@ legal aspects of algorithmic hiring and fairness. Our work supports a
 contextualized understanding and governance of this technology by highlighting
 current opportunities and limitations, providing recommendations for future
 work to ensure shared benefits for all stakeholders.",http://arxiv.org/pdf/2309.13933v1
-2309.13926v1,cs.LG,Pseudo Label Selection is a Decision Problem,2023-09-25 07:48:02+00:00,"Pseudo-Labeling is a simple and effective approach to semi-supervised
+2309.13926v2,cs.LG,Pseudo Label Selection is a Decision Problem,2023-09-25 07:48:02+00:00,"Pseudo-Labeling is a simple and effective approach to semi-supervised
 learning. It requires criteria that guide the selection of pseudo-labeled data.
 The latter have been shown to crucially affect pseudo-labeling's generalization
 performance. Several such criteria exist and were proven to work reasonably
@@ -1053,7 +1053,7 @@ methods. The decision-theoretic embedding further allows us to render PLS more
 robust towards the involved modeling assumptions. To achieve this goal, we
 introduce a multi-objective utility function. We demonstrate that the latter
 can be constructed to account for different sources of uncertainty and explore
-three examples: model selection, accumulation of errors and covariate shift.",http://arxiv.org/pdf/2309.13926v1
+three examples: model selection, accumulation of errors and covariate shift.",http://arxiv.org/pdf/2309.13926v2
 2309.13925v1,cs.CV,UCF-Crime Annotation: A Benchmark for Surveillance Video-and-Language Understanding,2023-09-25 07:46:56+00:00,"Surveillance videos are an essential component of daily life with various
 critical applications, particularly in public security. However, current
 surveillance video tasks mainly focus on classifying and localizing anomalous
@@ -1266,7 +1266,7 @@ exponentially in terms of computation. Specifically, we present a learning task
 that is NP-hard for unimodal learning but is solvable in polynomial time by a
 multimodal algorithm. Our construction is based on a novel modification to the
 intersection of two half-spaces problem.",http://arxiv.org/pdf/2309.13782v1
-2309.13781v1,cs.LG,Explainable Machine Learning for ICU Readmission Prediction,2023-09-25 00:16:43+00:00,"The intensive care unit (ICU) comprises a complex hospital environment, where
+2309.13781v2,cs.LG,Explainable Machine Learning for ICU Readmission Prediction,2023-09-25 00:16:43+00:00,"The intensive care unit (ICU) comprises a complex hospital environment, where
 decisions made by clinicians have a high level of risk for the patients' lives.
 A comprehensive care pathway must then be followed to reduce p complications.
 Uncertain, competing and unplanned aspects within this environment increase the
@@ -1290,7 +1290,7 @@ conclusions, primarily on variables related to vital signs and blood tests
 (e.g., albumin, blood urea nitrogen and hemoglobin levels), demographics (e.g.,
 age, and admission height and weight), and ICU-associated variables (e.g., unit
 type). These insights provide an invaluable source of information during
-clinicians' decision-making while discharging ICU patients.",http://arxiv.org/pdf/2309.13781v1
+clinicians' decision-making while discharging ICU patients.",http://arxiv.org/pdf/2309.13781v2
 2309.13773v1,cs.LG,GHN-QAT: Training Graph Hypernetworks to Predict Quantization-Robust Parameters of Unseen Limited Precision Neural Networks,2023-09-24 23:01:00+00:00,"Graph Hypernetworks (GHN) can predict the parameters of varying unseen CNN
 architectures with surprisingly good accuracy at a fraction of the cost of
 iterative optimization. Following these successes, preliminary research has
@@ -3420,7 +3420,7 @@ walking, human-like straight-leg walking, and dynamic running. Notably, even in
 the absence of transition motions in the demonstration dataset, robots showcase
 an emerging ability to transit naturally between distinct locomotion patterns
 as desired speed changes.",http://arxiv.org/pdf/2309.14225v1
-2309.14224v1,math.FA,On $k-$WUR and its generalizations,2023-09-25 15:30:55+00:00,"We introduce two notions called $k-$weakly uniform rotundity ($k-$WUR) and
+2309.14224v2,math.FA,On $k-$WUR and its generalizations,2023-09-25 15:30:55+00:00,"We introduce two notions called $k-$weakly uniform rotundity ($k-$WUR) and
 $k-$weakly locally uniform rotundity ($k-$WLUR) in real Banach spaces. These
 are natural generalizations of the well-known concepts $k-$UR and WUR. By
 introducing two best approximation notions namely $k-$weakly strong
@@ -3431,7 +3431,7 @@ Chebyshevness. Also, the inheritance of the notions $k-$WUR and $k-$WLUR by
 quotient spaces are discussed. Further, we provide a necessary and sufficient
 condition for an infinite $\ell_p-$product space to be $k-$WUR (respectively,
 $k-$WLUR). As a consequence, we observe that the notions WUR and $k-$WUR
-coincide for an infinite $\ell_p-$product of a Banach space.",http://arxiv.org/pdf/2309.14224v1
+coincide for an infinite $\ell_p-$product of a Banach space.",http://arxiv.org/pdf/2309.14224v2
 2309.14223v1,math-ph,Wigner measures of electromagnetic waves in bianisotropic heterogeneous media,2023-09-25 15:28:29+00:00,"We study the propagation of high-frequency electromagnetic waves in randomly
 heterogeneous bianisotropic media with dissipative properties. For that purpose
 we consider randomly fluctuating optical responses of such media with
@@ -4117,7 +4117,7 @@ single-antenna jammer can therefore resemble an L-antenna jammer. Simulations
 corroborate our theoretical results. These findings imply that mitigating
 jammers with large delay spread through linear spatial filtering is infeasible.
 We discuss some (im)possibilities for the way forward.",http://arxiv.org/pdf/2309.14059v1
-2309.14050v1,eess.SY,NNgTL: Neural Network Guided Optimal Temporal Logic Task Planning for Mobile Robots,2023-09-25 11:24:40+00:00,"In this work, we investigate task planning for mobile robots under linear
+2309.14050v2,eess.SY,NNgTL: Neural Network Guided Optimal Temporal Logic Task Planning for Mobile Robots,2023-09-25 11:24:40+00:00,"In this work, we investigate task planning for mobile robots under linear
 temporal logic (LTL) specifications. This problem is particularly challenging
 when robots navigate in continuous workspaces due to the high computational
 complexity involved. Sampling-based methods have emerged as a promising avenue
@@ -4133,7 +4133,7 @@ generates predictions that serve as guidance for random tree construction,
 directing the sampling process toward more optimal directions. Through
 numerical experiments, we compare our approach with existing methods and
 demonstrate its superior efficiency, requiring less than 15% of the time of the
-existing methods to find a feasible solution.",http://arxiv.org/pdf/2309.14050v1
+existing methods to find a feasible solution.",http://arxiv.org/pdf/2309.14050v2
 2309.14049v1,cs.HC,How Novices Use LLM-Based Code Generators to Solve CS1 Coding Tasks in a Self-Paced Learning Environment,2023-09-25 11:24:30+00:00,"As Large Language Models (LLMs) gain in popularity, it is important to
 understand how novice programmers use them. We present a thematic analysis of
 33 learners, aged 10-17, independently learning Python through 45
@@ -4159,7 +4159,7 @@ code generators and the challenges and opportunities associated with
 integrating them into self-paced learning environments. We conclude with
 various signs of over-reliance and self-regulation, as well as opportunities
 for curriculum and tool development.",http://arxiv.org/pdf/2309.14049v1
-2309.14048v1,cs.LO,"Synchronous Agents, Verification, and Blame -- A Deontic View",2023-09-25 11:23:59+00:00,"A question we can ask of multi-agent systems is whether the agents'
+2309.14048v2,cs.LO,"Synchronous Agents, Verification, and Blame -- A Deontic View",2023-09-25 11:23:59+00:00,"A question we can ask of multi-agent systems is whether the agents'
 collective interaction satisfies particular goals or specifications, which can
 be either individual or collective. When a collaborative goal is not reached,
 or a specification is violated, a pertinent question is whether any agent is to
@@ -4172,7 +4172,7 @@ logic, and use it to define blame assignment for violations. We give an
 automaton construction for the logic, which we use as the base for model
 checking and blame analysis. We also further provide quantitative semantics
 that is able to compare different interactions in terms of the required
-reparations.",http://arxiv.org/pdf/2309.14048v1
+reparations.",http://arxiv.org/pdf/2309.14048v2
 2309.14041v1,nucl-ex,Beam Charge Asymmetries for Deeply Virtual Compton Scattering on the Proton at CLAS12,2023-09-25 11:19:01+00:00,"The parameterization of the nucleon structure through Generalized Parton
 Distributions (GPDs) shed a new light on the nucleon internal dynamics. For its
 direct interpretation, Deeply Virtual Compton Scattering (DVCS) is the golden
@@ -4873,7 +4873,7 @@ to the cosmological realm, and highlight the various difficulties that arise
 when formulating thermodynamics for black holes in asymptotically de Sitter
 backgrounds. We discuss a number of proposed solutions and the open questions
 that arise therein.",http://arxiv.org/pdf/2309.13894v1
-2309.13890v1,cs.CV,Bitstream-Corrupted Video Recovery: A Novel Benchmark Dataset and Method,2023-09-25 06:06:26+00:00,"The past decade has witnessed great strides in video recovery by specialist
+2309.13890v2,cs.CV,Bitstream-Corrupted Video Recovery: A Novel Benchmark Dataset and Method,2023-09-25 06:06:26+00:00,"The past decade has witnessed great strides in video recovery by specialist
 technologies, like video inpainting, completion, and error concealment.
 However, they typically simulate the missing content by manual-designed error
 masks, thus failing to fill in the realistic video loss in video communication
@@ -4888,7 +4888,7 @@ in video recovery framework that serves as a benchmark. We evaluate
 state-of-the-art video inpainting methods on the BSCV dataset, demonstrating
 existing approaches' limitations and our framework's advantages in solving the
 bitstream-corrupted video recovery problem. The benchmark and dataset are
-released at https://github.com/LIUTIGHE/BSCV-Dataset.",http://arxiv.org/pdf/2309.13890v1
+released at https://github.com/LIUTIGHE/BSCV-Dataset.",http://arxiv.org/pdf/2309.13890v2
 2309.13888v1,cs.SI,Graph Representation Learning Towards Patents Network Analysis,2023-09-25 05:49:40+00:00,"Patent analysis has recently been recognized as a powerful technique for
 large companies worldwide to lend them insight into the age of competition
 among various industries. This technique is considered a shortcut for
@@ -5112,7 +5112,7 @@ experiments on popular image recognition benchmarks show the superior
 generalization and few-shot abilities of our approach. The qualitative analysis
 demonstrates that the learned prompt tokens have the ability to capture diverse
 visual concepts.",http://arxiv.org/pdf/2309.13847v1
-2309.13844v1,physics.optics,Measurement of the complex polar magneto-optical Kerr effect using weak measurement,2023-09-25 03:10:19+00:00,"Polar magneto-optical Kerr effect (PMOKE) is one of the most widely being
+2309.13844v2,physics.optics,Measurement of the complex polar magneto-optical Kerr effect using weak measurement,2023-09-25 03:10:19+00:00,"Polar magneto-optical Kerr effect (PMOKE) is one of the most widely being
 applied magneto-optical Kerr effects (MOKE) due to the induced complex MOKE
 signal, consisting of the Kerr rotation angle and the ellipticity, is very
 sensitive to the magnetization component perpendicular to the magnetic surface.
@@ -5130,7 +5130,7 @@ measurement precision for the complex PMOKE angle reaches to $10^{-4}$ deg in
 our experiment. Besides, the complex magneto-optical constant Q is also
 calculated. This work is of great significance for the measurement of the
 complex PMOKE with high efficiency, ultra-precision, low cost, and is an
-important attempt to obtain complex physical quantities using WM.",http://arxiv.org/pdf/2309.13844v1
+important attempt to obtain complex physical quantities using WM.",http://arxiv.org/pdf/2309.13844v2
 2309.13840v1,astro-ph.HE,Constraining the Charge of a Black Hole with Electromagnetic Radiation from a Black Hole-Neutron Star System,2023-09-25 02:54:32+00:00,"Black hole-neutron star (BH-NS) mergers are expected to emit
 gravitational-wave (GW) and electromagnetic (EM) counterparts when the NS is
 tidally disrupted or plunges into the BH. Recently, GW 200105 and GW200115 were
@@ -5307,8 +5307,8 @@ proposed method and microphone placement effectively localize sound sources
 within the 2D-horizontal plane without requiring prior knowledge of boundary
 conditions and room geometry, making it versatile for application in different
 room types.",http://arxiv.org/pdf/2309.13819v1
-2309.13818v1,physics.app-ph,Observing parity-time symmetry in diffusive systems,2023-09-25 01:57:12+00:00,"Abstract: Phase modulation has scarcely been mentioned in diffusive systems
-since the diffusion process does not carry momentum like waves. Recently, the
+2309.13818v2,physics.app-ph,Observing parity-time symmetry in diffusive systems,2023-09-25 01:57:12+00:00,"Phase modulation has scarcely been mentioned in diffusive systems since the
+diffusion process does not carry momentum like waves. Recently, the
 non-Hermitian physics provides a new perspective for understanding diffusion
 and shows prospects in the phase regulation of heat flow, for example, the
 discovery of anti-parity-time (APT) symmetry in diffusive systems. The precise
@@ -5324,7 +5324,7 @@ diffusive systems with the symmetry-determined amplitude distribution and phase
 regulation of coupled temperature fields. Our work uncovers the existence of
 PT-symmetry in dissipative energy exchanges and provides a unique approach for
 harnessing the mass transfer of particles, the wave propagation in strongly
-scattering systems as well as thermal conduction.",http://arxiv.org/pdf/2309.13818v1
+scattering systems as well as thermal conduction.",http://arxiv.org/pdf/2309.13818v2
 2309.13817v1,eess.IV,MMA-Net: Multiple Morphology-Aware Network for Automated Cobb Angle Measurement,2023-09-25 01:56:53+00:00,"Scoliosis diagnosis and assessment depend largely on the measurement of the
 Cobb angle in spine X-ray images. With the emergence of deep learning
 techniques that employ landmark detection, tilt prediction, and spine
@@ -6425,15 +6425,15 @@ contain the true states and unknown inputs of the system. Moreover, we provide
 several semi-definite programs to synthesize observer gains to ensure
 input-to-state stability of the proposed observer and optimality of the design
 in the sense of minimum $\mathcal{H}_{\infty}$ gain.",http://arxiv.org/pdf/2309.13889v1
-2309.13881v1,cs.CV,Skip-Connected Neural Networks with Layout Graphs for Floor Plan Auto-Generation,2023-09-25 05:20:57+00:00,"With the advent of AI and computer vision techniques, the quest for automated
+2309.13881v2,cs.CV,Skip-Connected Neural Networks with Layout Graphs for Floor Plan Auto-Generation,2023-09-25 05:20:57+00:00,"With the advent of AI and computer vision techniques, the quest for automated
 and efficient floor plan designs has gained momentum. This paper presents a
 novel approach using skip-connected neural networks integrated with layout
 graphs. The skip-connected layers capture multi-scale floor plan information,
 and the encoder-decoder networks with GNN facilitate pixel-level
 probability-based generation. Validated on the MSD dataset, our approach
-achieved a 56.6 mIoU score in the ICCV 1st CVAAD workshop challenge. Code and
+achieved a 93.9 mIoU score in the 1st CVAAD workshop challenge. Code and
 pre-trained models are publicly available at
-https://github.com/yuntaeJ/SkipNet-FloorPlanGe.",http://arxiv.org/pdf/2309.13881v1
+https://github.com/yuntaeJ/SkipNet-FloorPlanGe.",http://arxiv.org/pdf/2309.13881v2
 2309.13873v1,cs.SY,Guaranteed Privacy-Preserving $\mathcal{H}_{\infty}$-Optimal Interval Observer Design for Bounded-Error LTI Systems,2023-09-25 04:55:48+00:00,"This paper furthers current research into the notion of guaranteed privacy,
 which provides a deterministic characterization of the privacy of output
 signals of a dynamical system or mechanism. Unlike stochastic differential
@@ -6453,7 +6453,7 @@ quotients, are cellular algebras. The cellular bases are explicitly described
 using crystal graphs. As a special case, this proves that the KLR algebras of
 finite type are cellular. As one application, we compute the graded
 decomposition numbers of the cyclotomic algebras.",http://arxiv.org/pdf/2309.13867v1
-2309.13866v1,cs.LG,On Calibration of Modern Quantized Efficient Neural Networks,2023-09-25 04:30:18+00:00,"We explore calibration properties at various precisions for three
+2309.13866v2,cs.LG,On Calibration of Modern Quantized Efficient Neural Networks,2023-09-25 04:30:18+00:00,"We explore calibration properties at various precisions for three
 architectures: ShuffleNetv2, GhostNet-VGG, and MobileOne; and two datasets:
 CIFAR-100 and PathMNIST. The quality of calibration is observed to track the
 quantization quality; it is well-documented that performance worsens with lower
@@ -6462,7 +6462,7 @@ becomes especially egregious at 4-bit activation regime. GhostNet-VGG is shown
 to be the most robust to overall performance drop at lower precision. We find
 that temperature scaling can improve calibration error for quantized networks,
 with some caveats. We hope that these preliminary insights can lead to more
-opportunities for explainable and reliable EdgeML.",http://arxiv.org/pdf/2309.13866v1
+opportunities for explainable and reliable EdgeML.",http://arxiv.org/pdf/2309.13866v2
 2309.13863v1,cs.CV,SuPerPM: A Large Deformation-Robust Surgical Perception Framework Based on Deep Point Matching Learned from Physical Constrained Simulation Data,2023-09-25 04:27:06+00:00,"Manipulation of tissue with surgical tools often results in large
 deformations that current methods in tracking and reconstructing algorithms
 have not effectively addressed. A major source of tracking errors during large

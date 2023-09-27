@@ -239,6 +239,53 @@ class BenchmarkTests:
             return times, memory
         return None
 
+    def benchmark_sc(self):
+        """
+        Benchmark the source_candidates function
+        compared to the fast_search function
+        """
+        # Run this test 3 times and display the average
+        times = []
+        memory = []
+        for i in range(3):
+            tracemalloc.start()
+            start_time = time.time()
+            can = sr.fast_search(
+                queries=self.config["queries"],
+                as_df=True,
+                prev_days=7,
+            )
+            elapsed_time = time.time() - start_time
+            times.append(elapsed_time)
+            memory.append(tracemalloc.get_traced_memory())
+            tracemalloc.stop()
+        self._display(
+            "Average Fast Search",
+            sum(times) / len(times),
+            sum([m[0] for m in memory]) / len(memory),
+            sum([m[1] for m in memory]) / len(memory),
+        )
+        times = []
+        memory = []
+        for i in range(3):
+            tracemalloc.start()
+            start_time = time.time()
+            can = sr.source_candidates(
+                queries=self.config["queries"],
+                as_df=True,
+                prev_days=7,
+            )
+            elapsed_time = time.time() - start_time
+            times.append(elapsed_time)
+            memory.append(tracemalloc.get_traced_memory())
+            tracemalloc.stop()
+        self._display(
+            "Average Source Candidates",
+            sum(times) / len(times),
+            sum([m[0] for m in memory]) / len(memory),
+            sum([m[1] for m in memory]) / len(memory),
+        )
+
     @staticmethod
     def _display(name, runtime, current_memory, peak_memory):
         """Display the results of the benchmarking tests."""
@@ -250,4 +297,4 @@ class BenchmarkTests:
 
 if __name__ == "__main__":
     unittest.main()
-    # BenchmarkTests().benchmark()
+    # BenchmarkTests().benchmark_sc()
