@@ -37,8 +37,7 @@ def search(
             repository["Abstract"].append(result.summary.strip("\n"))
             repository["URL"].append(result.pdf_url)
         except arxiv.arxiv.UnexpectedEmptyPageError as error:
-            print(error)
-            logging.error(error)
+            logging.exception(error)
             continue
     if len(repository["Id"]) == 0:
         raise ValueError("No papers found for this query")
@@ -82,8 +81,7 @@ def fast_search(
             repository["Abstract"].append(result.summary.strip("\n"))
             repository["URL"].append(result.pdf_url)
         except arxiv.arxiv.UnexpectedEmptyPageError as error:
-            print(error)
-            logging.error(error)
+            logging.exception(error)
             continue
     if len(repository["Id"]) == 0:
         raise ValueError("No papers found for this query")
