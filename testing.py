@@ -250,7 +250,7 @@ class BenchmarkTests:
         for i in range(3):
             tracemalloc.start()
             start_time = time.time()
-            can = sr.fast_search(
+            can = sr.source_candidates(
                 queries=self.config["queries"],
                 as_df=True,
                 prev_days=7,
@@ -286,6 +286,33 @@ class BenchmarkTests:
             sum(m[1] for m in memory) / len(memory),
         )
 
+    def benchmark_rec_sys(self):
+        """
+        Benchmark the equal weight rank function
+        compared to the unequal weight function
+        """
+        # Run this test 5 times and display the average
+        times = []
+        memory = []
+        for i in range(5):
+            tracemalloc.start()
+            start_time = time.time()
+            rec = sr.get_recommendations(
+                data=REF_CANDIDATES_PATH,
+                labels=REF_LABELS_PATH,
+                as_df=True,
+            )
+            elapsed_time = time.time() - start_time
+            times.append(elapsed_time)
+            memory.append(tracemalloc.get_traced_memory())
+            tracemalloc.stop()
+        self._display(
+            "Average for get_recommendations",
+            sum(times) / len(times),
+            sum(m[0] for m in memory) / len(memory),
+            sum(m[1] for m in memory) / len(memory),
+        )
+
     @staticmethod
     def _display(name, runtime, current_memory, peak_memory):
         """Display the results of the benchmarking tests."""
@@ -297,4 +324,4 @@ class BenchmarkTests:
 
 if __name__ == "__main__":
     unittest.main()
-    # BenchmarkTests().benchmark_sc()
+    # BenchmarkTests().benchmark_rec_sys()

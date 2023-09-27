@@ -1,3 +1,4 @@
+import logging
 import gzip
 import numpy as np
 from tqdm import tqdm
@@ -7,14 +8,13 @@ from ScholarlyRecommender.const import BASE_REPO
 from ScholarlyRecommender.config import get_config
 
 config = get_config()
-"""
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s]: %(message)s",
     handlers=[logging.StreamHandler()],
 )
-logging.disable(logging.CRITICAL)
-"""
+# logging.disable(logging.CRITICAL)
 
 
 def rankerV3(
@@ -38,7 +38,7 @@ def rankerV3(
     results = []
     # logging.info(f"Starting to rank {len(test)} candidates on {on}\n")
     # print(f"Starting to rank {len(test)} candidates on {on}\n")
-    for x1, id in tqdm(test, disable=True):
+    for x1, id in tqdm(test, disable=False):
         # calculate the compressed length of the utf-8 encoded text
         Cx1 = len(gzip.compress(x1.encode()))
         # create a distance array
@@ -92,6 +92,32 @@ def rank(context, labels=None, n: int = 5) -> list:
     df1 = rankerV3(context, labels, on="Abstract")
     df2 = rankerV3(context, labels, on="Title")
     df1["predicted"] = (df1["predicted"] + df2["predicted"]) / 2
+    df1["rank"] = df1["predicted"].rank(ascending=False)
+    df1 = df1.nsmallest(n, "rank")
+    df1["Id"] = df1["Id"].astype(str)
+    recommended = df1["Id"].iloc[:n].tolist()
+
+    return recommended
+
+
+def rank2(context, labels=None, n: int = 5) -> list:
+    """
+    Run the rankerV3 algorithm on the context and return a list
+    of the top 5 ranked papers.
+    """
+    if labels is None:
+        labels = config["labels"]
+    if isinstance(labels, str):
+        labels = pd.read_csv(labels)
+    if not isinstance(labels, pd.DataFrame):
+        raise TypeError("labels must be a pandas DataFrame")
+    train = context[["Id", "Title", "Abstract"]].copy()
+    test = labels[["Title", "Abstract", "label"]].copy()
+    train["content"] = train["Title"] + ":  " + train["Abstract"]
+    test["content"] = test["Title"] + ":  " + test["Abstract"]
+    train.drop(["Title", "Abstract"], axis=1, inplace=True)
+    test.drop(["Title", "Abstract"], axis=1, inplace=True)
+    df1 = rankerV3(train, test, on="content")
     df1["rank"] = df1["predicted"].rank(ascending=False)
     df1 = df1.nsmallest(n, "rank")
     df1["Id"] = df1["Id"].astype(str)
@@ -211,7 +237,7 @@ def get_recommendations(
             "size must be greater than 0 and less than the length of the data"
         )
 
-    reccommended = rank(
+    reccommended = rank2(
         context=df,
         labels=labels,
         n=size,
