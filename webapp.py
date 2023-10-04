@@ -436,7 +436,7 @@ elif navigation == "Contact":
 
         - **Ian Snyder**: [@iansnydes](https://twitter.com/iansnydes) - idsnyder136@gmail.com
         - **Website and Portfolio**: [iansnyder333.github.io/frontend](https://iansnyder333.github.io/frontend)
-        - **LinkedIn**: [www.linkedin.com/in/ian-snyder-aa1600182](https://www.linkedin.com/in/ian-snyder-aa1600182)
+        - **LinkedIn**: [www.linkedin.com/in/iandsnyder](https://www.linkedin.com/in/iandsnyder)
 
 
                 """,

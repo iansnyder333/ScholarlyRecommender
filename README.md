@@ -196,7 +196,7 @@ Project Email - scholarlyrecommender@gmail.com
 
 My Website: [iansnyder333.github.io/frontend/](https://iansnyder333.github.io/frontend/)
 
-Linkedin: [www.linkedin.com/in/ian-snyder-aa1600182/](https://www.linkedin.com/in/ian-snyder-aa1600182/)
+Linkedin: [www.linkedin.com/in/iandsnyder](https://www.linkedin.com/in/iandsnyder/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
