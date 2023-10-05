@@ -67,7 +67,7 @@ pandas==2.0.1
     #   -r requirements.in
     #   altair
     #   streamlit
-pillow==10.0.1
+pillow>=9.5.0
     # via streamlit
 protobuf==4.24.3
     # via streamlit
