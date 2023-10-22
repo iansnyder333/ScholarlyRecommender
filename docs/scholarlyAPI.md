@@ -117,7 +117,7 @@ Scrapes the web for papers matching the queries, filters them and returns a data
   - sort_by: arxiv.SortCriterion, *optional*
     - TODO
 - **Returns:**
-  - None
+  - Pandas Dataframe if as_df is True, otherwise None.
 - **Example**
   - ```sh
     import ScholarlyRecommender as sr
@@ -135,12 +135,22 @@ ScholarlyRecommender.get_recommendations(
 ):
 ```
  
-what it does
+ Rank the papers in the data and return the top n papers as a dataframe or saved to a csv file.
 
 - **Parameters:**
-  - None
+  - data: Dataframe or path like object
+    - The dataset containing the candidates for the system to rank. This dataset is returned by source_candidates.
+  - labels: Dataframe, path like object, or None
+    - The labeled dataset the system will use to generate recommendations. This dataset is stored in the enviroment configuration and should be how it is accessed. 
+  - size: int, *optional*
+    - The number of papers to return, defaults to the enviroment configuration (typically 5).
+    - Throws a ValueError for manual inputs less than 0 or greater than the number of candidates provided by data.
+  - to_path: str, path object, file-like object, *optional*
+    - Where to store the resulting candidates if desired, the dataframe will be saved here as a csv. Defaults to None.
+  - as_df: bool, *optional*
+    - Boolean to indicate if the resulting candidates should be returned as a Pandas Dataframe. defaults to True, and should only be changed to False if to_path is provided.
 - **Returns:**
-  - None
+  - Pandas Dataframe if as_df is True, otherwise None.
 - **Example**
   - ```sh
     import ScholarlyRecommender as sr
