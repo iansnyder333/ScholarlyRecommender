@@ -59,3 +59,5 @@ Memory: 176038.4 bytes in current memory
 Runtime: 14.979782772064208 seconds -> 10.908777046203614 seconds (31.4502% faster)
 Memory: 176038.4 bytes in current memory -> 172282.0 bytes in current memory (2.15686% worse)
 12338189.0 bytes in peak memory -> 13543635.6 bytes in peak memory (9.315% worse)
+
+ENDTEST
