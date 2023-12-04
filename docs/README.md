@@ -1,6 +1,6 @@
 # ScholarlyRecommender Documentation 
 
-These documents are intended to help you use the ScholarlyRecommender Application, as the project continues to scale, more documentation support will be prioritized. 
+These documents are intended to help you use the ScholarlyRecommender Application. These docs are still in development, as the project continues to scale, more documentation will be added. 
 
 Please **note:** most of, if not all the source code contained within the repo are formatted in accordance with Black. This includes docstrings, comments, and typedefs. Please use this as a reference if various functionality is yet to be implemented in the document abstraction. 
 
