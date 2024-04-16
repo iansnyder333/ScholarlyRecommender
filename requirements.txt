@@ -30,7 +30,7 @@ feedparser==6.0.10
     # via arxiv
 gitdb==4.0.10
     # via gitpython
-gitpython==3.1.37
+gitpython==3.1.41
     # via streamlit
 idna==3.4
     # via requests
