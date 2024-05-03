@@ -119,7 +119,7 @@ toolz==0.12.0
     # via altair
 tornado==6.3.3
     # via streamlit
-tqdm==4.65.0
+tqdm==4.66.3
     # via -r requirements.in
 typing-extensions==4.8.0
     # via streamlit
