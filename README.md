@@ -1,4 +1,4 @@
-<a name="readme-top"></a>
+<a name="readme-top"></a> 
 
 <div align="right">
   <a align="right" href="https://app.deepsource.com/gh/iansnyder333/ScholarlyRecommender/?ref=repository-badge}" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/iansnyder333/ScholarlyRecommender.svg/?label=active+issues&show_trend=true&token=_aFFwUHTc-lWTHFVDDXaQQX8"/></a>
