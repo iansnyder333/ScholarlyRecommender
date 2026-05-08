@@ -10,6 +10,7 @@ them with your own constants.
 To send an email, simply call send_email(content=html_string) from the Newsletter
 module. html_string is the return value from the get_feed() function in feed.py.
 """
+
 import smtplib
 from email.message import EmailMessage
 import re
